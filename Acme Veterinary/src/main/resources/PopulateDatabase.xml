@@ -31,8 +31,8 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="customer1" />
+		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -42,6 +42,354 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="customer2" />
+		<property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="veterinary1" />
+		<property name="password" value="5c2ccb960ff6491b69c4f9e9187f2cf8" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VETERINARY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="veterinary2" />
+		<property name="password" value="6027817087f7027fa9d9d6c20988a53f" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VETERINARY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Other domain beans come here -->	
+	
+	<!-- MessageFolder -->
+
+	<bean id="inbox1" class="domain.MessageFolder">
+		<property name="name" value="In box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outbox1" class="domain.MessageFolder">
+		<property name="name" value="Out box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashbox1" class="domain.MessageFolder">
+		<property name="name" value="Trash box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spambox1" class="domain.MessageFolder">
+		<property name="name" value="Spam box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inbox2" class="domain.MessageFolder">
+		<property name="name" value="In box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outbox2" class="domain.MessageFolder">
+		<property name="name" value="Out box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashbox2" class="domain.MessageFolder">
+		<property name="name" value="Trash box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spambox2" class="domain.MessageFolder">
+		<property name="name" value="Spam box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inbox3" class="domain.MessageFolder">
+		<property name="name" value="In box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outbox3" class="domain.MessageFolder">
+		<property name="name" value="Out box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashbox3" class="domain.MessageFolder">
+		<property name="name" value="Trash box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spambox3" class="domain.MessageFolder">
+		<property name="name" value="Spam box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="inbox4" class="domain.MessageFolder">
+		<property name="name" value="In box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outbox4" class="domain.MessageFolder">
+		<property name="name" value="Out box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashbox4" class="domain.MessageFolder">
+		<property name="name" value="Trash box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spambox4" class="domain.MessageFolder">
+		<property name="name" value="Spam box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inbox5" class="domain.MessageFolder">
+		<property name="name" value="In box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outbox5" class="domain.MessageFolder">
+		<property name="name" value="Out box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashbox5" class="domain.MessageFolder">
+		<property name="name" value="Trash box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spambox5" class="domain.MessageFolder">
+		<property name="name" value="Spam box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Clinic -->
+
+	<bean id="clinic1" class="domain.Clinic">
+		<property name="name" value="Clinic1Name" />
+		<property name="address" value="Clinic1Address" />
+		<property name="zipCode" value="41000" />
+		<property name="pictures" value="" />
+		<property name="veterinaries">
+			<list>
+				<ref bean="veterinary1" />
+				<ref bean="veterinary2" />
+			</list>
+		</property>
+		<property name="bulletins">
+			<list>
+			</list>
+		</property>
+		<property name="appointments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Administrators -->
+
+	<bean id="admin" class="domain.Administrator">
+		<property name="name" value="Administrator1Name" />
+		<property name="surname" value="Administrator1Surname" />
+		<property name="email" value="administrator1@acme.com" />
+		<property name="phone" value="954121212" />
+		<property name="userAccount" ref="userAccount1" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox1" />
+				<ref bean="outbox1" />
+				<ref bean="trashbox1" />
+				<ref bean="spambox1" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Customers -->
+
+	<bean id="customer1" class="domain.Customer">
+		<property name="name" value="customer1Name" />
+		<property name="surname" value="customer1Surname" />
+		<property name="email" value="customer1@acme.com" />
+		<property name="phone" value="954121612" />
+		<property name="userAccount" ref="userAccount2" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox2" />
+				<ref bean="outbox2" />
+				<ref bean="trashbox2" />
+				<ref bean="spambox2" />
+			</list>
+		</property>
+		<property name="registerMoment" value="01/01/2016 10:00" />
+	</bean>
+
+	<bean id="customer2" class="domain.Customer">
+		<property name="name" value="customer2Name" />
+		<property name="surname" value="customer2Surname" />
+		<property name="email" value="customer2@acme.com" />
+		<property name="phone" value="954121612" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox3" />
+				<ref bean="outbox3" />
+				<ref bean="trashbox3" />
+				<ref bean="spambox3" />
+			</list>
+		</property>
+		<property name="registerMoment" value="01/02/2016 10:00" />
+	</bean>
+	
+	<!-- Veterinaries -->
+
+	<bean id="veterinary1" class="domain.Veterinary">
+		<property name="name" value="Veterinary1Name" />
+		<property name="surname" value="Veterinary1Surname" />
+		<property name="email" value="Veterinary1@acme.com" />
+		<property name="phone" value="954121612" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox4" />
+				<ref bean="outbox4" />
+				<ref bean="trashbox4" />
+				<ref bean="spambox4" />
+			</list>
+		</property>
+		<property name="clinic" ref="clinic1" />
+		<property name="histories">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="veterinary2" class="domain.Veterinary">
+		<property name="name" value="Veterinary2Name" />
+		<property name="surname" value="Veterinary2Surname" />
+		<property name="email" value="Veterinary2@acme.com" />
+		<property name="phone" value="954121612" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox5" />
+				<ref bean="outbox5" />
+				<ref bean="trashbox5" />
+				<ref bean="spambox5" />
+			</list>
+		</property>
+		<property name="clinic" ref="clinic1" />
+		<property name="histories">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 	
 </beans>

@@ -9,6 +9,8 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -27,6 +29,7 @@ public class Clinic extends DomainEntity {
 	private String pictures;
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}
@@ -36,6 +39,7 @@ public class Clinic extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddress() {
 		return address;
 	}
@@ -45,6 +49,7 @@ public class Clinic extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getZipCode() {
 		return zipCode;
 	}
@@ -53,7 +58,6 @@ public class Clinic extends DomainEntity {
 		this.zipCode = zipCode;
 	}
 
-	@NotBlank
 	public String getPictures() {
 		return pictures;
 	}
