@@ -17,6 +17,7 @@
 
 	<!-- Artifact identification and properties -->
 
+	<groupId>Acme-Veterinary</groupId>
 	<artifactId>Acme-Veterinary</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
@@ -320,7 +321,14 @@
 		    <version>1.7.4</version>
 		</dependency>
 		
+		<!-- SafeHtml -->
+		
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+		
 	</dependencies>
-
-	<groupId>Acme-Veterinary</groupId>
+	
 </project> 
