@@ -82,7 +82,7 @@ public class Voucher extends DomainEntity {
 
 	@Valid
 	@ManyToMany
-	@JoinTable(name = "customer_voucher", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "voucher_id"))
+	@JoinTable(name = "voucher_customer", joinColumns = @JoinColumn(name = "voucher_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
 	public Collection<Customer> getCustomers() {
 		return customers;
 	}

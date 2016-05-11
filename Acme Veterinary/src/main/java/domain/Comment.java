@@ -113,10 +113,4 @@ public class Comment extends DomainEntity {
 		this.bulletin = bulletin;
 	}
 
-	@Override
-	public String toString() {
-		return "Comment [name=" + name + ", title=" + title + ", text=" + text
-				+ ", rating=" + rating + ", item=" + item + "]";
-	}
-
 }
