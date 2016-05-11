@@ -22,6 +22,25 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
+		
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		
+		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.StringToMessageConverter" />
+		
+		<bean class="converters.MessageFolderToStringConverter" />
+		<bean class="converters.StringToMessageFolderConverter" />
+		
+		<bean class="converters.CustomerToStringConverter" />
+		<bean class="converters.StringToCustomerConverter" />
+		
+		<bean class="converters.VeterinaryToStringConverter" />
+		<bean class="converters.StringToVeterinaryConverter" />
+		
 	</util:list>
 	
 </beans>

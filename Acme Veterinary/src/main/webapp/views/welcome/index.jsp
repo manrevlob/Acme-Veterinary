@@ -28,7 +28,3 @@ document.getElementById('cookie1').style.bottom = '-50px';
 </script>
  
 <!-- Fin del código de cookies --->
-
-<p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
-
-<p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
