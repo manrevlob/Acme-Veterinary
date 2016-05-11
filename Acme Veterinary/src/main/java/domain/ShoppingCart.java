@@ -32,7 +32,7 @@ public class ShoppingCart extends DomainEntity {
 
 	// Relationships ---------------------------------------------------------
 	private Customer customer;
-	private Collection<ItemOrder> itemOrders;
+	private Collection<ShoppingCartLine> shoppingCartLines;
 
 	@Valid
 	@OneToOne(optional = false)
@@ -46,12 +46,12 @@ public class ShoppingCart extends DomainEntity {
 
 	@Valid
 	@OneToMany(mappedBy = "shoppingCart")
-	public Collection<ItemOrder> getItemOrders() {
-		return itemOrders;
+	public Collection<ShoppingCartLine> getShoppingCartLines() {
+		return shoppingCartLines;
 	}
 
-	public void setItemOrders(Collection<ItemOrder> itemOrders) {
-		this.itemOrders = itemOrders;
+	public void setShoppingCartLines(Collection<ShoppingCartLine> shoppingCartLines) {
+		this.shoppingCartLines = shoppingCartLines;
 	}
 
 }

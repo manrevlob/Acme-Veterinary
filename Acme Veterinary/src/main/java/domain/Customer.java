@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -86,7 +85,7 @@ public class Customer extends Actor {
 	}
 
 	@Valid
-	@ManyToOne(optional = false)
+	@OneToMany(mappedBy = "customer")
 	public Collection<Pet> getPets() {
 		return pets;
 	}
@@ -96,7 +95,7 @@ public class Customer extends Actor {
 	}
 
 	@Valid
-	@OneToMany(mappedBy ="customer")
+	@OneToMany(mappedBy = "customer")
 	public Collection<Comment> getComments() {
 		return comments;
 	}
@@ -104,7 +103,5 @@ public class Customer extends Actor {
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
 	}
-	
-	
 
 }
