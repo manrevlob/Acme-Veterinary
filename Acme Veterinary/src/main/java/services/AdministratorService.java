@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Administrator;
 
 @Service
@@ -51,6 +53,14 @@ public class AdministratorService {
 		Assert.notNull(administrator);
 		return administratorRepository.save(administrator);
 	}
-	
+
 	// Other business methods -------------------------------------------------
+
+	public Administrator findByPrincipal() {
+		Administrator result;
+		UserAccount userAccount = LoginService.getPrincipal();
+		result = administratorRepository.findByPrincipal(userAccount.getId());
+		Assert.notNull(result);
+		return result;
+	}
 }
