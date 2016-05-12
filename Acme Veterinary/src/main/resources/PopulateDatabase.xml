@@ -80,19 +80,19 @@
 		<property name="amount" value="10" />
 		<property name="currency" value="Euro" />
 	</bean>
-	
+
 	<bean id="money2" class="domain.Money">
 		<property name="amount" value="20" />
 		<property name="currency" value="Euro" />
 	</bean>
-	
+
 	<bean id="money3" class="domain.Money">
 		<property name="amount" value="30" />
 		<property name="currency" value="Euro" />
 	</bean>
 
 	<!-- Treatment -->
-	
+
 	<bean id="treatment1" class="domain.Treatment">
 		<property name="description" value="Treatment1Description" />
 		<property name="startMoment" value="05/05/2015" />
@@ -595,5 +595,7 @@
 		<property name="pet" ref="pet3" />
 		<property name="appointment" ref="appointment4" />
 	</bean>
+	
+
 
 </beans>
