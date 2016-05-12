@@ -27,6 +27,7 @@ public class MessageService {
 	private ActorService actorService;
 	@Autowired
 	private MessageFolderService messageFolderService;
+	
 
 	// Constructors -----------------------------------------------------------
 
@@ -137,34 +138,34 @@ public class MessageService {
 
 	}
 	
-//	public void sendAutoReplyMessage(String messageText, Actor sender, Actor recipient) {
-//		Assert.notNull(sender);
-//		Assert.notNull(recipient);
-//		
-//		Collection<Message> messages;
-//		MessageFolder senderOutbox;
-//		Message message;
-//		message = create();
-//		
-//		message.setSender(sender);
-//		message.setRecipient(recipient);
-//		message.setSubject("AUTO-REPLY --");
-//		message.setBody(messageText);
-//		
-//		senderOutbox = messageFolderService.findFolder(sender, "Auto-Reply box");
-//
-//		receiveMessage(message, recipient);
-//
-//		message.setMessageFolder(senderOutbox);
-//
-//		messages = findAllByFolder(senderOutbox);
-//		messages.add(message);
-//		senderOutbox.setMessages(messages);
-//
-//		save(message);
-//		messageFolderService.save(senderOutbox);
-//
-//	}
+	public void sendAutoReplyMessage(String messageText, Actor sender, Actor recipient) {
+		Assert.notNull(sender);
+		Assert.notNull(recipient);
+		
+		Collection<Message> messages;
+		MessageFolder senderOutbox;
+		Message message;
+		message = create();
+		
+		message.setSender(sender);
+		message.setRecipient(recipient);
+		message.setSubject("AUTO-REPLY --");
+		message.setBody(messageText);
+		
+		senderOutbox = messageFolderService.findFolder(sender, "Auto-Reply box");
+
+		receiveMessage(message, recipient);
+
+		message.setMessageFolder(senderOutbox);
+
+		messages = findAllByFolder(senderOutbox);
+		messages.add(message);
+		senderOutbox.setMessages(messages);
+
+		save(message);
+		messageFolderService.save(senderOutbox);
+
+	}
 
 	public void receiveMessage(Message message, Actor recipient) {
 		Message messageReceived;
@@ -190,6 +191,7 @@ public class MessageService {
 		save(messageReceived);
 		messageFolderService.save(recipientInbox);
 		
+	
 
 	}
 
