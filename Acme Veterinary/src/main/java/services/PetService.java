@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PetRepository;
+import domain.Customer;
 import domain.Pet;
 
 @Service
@@ -21,6 +22,11 @@ public class PetService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private ActorService actorService;
+	@Autowired
+	private CustomerService customerService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public PetService() {
@@ -57,4 +63,13 @@ public class PetService {
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Collection<Pet> findAllOwner() {
+		Assert.isTrue(actorService.isCustomer());
+		Collection<Pet> result;
+		Customer customer;
+		customer = customerService.findByPrincipal();
+		result = petRepository.findAllOwner(customer);
+		return result;
+	}
 }

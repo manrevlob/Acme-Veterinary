@@ -21,6 +21,13 @@ public class HistoryService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private ActorService actorService;
+	@Autowired
+	private PetService petService;
+	@Autowired
+	private CustomerService customerService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public HistoryService() {
@@ -51,10 +58,18 @@ public class HistoryService {
 		Assert.notNull(history);
 		return historyRepository.save(history);
 	}
-	
+
 	public void delete(History history) {
 		historyRepository.delete(history);
 	}
-	
+
 	// Other business methods -------------------------------------------------
+
+	public Collection<History> findAllByPet(int petId) {
+		Assert.isTrue(actorService.isCustomer());
+		Assert.isTrue(customerService.findByPrincipal().equals(petService.findOne(petId).getCustomer()));
+		Collection<History> result;
+		result = historyRepository.findAllByPet(petId);
+		return result;
+	}
 }
