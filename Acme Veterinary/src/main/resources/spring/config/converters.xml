@@ -41,6 +41,15 @@
 		<bean class="converters.VeterinaryToStringConverter" />
 		<bean class="converters.StringToVeterinaryConverter" />
 		
+		<bean class="converters.PetToStringConverter" />
+		<bean class="converters.StringToPetConverter" />
+		
+		<bean class="converters.HistoryToStringConverter" />
+		<bean class="converters.StringToHistoryConverter" />
+		
+		<bean class="converters.AppointmentToStringConverter" />
+		<bean class="converters.StringToAppointmentConverter" />
+		
 	</util:list>
 	
 </beans>

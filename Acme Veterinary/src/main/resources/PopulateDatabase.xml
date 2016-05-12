@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2014 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2014 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -41,7 +35,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="customer2" />
 		<property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
@@ -53,7 +47,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="veterinary1" />
 		<property name="password" value="5c2ccb960ff6491b69c4f9e9187f2cf8" />
@@ -65,7 +59,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="veterinary2" />
 		<property name="password" value="6027817087f7027fa9d9d6c20988a53f" />
@@ -77,9 +71,69 @@
 			</list>
 		</property>
 	</bean>
+
+	<!-- Other domain beans come here -->
+
+	<!-- Money -->
 	
-	<!-- Other domain beans come here -->	
+	<bean id="money1" class="domain.Money">
+		<property name="amount" value="10" />
+		<property name="currency" value="Euro" />
+	</bean>
 	
+	<bean id="money2" class="domain.Money">
+		<property name="amount" value="20" />
+		<property name="currency" value="Euro" />
+	</bean>
+	
+	<bean id="money3" class="domain.Money">
+		<property name="amount" value="30" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<!-- Treatment -->
+	
+	<bean id="treatment1" class="domain.Treatment">
+		<property name="description" value="Treatment1Description" />
+		<property name="startMoment" value="05/05/2015" />
+		<property name="endMoment" value="05/06/2015" />
+	</bean>
+	
+	<bean id="treatment2" class="domain.Treatment">
+		<property name="description" value="Treatment2Description" />
+		<property name="startMoment" value="05/06/2015" />
+		<property name="endMoment" value="05/07/2015" />
+	</bean>
+	
+	<bean id="treatment3" class="domain.Treatment">
+		<property name="description" value="Treatment3Description" />
+		<property name="startMoment" value="10/05/2015" />
+		<property name="endMoment" value="10/06/2015" />
+	</bean>
+
+	<bean id="treatment4" class="domain.Treatment">
+		<property name="description" value="Treatment4Description" />
+		<property name="startMoment" value="10/06/2015" />
+		<property name="endMoment" value="10/07/2015" />
+	</bean>
+
+	<!-- PetType -->
+	
+	<bean id="petType1" class="domain.PetType">
+		<property name="name" value="PetType1" />
+		<property name="description" value="PetType1Description" />
+	</bean>
+
+	<bean id="petType2" class="domain.PetType">
+		<property name="name" value="PetType2" />
+		<property name="description" value="PetType2Description" />
+	</bean>
+	
+	<bean id="petType3" class="domain.PetType">
+		<property name="name" value="PetType3" />
+		<property name="description" value="PetType3Description" />
+	</bean>
+
 	<!-- MessageFolder -->
 
 	<bean id="inbox1" class="domain.MessageFolder">
@@ -262,7 +316,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Clinic -->
 
 	<bean id="clinic1" class="domain.Clinic">
@@ -285,7 +339,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Administrators -->
 
 	<bean id="admin" class="domain.Administrator">
@@ -320,6 +374,12 @@
 				<ref bean="spambox2" />
 			</list>
 		</property>
+		<property name="pets">
+			<list>
+				<ref bean="pet1" />
+				<ref bean="pet2" />
+			</list>
+		</property>
 		<property name="registerMoment" value="01/01/2016 10:00" />
 	</bean>
 
@@ -337,9 +397,14 @@
 				<ref bean="spambox3" />
 			</list>
 		</property>
+		<property name="pets">
+			<list>
+				<ref bean="pet3" />
+			</list>
+		</property>
 		<property name="registerMoment" value="01/02/2016 10:00" />
 	</bean>
-	
+
 	<!-- Veterinaries -->
 
 	<bean id="veterinary1" class="domain.Veterinary">
@@ -359,6 +424,8 @@
 		<property name="clinic" ref="clinic1" />
 		<property name="histories">
 			<list>
+				<ref bean="history1" />
+				<ref bean="history2" />
 			</list>
 		</property>
 		<property name="comments">
@@ -366,7 +433,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="veterinary2" class="domain.Veterinary">
 		<property name="name" value="Veterinary2Name" />
 		<property name="surname" value="Veterinary2Surname" />
@@ -384,6 +451,8 @@
 		<property name="clinic" ref="clinic1" />
 		<property name="histories">
 			<list>
+				<ref bean="history3" />
+				<ref bean="history4" />
 			</list>
 		</property>
 		<property name="comments">
@@ -391,5 +460,136 @@
 			</list>
 		</property>
 	</bean>
+
+	<!-- Pets -->
+
+	<bean id="pet1" class="domain.Pet">
+		<property name="name" value="Pet1Name" />
+		<property name="type" value="PetType1" />
+		<property name="birthDate" value="01/12/2015" />
+		<property name="customer" ref="customer1" />
+		<property name="histories">
+			<list>
+				<ref bean="history1" />
+				<ref bean="history2" />
+			</list>
+		</property>
+		<property name="appointments">
+			<list>
+				<ref bean="appointment1" />
+				<ref bean="appointment2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="pet2" class="domain.Pet">
+		<property name="name" value="Pet2Name" />
+		<property name="type" value="PetType2" />
+		<property name="birthDate" value="01/05/2015" />
+		<property name="customer" ref="customer1" />
+		<property name="histories">
+			<list>
+				<ref bean="history3" />
+			</list>
+		</property>
+		<property name="appointments">
+			<list>
+				<ref bean="appointment3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="pet3" class="domain.Pet">
+		<property name="name" value="Pet3Name" />
+		<property name="type" value="PetType3" />
+		<property name="birthDate" value="01/09/2015" />
+		<property name="customer" ref="customer2" />
+		<property name="histories">
+			<list>
+				<ref bean="history4" />
+			</list>
+		</property>
+		<property name="appointments">
+			<list>
+				<ref bean="appointment4" />
+			</list>
+		</property>
+	</bean>
 	
+	<!-- Appointments -->
+
+	<bean id="appointment1" class="domain.Appointment">
+		<property name="moment" value="05/05/2015 10:00" />
+		<property name="reason" value="Appointment1Reason" />
+		<property name="price" ref="money1" />
+		<property name="clinic" ref="clinic1" />
+		<property name="pet" ref="pet1" />
+		<property name="history" ref="history1" />
+	</bean>
+	
+	<bean id="appointment2" class="domain.Appointment">
+		<property name="moment" value="05/06/2015 10:00" />
+		<property name="reason" value="Appointment2Reason" />
+		<property name="price" ref="money1" />
+		<property name="clinic" ref="clinic1" />
+		<property name="pet" ref="pet1" />
+		<property name="history" ref="history2" />
+	</bean>
+	
+	<bean id="appointment3" class="domain.Appointment">
+		<property name="moment" value="10/05/2015 10:00" />
+		<property name="reason" value="Appointment3Reason" />
+		<property name="price" ref="money2" />
+		<property name="clinic" ref="clinic1" />
+		<property name="pet" ref="pet2" />
+		<property name="history" ref="history3" />
+	</bean>
+	
+	<bean id="appointment4" class="domain.Appointment">
+		<property name="moment" value="10/06/2015 10:00" />
+		<property name="reason" value="Appointment4Reason" />
+		<property name="price" ref="money3" />
+		<property name="clinic" ref="clinic1" />
+		<property name="pet" ref="pet3" />
+		<property name="history" ref="history4" />
+	</bean>
+	
+	<!-- Histories -->
+
+	<bean id="history1" class="domain.History">
+		<property name="moment" value="05/05/2015 10:00" />
+		<property name="diagnosis" value="History1Diagnosis" />
+		<property name="treatment" ref="treatment1" />
+		<property name="veterinary" ref="veterinary1" />
+		<property name="pet" ref="pet1" />
+		<property name="appointment" ref="appointment1" />
+	</bean>
+	
+	<bean id="history2" class="domain.History">
+		<property name="moment" value="05/06/2015 10:00" />
+		<property name="diagnosis" value="History2Diagnosis" />
+		<property name="treatment" ref="treatment2" />
+		<property name="veterinary" ref="veterinary1" />
+		<property name="pet" ref="pet1" />
+		<property name="appointment" ref="appointment2" />
+	</bean>
+	
+	<bean id="history3" class="domain.History">
+		<property name="moment" value="10/05/2015 10:00" />
+		<property name="diagnosis" value="History3Diagnosis" />
+		<property name="treatment" ref="treatment3" />
+		<property name="veterinary" ref="veterinary2" />
+		<property name="pet" ref="pet2" />
+		<property name="appointment" ref="appointment3" />
+	</bean>
+
+	<bean id="history4" class="domain.History">
+		<property name="moment" value="10/06/2015 10:00" />
+		<property name="diagnosis" value="History4Diagnosis" />
+		<property name="treatment" ref="treatment4" />
+		<property name="veterinary" ref="veterinary2" />
+		<property name="pet" ref="pet3" />
+		<property name="appointment" ref="appointment4" />
+	</bean>
+
 </beans>
