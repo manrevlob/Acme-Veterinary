@@ -15,4 +15,14 @@
 		<put-attribute name="body" value="/views/pet/list.jsp" />
 	</definition>
 
+	<definition name="pet/create" extends="master.page">
+		<put-attribute name="title" value="Crea una mascota" />
+		<put-attribute name="body" value="/views/pet/edit.jsp" />
+	</definition>
+
+	<definition name="pet/edit" extends="master.page">
+		<put-attribute name="title" value="Edita una mascota" />
+		<put-attribute name="body" value="/views/pet/edit.jsp" />
+	</definition>
+
 </tiles-definitions>

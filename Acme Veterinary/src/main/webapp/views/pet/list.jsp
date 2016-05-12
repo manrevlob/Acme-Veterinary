@@ -26,11 +26,16 @@
 	<spring:message code="pet.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" sortable="true" />
 
-	<spring:message code="pet.type" var="typeHeader" />
-	<display:column property="type" title="${typeHeader}" sortable="true" />
-
 	<spring:message code="pet.birthDate" var="birthDateHeader" />
-	<fmt:formatDate pattern="dd-MM-yyyy" value="${row.birthDate}" />
+	<display:column title="${birthDateHeader}" sortable="true">
+		<fmt:formatDate pattern="dd-MM-yyyy" value="${row.birthDate}" />
+	</display:column>
+
+	<spring:message code="pet.petType" var="petTypeHeader" />
+	<display:column property="petType.name" title="${PetTypeHeader}"
+		sortable="true" />
+
+
 
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column title="${HistoryHeader}">
@@ -38,7 +43,26 @@
 					code="pet.seeHistory" />
 			</a>
 		</display:column>
+
+		<display:column title="${editHeader}">
+			<a href="pet/customer/edit.do?petId=${row.id}"> <spring:message
+					code="pet.edit" />
+			</a>
+		</display:column>
+
+		<display:column>
+			<jstl:if test="${row.isDeleted == false}">
+				<a
+					onclick="return confirm('<spring:message code="pet.delete.confirm" />')"
+					href="pet/customer/delete.do?petId=${row.id}"> <spring:message
+						code="pet.delete" />
+				</a>
+			</jstl:if>
+		</display:column>
 	</security:authorize>
 
 </display:table>
+
+<a href="pet/customer/create.do"> <spring:message code="pet.create" />
+</a>
 

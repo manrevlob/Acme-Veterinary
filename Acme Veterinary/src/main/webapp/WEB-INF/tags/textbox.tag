@@ -26,6 +26,7 @@
 <%@ attribute name="code" required="true" %>
 
 <%@ attribute name="readonly" required="false" %>
+<%@ attribute name="text" required="false" %>
 
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
@@ -38,5 +39,8 @@
 		<spring:message code="${code}" />
 	</form:label>	
 	<form:input path="${path}" readonly="${readonly}" />	
+	<jstl:if test="${text != null}">
+		<spring:message code="${text}"/>
+	</jstl:if>
 	<form:errors path="${path}" cssClass="error" />
 </div>	

@@ -75,36 +75,36 @@
 	<!-- Other domain beans come here -->
 
 	<!-- Money -->
-	
+
 	<bean id="money1" class="domain.Money">
 		<property name="amount" value="10" />
 		<property name="currency" value="Euro" />
 	</bean>
-	
+
 	<bean id="money2" class="domain.Money">
 		<property name="amount" value="20" />
 		<property name="currency" value="Euro" />
 	</bean>
-	
+
 	<bean id="money3" class="domain.Money">
 		<property name="amount" value="30" />
 		<property name="currency" value="Euro" />
 	</bean>
 
 	<!-- Treatment -->
-	
+
 	<bean id="treatment1" class="domain.Treatment">
 		<property name="description" value="Treatment1Description" />
 		<property name="startMoment" value="05/05/2015" />
 		<property name="endMoment" value="05/06/2015" />
 	</bean>
-	
+
 	<bean id="treatment2" class="domain.Treatment">
 		<property name="description" value="Treatment2Description" />
 		<property name="startMoment" value="05/06/2015" />
 		<property name="endMoment" value="05/07/2015" />
 	</bean>
-	
+
 	<bean id="treatment3" class="domain.Treatment">
 		<property name="description" value="Treatment3Description" />
 		<property name="startMoment" value="10/05/2015" />
@@ -118,7 +118,7 @@
 	</bean>
 
 	<!-- PetType -->
-	
+
 	<bean id="petType1" class="domain.PetType">
 		<property name="name" value="PetType1" />
 		<property name="description" value="PetType1Description" />
@@ -128,7 +128,7 @@
 		<property name="name" value="PetType2" />
 		<property name="description" value="PetType2Description" />
 	</bean>
-	
+
 	<bean id="petType3" class="domain.PetType">
 		<property name="name" value="PetType3" />
 		<property name="description" value="PetType3Description" />
@@ -465,7 +465,7 @@
 
 	<bean id="pet1" class="domain.Pet">
 		<property name="name" value="Pet1Name" />
-		<property name="type" value="PetType1" />
+		<property name="petType" ref="petType1" />
 		<property name="birthDate" value="01/12/2015" />
 		<property name="customer" ref="customer1" />
 		<property name="histories">
@@ -484,7 +484,7 @@
 
 	<bean id="pet2" class="domain.Pet">
 		<property name="name" value="Pet2Name" />
-		<property name="type" value="PetType2" />
+		<property name="petType" ref="petType2" />
 		<property name="birthDate" value="01/05/2015" />
 		<property name="customer" ref="customer1" />
 		<property name="histories">
@@ -501,7 +501,7 @@
 
 	<bean id="pet3" class="domain.Pet">
 		<property name="name" value="Pet3Name" />
-		<property name="type" value="PetType3" />
+		<property name="petType" ref="petType3" />
 		<property name="birthDate" value="01/09/2015" />
 		<property name="customer" ref="customer2" />
 		<property name="histories">
@@ -515,7 +515,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Appointments -->
 
 	<bean id="appointment1" class="domain.Appointment">
@@ -526,7 +526,7 @@
 		<property name="pet" ref="pet1" />
 		<property name="history" ref="history1" />
 	</bean>
-	
+
 	<bean id="appointment2" class="domain.Appointment">
 		<property name="moment" value="05/06/2015 10:00" />
 		<property name="reason" value="Appointment2Reason" />
@@ -535,7 +535,7 @@
 		<property name="pet" ref="pet1" />
 		<property name="history" ref="history2" />
 	</bean>
-	
+
 	<bean id="appointment3" class="domain.Appointment">
 		<property name="moment" value="10/05/2015 10:00" />
 		<property name="reason" value="Appointment3Reason" />
@@ -544,7 +544,7 @@
 		<property name="pet" ref="pet2" />
 		<property name="history" ref="history3" />
 	</bean>
-	
+
 	<bean id="appointment4" class="domain.Appointment">
 		<property name="moment" value="10/06/2015 10:00" />
 		<property name="reason" value="Appointment4Reason" />
@@ -553,7 +553,7 @@
 		<property name="pet" ref="pet3" />
 		<property name="history" ref="history4" />
 	</bean>
-	
+
 	<!-- Histories -->
 
 	<bean id="history1" class="domain.History">
@@ -564,7 +564,7 @@
 		<property name="pet" ref="pet1" />
 		<property name="appointment" ref="appointment1" />
 	</bean>
-	
+
 	<bean id="history2" class="domain.History">
 		<property name="moment" value="05/06/2015 10:00" />
 		<property name="diagnosis" value="History2Diagnosis" />
@@ -573,7 +573,7 @@
 		<property name="pet" ref="pet1" />
 		<property name="appointment" ref="appointment2" />
 	</bean>
-	
+
 	<bean id="history3" class="domain.History">
 		<property name="moment" value="10/05/2015 10:00" />
 		<property name="diagnosis" value="History3Diagnosis" />

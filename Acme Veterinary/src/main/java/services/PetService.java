@@ -26,7 +26,7 @@ public class PetService {
 	private ActorService actorService;
 	@Autowired
 	private CustomerService customerService;
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public PetService() {
@@ -38,6 +38,8 @@ public class PetService {
 	public Pet create() {
 		Pet result;
 		result = new Pet();
+		Customer customer = customerService.findByPrincipal();
+		result.setCustomer(customer);
 		return result;
 	}
 
@@ -57,13 +59,16 @@ public class PetService {
 		Assert.notNull(pet);
 		return petRepository.save(pet);
 	}
-	
-	public void delete(Pet pet) {
-		petRepository.delete(pet);
+
+	public void delete(int petId) {
+		Assert.isTrue(actorService.isCustomer());
+		Pet pet = findOne(petId);
+		pet.setIsDeleted(true);
+		petRepository.save(pet);
 	}
-	
+
 	// Other business methods -------------------------------------------------
-	
+
 	public Collection<Pet> findAllOwner() {
 		Assert.isTrue(actorService.isCustomer());
 		Collection<Pet> result;
