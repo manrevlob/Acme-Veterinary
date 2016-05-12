@@ -31,7 +31,7 @@
 <b><spring:message code="actor.email" />:</b>
 <jstl:out value="${actor.email}" />
 <br />
-<security:authorize access="hasRole('USER')">
+<security:authorize access="hasRole('CUSTOMER')">
 	<b><spring:message code="actor.registerSince" />:</b>
 	<fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${customer.registerMoment}" />
 	<br />
