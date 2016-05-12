@@ -80,19 +80,19 @@
 		<property name="amount" value="10" />
 		<property name="currency" value="Euro" />
 	</bean>
-
+	
 	<bean id="money2" class="domain.Money">
 		<property name="amount" value="20" />
 		<property name="currency" value="Euro" />
 	</bean>
-
+	
 	<bean id="money3" class="domain.Money">
 		<property name="amount" value="30" />
 		<property name="currency" value="Euro" />
 	</bean>
 
 	<!-- Treatment -->
-
+	
 	<bean id="treatment1" class="domain.Treatment">
 		<property name="description" value="Treatment1Description" />
 		<property name="startMoment" value="05/05/2015" />
@@ -334,10 +334,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="appointments">
-			<list>
-			</list>
-		</property>
 	</bean>
 
 	<!-- Administrators -->
@@ -432,6 +428,12 @@
 			<list>
 			</list>
 		</property>
+		<property name="appointments">
+			<list>
+				<ref bean="appointment1" />
+				<ref bean="appointment2" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="veterinary2" class="domain.Veterinary">
@@ -457,6 +459,12 @@
 		</property>
 		<property name="comments">
 			<list>
+			</list>
+		</property>
+		<property name="appointments">
+			<list>
+				<ref bean="appointment3" />
+				<ref bean="appointment4" />
 			</list>
 		</property>
 	</bean>
@@ -521,8 +529,7 @@
 	<bean id="appointment1" class="domain.Appointment">
 		<property name="moment" value="05/05/2015 10:00" />
 		<property name="reason" value="Appointment1Reason" />
-		<property name="price" ref="money1" />
-		<property name="clinic" ref="clinic1" />
+		<property name="veterinary" ref="veterinary1" />
 		<property name="pet" ref="pet1" />
 		<property name="history" ref="history1" />
 	</bean>
@@ -530,8 +537,7 @@
 	<bean id="appointment2" class="domain.Appointment">
 		<property name="moment" value="05/06/2015 10:00" />
 		<property name="reason" value="Appointment2Reason" />
-		<property name="price" ref="money1" />
-		<property name="clinic" ref="clinic1" />
+		<property name="veterinary" ref="veterinary1" />
 		<property name="pet" ref="pet1" />
 		<property name="history" ref="history2" />
 	</bean>
@@ -539,8 +545,7 @@
 	<bean id="appointment3" class="domain.Appointment">
 		<property name="moment" value="10/05/2015 10:00" />
 		<property name="reason" value="Appointment3Reason" />
-		<property name="price" ref="money2" />
-		<property name="clinic" ref="clinic1" />
+		<property name="veterinary" ref="veterinary2" />
 		<property name="pet" ref="pet2" />
 		<property name="history" ref="history3" />
 	</bean>
@@ -548,8 +553,7 @@
 	<bean id="appointment4" class="domain.Appointment">
 		<property name="moment" value="10/06/2015 10:00" />
 		<property name="reason" value="Appointment4Reason" />
-		<property name="price" ref="money3" />
-		<property name="clinic" ref="clinic1" />
+		<property name="veterinary" ref="veterinary2" />
 		<property name="pet" ref="pet3" />
 		<property name="history" ref="history4" />
 	</bean>

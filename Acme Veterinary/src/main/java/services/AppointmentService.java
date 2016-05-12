@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 
 import repositories.AppointmentRepository;
 import domain.Appointment;
+import domain.Veterinary;
 
 @Service
 @Transactional
@@ -21,6 +22,11 @@ public class AppointmentService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private ActorService actorService;
+	@Autowired
+	private VeterinaryService veterinaryService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public AppointmentService() {
@@ -57,4 +63,13 @@ public class AppointmentService {
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Collection<Appointment> findAllOwn() {
+		Assert.isTrue(actorService.isVeterinary());
+		Collection<Appointment> result;
+		Veterinary veterinary;
+		veterinary = veterinaryService.findByPrincipal();
+		result = appointmentRepository.findAllOwn(veterinary);
+		return result;
+	}
 }

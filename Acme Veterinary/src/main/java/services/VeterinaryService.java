@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.VeterinaryRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Veterinary;
 
 @Service
@@ -51,6 +53,15 @@ public class VeterinaryService {
 		Assert.notNull(veterinary);
 		return veterinaryRepository.save(veterinary);
 	}
-	
+
 	// Other business methods -------------------------------------------------
+
+	public Veterinary findByPrincipal() {
+		Veterinary result;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		result = veterinaryRepository.findByPrincipal(userAccount.getId());
+		Assert.notNull(result);
+		return result;
+	}
 }

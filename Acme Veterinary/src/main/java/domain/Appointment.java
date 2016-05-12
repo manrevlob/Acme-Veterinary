@@ -31,7 +31,6 @@ public class Appointment extends DomainEntity {
 
 	private Date moment;
 	private String reason;
-	private Money price;
 
 	@Past
 	@NotNull
@@ -54,30 +53,21 @@ public class Appointment extends DomainEntity {
 		this.reason = reason;
 	}
 
-	@NotNull
-	public Money getPrice() {
-		return price;
-	}
-
-	public void setPrice(Money price) {
-		this.price = price;
-	}
-
 	// RelationsShips --------------------------------------------------------
 
-	private Clinic clinic;
+	private Veterinary veterinary;
 	private Payment payment;
 	private History history;
 	private Pet pet;
 
 	@Valid
 	@ManyToOne(optional = false)
-	public Clinic getClinic() {
-		return clinic;
+	public Veterinary getVeterinary() {
+		return veterinary;
 	}
 
-	public void setClinic(Clinic clinic) {
-		this.clinic = clinic;
+	public void setVeterinary(Veterinary veterinary) {
+		this.veterinary = veterinary;
 	}
 
 	@Valid

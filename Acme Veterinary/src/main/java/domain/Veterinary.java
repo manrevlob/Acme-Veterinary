@@ -26,6 +26,7 @@ public class Veterinary extends Actor {
 	private Collection<History> histories;
 	private Clinic clinic;
 	private Collection<Comment> comments;
+	private Collection<Appointment> appointments;
 
 	@Valid
 	@OneToMany(mappedBy = "veterinary")
@@ -55,6 +56,16 @@ public class Veterinary extends Actor {
 
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "veterinary")
+	public Collection<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Collection<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 }

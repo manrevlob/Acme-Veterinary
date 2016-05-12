@@ -40,6 +40,15 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('VETERINARY')">
+			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="appointment/veterinary/list.do"><spring:message code="master.page.veterinary.myAppointment" /></a></li>					
+				</ul>
+			</li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
 			<li><a href="register/createCustomer.do"> <spring:message
 						code="master.page.register" /></a></li>
