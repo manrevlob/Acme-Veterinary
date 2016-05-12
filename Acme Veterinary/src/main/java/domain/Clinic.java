@@ -70,7 +70,6 @@ public class Clinic extends DomainEntity {
 
 	private Collection<Veterinary> veterinaries;
 	private Collection<Bulletin> bulletins;
-	private Collection<Appointment> appointments;
 
 	@Valid
 	@OneToMany(mappedBy = "clinic")
@@ -90,16 +89,6 @@ public class Clinic extends DomainEntity {
 
 	public void setBulletins(Collection<Bulletin> bulletins) {
 		this.bulletins = bulletins;
-	}
-
-	@Valid
-	@OneToMany(mappedBy = "clinic")
-	public Collection<Appointment> getAppointments() {
-		return appointments;
-	}
-
-	public void setAppointments(Collection<Appointment> appointments) {
-		this.appointments = appointments;
 	}
 
 }
