@@ -29,8 +29,8 @@ public class Pet extends DomainEntity {
 	// Identification ---------------------------------------------------------
 
 	private String name;
-	private String type;
 	private Date birthDate;
+	private boolean isDeleted;
 
 	@NotBlank
 	public String getName() {
@@ -39,15 +39,6 @@ public class Pet extends DomainEntity {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@NotBlank
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	@Past
@@ -62,11 +53,20 @@ public class Pet extends DomainEntity {
 		this.birthDate = birthDate;
 	}
 
+	public boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	// RelationsShips --------------------------------------------------------
 
 	private Customer customer;
 	private Collection<History> histories;
 	private Collection<Appointment> appointments;
+	private PetType petType;
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -96,6 +96,16 @@ public class Pet extends DomainEntity {
 
 	public void setAppointments(Collection<Appointment> appointments) {
 		this.appointments = appointments;
+	}
+
+	@Valid
+	@ManyToOne(optional = false)
+	public PetType getPetType() {
+		return petType;
+	}
+
+	public void setPetType(PetType petType) {
+		this.petType = petType;
 	}
 
 }

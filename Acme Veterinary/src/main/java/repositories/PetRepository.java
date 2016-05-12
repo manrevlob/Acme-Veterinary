@@ -12,7 +12,7 @@ import domain.Pet;
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Integer> {
 
-	@Query("select p from Pet p where p.customer = ?1")
+	@Query("select p from Pet p where p.customer = ?1 and p.isDeleted = false")
 	Collection<Pet> findAllOwner(Customer customer);
 
 }
