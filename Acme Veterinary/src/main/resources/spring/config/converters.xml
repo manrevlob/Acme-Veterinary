@@ -48,6 +48,8 @@
 		<bean class="converters.ClinicToStringConverter" />
 		<bean class="converters.StringToClinicConverter" />
 		
+		<bean class="converters.SpamWordToStringConverter" />
+		<bean class="converters.StringToSpamWordConverter" />
 	</util:list>
 
 </beans>
