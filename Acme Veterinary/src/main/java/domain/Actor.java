@@ -69,6 +69,7 @@ public class Actor extends DomainEntity {
 	
 	@NotBlank
 	@Email
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getEmail() {
 		return email;
 	}

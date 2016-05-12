@@ -42,6 +42,8 @@
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
+			<li><a href="register/createCustomer.do"> <spring:message
+						code="master.page.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		

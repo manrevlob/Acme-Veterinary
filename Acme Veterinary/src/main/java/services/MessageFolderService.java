@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MessageFolderRepository;
+import domain.Message;
 import domain.MessageFolder;
 
 @Service
@@ -31,7 +33,12 @@ public class MessageFolderService {
 
 	public MessageFolder create() {
 		MessageFolder result;
+		Collection<Message> messages = new ArrayList<Message>();
 		result = new MessageFolder();
+
+		result.setMessages(messages);
+		result.setSystem(false);
+
 		return result;
 	}
 
@@ -47,6 +54,12 @@ public class MessageFolderService {
 		return result;
 	}
 
+	public Collection<MessageFolder> saveAll(
+			Collection<MessageFolder> messageFolders) {
+		Assert.notEmpty(messageFolders);
+		return messageFolderRepository.save(messageFolders);
+	}
+	
 	public MessageFolder save(MessageFolder messageFolder) {
 		Assert.notNull(messageFolder);
 		return messageFolderRepository.save(messageFolder);
