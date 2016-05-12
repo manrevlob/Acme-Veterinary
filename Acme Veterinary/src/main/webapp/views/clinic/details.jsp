@@ -51,5 +51,5 @@
 
 <input type="button" name="cancel"
 	value="<spring:message code="clinic.cancel" />"
-	onclick="javascript:history.back();" />
+	onclick="javascript: window.location.replace('clinic/list.do')" />
 <br />

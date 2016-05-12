@@ -19,5 +19,15 @@
 		<put-attribute name="title" value="Detalles clinica" />
 		<put-attribute name="body" value="/views/clinic/details.jsp" />
 	</definition>
+	
+	<definition name="clinic/create" extends="master.page">
+		<put-attribute name="title" value="Crear clinica" />
+		<put-attribute name="body" value="/views/clinic/edit.jsp" />
+	</definition>
+	
+	<definition name="clinic/edit" extends="master.page">
+		<put-attribute name="title" value="Editar clinica" />
+		<put-attribute name="body" value="/views/clinic/edit.jsp" />
+	</definition>
 
 </tiles-definitions>

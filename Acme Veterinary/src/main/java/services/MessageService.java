@@ -137,7 +137,6 @@ public class MessageService {
 
 	}
 	
-	//TODO por si hace falta para el mensaje automático al cancelar una cita
 //	public void sendAutoReplyMessage(String messageText, Actor sender, Actor recipient) {
 //		Assert.notNull(sender);
 //		Assert.notNull(recipient);
@@ -190,10 +189,25 @@ public class MessageService {
 
 		save(messageReceived);
 		messageFolderService.save(recipientInbox);
+		
 
 	}
 
+	public Message createReply(Message message) {
+		Message result;
 
+		Assert.notNull(message);
+		Assert.isTrue(actorService.findByPrincipal().equals(
+				message.getRecipient()));
+	
+		result = create();
+
+		result.setSubject("RE: " + message.getSubject());
+		result.setRecipient(message.getSender());
+		result.setSender(actorService.findByPrincipal());
+
+		return result;
+	}
 
 	public boolean isRecipient(Message message, Actor actor) {
 		return message.getRecipient().equals(actor);
