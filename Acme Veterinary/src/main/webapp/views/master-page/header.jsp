@@ -44,6 +44,7 @@
 			<li><a href="register/createCustomer.do"> <spring:message
 						code="master.page.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a href="clinic/list.do"><spring:message code="master.page.clinic" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -56,6 +57,7 @@
 					<li class="arrow"></li>
 					<li><a href="profile/actor/list.do"><spring:message code="master.page.profile.view" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+					<li><a href="messageFolder/actor/list.do"><spring:message code="master.page.mail" /> </a></li>
 				</ul>
 			</li>
 		</security:authorize>

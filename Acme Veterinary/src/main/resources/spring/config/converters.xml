@@ -45,6 +45,9 @@
 		<bean class="converters.AppointmentToStringConverter" />
 		<bean class="converters.StringToAppointmentConverter" />
 
+		<bean class="converters.ClinicToStringConverter" />
+		<bean class="converters.StringToClinicConverter" />
+		
 	</util:list>
 
 </beans>
