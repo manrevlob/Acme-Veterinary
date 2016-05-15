@@ -5,17 +5,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.History;
+import domain.Clinic;
 
 @Component
 @Transactional
-public class ClinicToStringConverter implements Converter<History, String> {
+public class ClinicToStringConverter implements Converter<Clinic, String> {
 
 	@Override
-	public String convert(History history) {
-		Assert.notNull(history);
+	public String convert(Clinic clinic) {
+		Assert.notNull(clinic);
 		String result;
-		result = String.valueOf(history.getId());
+		result = String.valueOf(clinic.getId());
 		return result;
 	}
 
