@@ -1,5 +1,7 @@
 package controllers.veterinary;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import services.AppointmentService;
 import services.HistoryService;
 import controllers.AbstractController;
 import domain.Appointment;
+import domain.History;
 import forms.HistoryForm;
 
 @Controller
@@ -31,6 +34,23 @@ public class HistoryVeterinaryController extends AbstractController {
 
 	public HistoryVeterinaryController() {
 		super();
+	}
+
+	// Listing ----------------------------------------------------------------
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int petId) {
+		ModelAndView result;
+
+		Collection<History> histories;
+
+		histories = historyService.findAllByPet(petId);
+
+		result = new ModelAndView("history/list");
+		result.addObject("requestURI", "history/veterinary/list.do");
+		result.addObject("histories", histories);
+
+		return result;
 	}
 
 	// Creation ---------------------------------------------------------------
@@ -52,7 +72,8 @@ public class HistoryVeterinaryController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid HistoryForm historyForm, BindingResult binding) {
+	public ModelAndView save(@Valid HistoryForm historyForm,
+			BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -60,7 +81,8 @@ public class HistoryVeterinaryController extends AbstractController {
 		} else {
 			try {
 				historyService.convertFormToHistory(historyForm);
-				result = new ModelAndView("redirect:/appointment/veterinary/list.do");
+				result = new ModelAndView(
+						"redirect:/appointment/veterinary/list.do");
 			} catch (Throwable oops) {
 				result = createAndEditModelAndView(historyForm,
 						"history.commit.error");

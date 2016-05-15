@@ -32,7 +32,9 @@ public class CustomerService {
 
 	@Autowired
 	private MessageFolderService messageFolderService;
-
+	@Autowired
+	private ActorService actorService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public CustomerService() {
@@ -154,5 +156,12 @@ public class CustomerService {
 		customer.setEmail(customerForm.getEmail());
 
 		save(customer);
+	}
+
+	public Collection<Customer> findByKeyword(String keyword) {
+		Assert.isTrue(actorService.isVeterinary());
+		Collection<Customer> result;
+		result = customerRepository.findByKeyword(keyword);
+		return result;
 	}
 }

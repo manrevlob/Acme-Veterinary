@@ -25,13 +25,14 @@
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 
 		<security:authorize access="hasRole('ADMIN')">
+			<li><a href="register/createVeterinary.do"> <spring:message
+						code="master.page.register.veterinary" /></a></li>
 			<li><a class="fNiv"><spring:message
 						code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="spamword/administrator/list.do"><spring:message
 								code="master.page.administrator.spamWord" /></a></li>
-
 				</ul></li>
 		</security:authorize>
 
@@ -53,6 +54,8 @@
 					<li><a href="appointment/veterinary/list.do"><spring:message
 								code="master.page.veterinary.myAppointment" /></a></li>
 				</ul></li>
+			<li><a href="customer/veterinary/list.do"> <spring:message
+						code="master.page.customer.list" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="isAnonymous()">

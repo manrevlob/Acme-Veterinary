@@ -77,4 +77,13 @@ public class PetService {
 		result = petRepository.findAllOwner(customer);
 		return result;
 	}
+
+	public Collection<Pet> findAllByCustomer(int customerId) {
+		Assert.isTrue(actorService.isVeterinary());
+		Collection<Pet> result;
+		Customer customer;
+		customer = customerService.findOne(customerId);
+		result = petRepository.findAllOwner(customer);
+		return result;
+	}
 }

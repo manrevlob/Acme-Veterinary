@@ -70,8 +70,10 @@ public class HistoryService {
 	// Other business methods -------------------------------------------------
 
 	public Collection<History> findAllByPet(int petId) {
-		Assert.isTrue(actorService.isCustomer());
-		Assert.isTrue(customerService.findByPrincipal().equals(petService.findOne(petId).getCustomer()));
+		Assert.isTrue(actorService.isCustomer() || actorService.isVeterinary());
+		if(actorService.isCustomer()){
+			Assert.isTrue(customerService.findByPrincipal().equals(petService.findOne(petId).getCustomer()));
+		}
 		Collection<History> result;
 		result = historyRepository.findAllByPet(petId);
 		return result;

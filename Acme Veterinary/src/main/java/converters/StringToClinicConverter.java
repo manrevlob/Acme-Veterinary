@@ -6,19 +6,19 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.MessageRepository;
-import domain.Message;
+import repositories.ClinicRepository;
+import domain.Clinic;
 
 @Component
 @Transactional
-public class StringToClinicConverter implements
-		Converter<String, Message> {
+public class StringToClinicConverter implements Converter<String, Clinic> {
+
 	@Autowired
-	MessageRepository messageRepository;
+	ClinicRepository clinicRepository;
 
 	@Override
-	public Message convert(String text) {
-		Message result;
+	public Clinic convert(String text) {
+		Clinic result;
 		int id;
 
 		try {
@@ -26,7 +26,7 @@ public class StringToClinicConverter implements
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = messageRepository.findOne(id);
+				result = clinicRepository.findOne(id);
 			}
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);

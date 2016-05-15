@@ -60,9 +60,18 @@
 			</jstl:if>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('VETERINARY')">
+		<display:column title="${HistoryHeader}">
+			<a href="history/veterinary/list.do?petId=${row.id}"> <spring:message
+					code="pet.seeHistory" />
+			</a>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 
-<a href="pet/customer/create.do"> <spring:message code="pet.create" />
-</a>
-
+<security:authorize access="hasRole('CUSTOMER')">
+	<a href="pet/customer/create.do"> <spring:message code="pet.create" />
+	</a>
+</security:authorize>
