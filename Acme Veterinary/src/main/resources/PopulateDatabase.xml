@@ -421,7 +421,6 @@
 		<property name="histories">
 			<list>
 				<ref bean="history1" />
-				<ref bean="history2" />
 			</list>
 		</property>
 		<property name="comments">
@@ -479,7 +478,6 @@
 		<property name="histories">
 			<list>
 				<ref bean="history1" />
-				<ref bean="history2" />
 			</list>
 		</property>
 		<property name="appointments">
@@ -539,7 +537,6 @@
 		<property name="reason" value="Appointment2Reason" />
 		<property name="veterinary" ref="veterinary1" />
 		<property name="pet" ref="pet1" />
-		<property name="history" ref="history2" />
 	</bean>
 	
 	<bean id="appointment3" class="domain.Appointment">
@@ -567,15 +564,6 @@
 		<property name="veterinary" ref="veterinary1" />
 		<property name="pet" ref="pet1" />
 		<property name="appointment" ref="appointment1" />
-	</bean>
-	
-	<bean id="history2" class="domain.History">
-		<property name="moment" value="05/06/2015 10:00" />
-		<property name="diagnosis" value="History2Diagnosis" />
-		<property name="treatment" ref="treatment2" />
-		<property name="veterinary" ref="veterinary1" />
-		<property name="pet" ref="pet1" />
-		<property name="appointment" ref="appointment2" />
 	</bean>
 	
 	<bean id="history3" class="domain.History">

@@ -19,5 +19,10 @@
 		<put-attribute name="title" value="History pet Details" />
 		<put-attribute name="body" value="/views/history/details.jsp" />
 	</definition>
+	
+	<definition name="history/edit" extends="master.page">
+		<put-attribute name="title" value="Create History pet" />
+		<put-attribute name="body" value="/views/history/edit.jsp" />
+	</definition>
 
 </tiles-definitions>

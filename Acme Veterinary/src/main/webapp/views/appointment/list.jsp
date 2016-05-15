@@ -33,11 +33,15 @@
 		sortable="true" />
 
 	<security:authorize access="hasRole('VETERINARY')">
+
 		<display:column title="${createHistoryHeader}">
-			<a href="history/veterinary/create.do?appointmentId=${row.id}"> <spring:message
-					code="appointment.create" />
-			</a>
+			<jstl:if test="${row.history == null}">
+				<a href="history/veterinary/create.do?appointmentId=${row.id}">
+					<spring:message code="appointment.create" />
+				</a>
+			</jstl:if>
 		</display:column>
+
 	</security:authorize>
 
 </display:table>
