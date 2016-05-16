@@ -3,7 +3,6 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import repositories.VeterinaryRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.MessageFolder;
 import domain.Veterinary;
 import forms.VeterinaryForm;
 
@@ -29,9 +27,6 @@ public class VeterinaryService {
 
 	// Supporting services ----------------------------------------------------
 
-	@Autowired
-	private MessageFolderService messageFolderService;
-
 	// Constructors -----------------------------------------------------------
 
 	public VeterinaryService() {
@@ -42,49 +37,7 @@ public class VeterinaryService {
 
 	public Veterinary create() {
 		Veterinary result;
-		UserAccount userAccount;
-		Authority authority;
-		Collection<Authority> authorities;
-		MessageFolder inbox;
-		MessageFolder outbox;
-		MessageFolder trashbox;
-		MessageFolder spambox;
-		Collection<MessageFolder> messageFolders;
-
-		userAccount = new UserAccount();
 		result = new Veterinary();
-		authority = new Authority();
-		authority.setAuthority(Authority.VETERINARY);
-		authorities = new ArrayList<Authority>();
-		messageFolders = new ArrayList<MessageFolder>();
-
-		inbox = messageFolderService.create();
-		outbox = messageFolderService.create();
-		trashbox = messageFolderService.create();
-		spambox = messageFolderService.create();
-
-		inbox.setSystem(true);
-		outbox.setSystem(true);
-		trashbox.setSystem(true);
-		spambox.setSystem(true);
-
-		authorities.add(authority);
-		userAccount.setAuthorities(authorities);
-		result.setUserAccount(userAccount);
-
-		inbox.setName("In box");
-		outbox.setName("Out box");
-		trashbox.setName("Trash box");
-		spambox.setName("Spam box");
-
-		messageFolders.add(inbox);
-		messageFolders.add(outbox);
-		messageFolders.add(trashbox);
-		messageFolders.add(spambox);
-
-		messageFolders = messageFolderService.saveAll(messageFolders);
-		result.setMessageFolders(messageFolders);
-
 		return result;
 	}
 
@@ -102,10 +55,6 @@ public class VeterinaryService {
 
 	public Veterinary save(Veterinary veterinary) {
 		Assert.notNull(veterinary);
-		Assert.isTrue(StringUtils.isNotEmpty(veterinary.getName()),
-				"Name is null");
-		Assert.isTrue(StringUtils.isNotEmpty(veterinary.getSurname()),
-				"Surname is null");
 		return veterinaryRepository.save(veterinary);
 	}
 
@@ -153,5 +102,11 @@ public class VeterinaryService {
 
 		save(veterinary);
 	}
-
+	
+	// Devuelve lista de veterinarios asignados a una clinica
+	public Collection<Veterinary> findByClinic(int clinicId) {
+		Collection<Veterinary> result;
+		result = veterinaryRepository.findByClinic(clinicId);
+		return result;
+	}
 }

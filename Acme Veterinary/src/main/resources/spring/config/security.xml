@@ -40,7 +40,10 @@
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
-		<security:intercept-url pattern="/clinic/**" access="permitAll" /> 
+		<security:intercept-url pattern="/clinic/**" access="permitAll" />
+		<security:intercept-url pattern="/veterinary/list.do" access="permitAll" />
+		<security:intercept-url pattern="/appointment/list.do" access="permitAll" />
+		<security:intercept-url pattern="/appointment/listDate.do" access="permitAll" />  
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
 		<security:intercept-url pattern="/register/createCustomer.do" access="permitAll" />  
@@ -51,6 +54,7 @@
 
 		<security:intercept-url pattern="/pet/customer/**" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/history/customer/**" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/appointment/customer/**" access="hasRole('CUSTOMER')" />
 		
 		<security:intercept-url pattern="/appointment/veterinary/**" access="hasRole('VETERINARY')" />
 		<security:intercept-url pattern="/history/veterinary/**" access="hasRole('VETERINARY')" />

@@ -1,6 +1,11 @@
 package services;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +14,9 @@ import org.springframework.util.Assert;
 
 import repositories.AppointmentRepository;
 import domain.Appointment;
+import domain.Customer;
 import domain.Veterinary;
+import forms.AppointmentForm;
 
 @Service
 @Transactional
@@ -18,7 +25,7 @@ public class AppointmentService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private AppointmentRepository appointmentRepository;
+	private AppointmentRepository appointmentRepository;	
 
 	// Supporting services ----------------------------------------------------
 
@@ -26,6 +33,8 @@ public class AppointmentService {
 	private ActorService actorService;
 	@Autowired
 	private VeterinaryService veterinaryService;
+	@Autowired
+	private CustomerService customerService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -70,6 +79,63 @@ public class AppointmentService {
 		Veterinary veterinary;
 		veterinary = veterinaryService.findByPrincipal();
 		result = appointmentRepository.findAllOwn(veterinary);
+		return result;
+	}
+	
+	//Este metodo se podrá utilizar sin estar logueado, x eso no lleva asserts
+	public boolean getVeterinaryisBooked(String day, String startTime,	String endTime, Veterinary veterinary) {
+		boolean res = false;
+		Date dayDate = new Date(day);
+		Collection<Appointment> appointments = appointmentRepository.getVeterinaryIsBooked(dayDate, startTime, endTime, veterinary);
+		if ((appointments != null) && (appointments.size() != 0))
+			res = true;
+		return res;
+	}
+	
+	public LinkedHashMap<String, String> getNextDays() {
+		LinkedHashMap<String, String> days = new LinkedHashMap<String, String>();
+		Calendar c = Calendar.getInstance();
+		String day;
+		Date dt = c.getTime();
+		DateFormat ndf = new SimpleDateFormat("dd/MM/yyyy");
+
+		for (int i = 0; i < 7; i++) {
+			day = ndf.format(dt);
+			days.put(day, day);
+			c.add(Calendar.DAY_OF_MONTH, 1);
+			dt = c.getTime();
+		}
+		return days;
+	}
+	
+	public String getDay() {
+		Calendar c = Calendar.getInstance();
+		String day;
+		Date dt = c.getTime();
+		DateFormat ndf = new SimpleDateFormat("dd/MM/yyyy");
+		day = ndf.format(dt);
+		return day;
+	}
+	
+	public Appointment reconstruct(AppointmentForm appointmentForm) {
+		Assert.isTrue(actorService.isCustomer());
+		Appointment appointment= new Appointment();
+		Date day = new Date(appointmentForm.getStartMoment());
+		appointment.setDay(day);
+		appointment.setStartTime(appointmentForm.getStartTime());
+		appointment.setEndTime(appointmentForm.getEndTime());
+		appointment.setVeterinary(appointmentForm.getVeterinary());
+		appointment.setMoment((new Date(System.currentTimeMillis() - 1000)));
+		appointment.setPet(appointmentForm.getPet());
+		appointment.setReason(appointmentForm.getReason());
+		return appointment;
+	}
+
+	//Devuelve las citas del principal que la fecha sea superior a las de hoy
+	public Collection<Appointment> findByPrincipalNoExpired() {
+		Collection<Appointment> result;
+		Customer principal = customerService.findByPrincipal();
+		result = appointmentRepository.findByPrincipalNoExpired(principal);
 		return result;
 	}
 }
