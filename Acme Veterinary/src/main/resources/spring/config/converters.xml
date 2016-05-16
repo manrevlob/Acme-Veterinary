@@ -50,6 +50,9 @@
 		
 		<bean class="converters.SpamWordToStringConverter" />
 		<bean class="converters.StringToSpamWordConverter" />
+		
+		<bean class="converters.PaymentToStringConverter" />
+		<bean class="converters.StringToPaymentConverter" />
 	</util:list>
 
 </beans>

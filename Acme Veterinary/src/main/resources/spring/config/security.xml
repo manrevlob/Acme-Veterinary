@@ -54,7 +54,8 @@
 		
 		<security:intercept-url pattern="/appointment/veterinary/**" access="hasRole('VETERINARY')" />
 		<security:intercept-url pattern="/history/veterinary/**" access="hasRole('VETERINARY')" />
-		<security:intercept-url pattern="/customer/veterinary/**" access="hasRole('VETERINARY')" />         
+		<security:intercept-url pattern="/customer/veterinary/**" access="hasRole('VETERINARY')" />  
+		<security:intercept-url pattern="/payment/veterinary/**" access="hasRole('VETERINARY')" />        
 
 		<security:intercept-url pattern="/profile/actor/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/messageFolder/**" access="isAuthenticated()" />

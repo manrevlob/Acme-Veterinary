@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -28,7 +27,6 @@ public class Payment extends DomainEntity {
 
 	private Date moment;
 	private CreditCard creditCard;
-	private String reason;
 	private Money totalCost;
 
 	@Past
@@ -43,22 +41,12 @@ public class Payment extends DomainEntity {
 		this.moment = moment;
 	}
 
-	@NotNull
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}
 
 	public void setCreditCard(CreditCard creditCard) {
 		this.creditCard = creditCard;
-	}
-
-	@NotBlank
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
 	}
 
 	@NotNull
@@ -83,5 +71,15 @@ public class Payment extends DomainEntity {
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
 	}
+
+	@Override
+	public String toString() {
+		return "Payment [moment=" + moment + ", creditCard=" + creditCard
+				+ ", totalCost=" + totalCost + ", appointment=" + appointment
+				+ "]";
+	}
+	
+	
+	
 
 }
