@@ -19,24 +19,20 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="pet/customer/edit.do" modelAttribute="pet">
+<html>
+<head>
+<title>Upload File Request Page</title>
+</head>
+<body>
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="customer" />
+	<form method="POST" action="pet/customer/uploadImage.do"
+		enctype="multipart/form-data">
+		<input type="hidden" name="petId" value="${petId}"> 
+		File to upload: <input type="file" name="file"  accept="image/x-png">
+		<br /> 
+		<br /> 
+		<input type="submit" name="upload"> Press here to upload the file!
+	</form>
 
-	<acme:textbox code="pet.name" path="name" />
-
-	<acme:textbox code="pet.birthDate" path="birthDate"
-		text="pet.birthDate.format" />
-
-	<acme:select items="${petTypes}" itemLabel="name" code="pet.petType"
-		path="petType" />
-
-	<acme:submit name="save" code="pet.save" />
-
-	<input type="button" name="cancel"
-		value="<spring:message code="pet.cancel" />"
-		onclick="javascript: window.location.replace('pet/customer/list.do')" />
-
-</form:form>
+</body>
+</html>  
