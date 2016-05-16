@@ -67,6 +67,10 @@ public class Authority implements GrantedAuthority {
 		authority = new Authority();
 		authority.setAuthority(CUSTOMER);
 		result.add(authority);
+		
+		authority = new Authority();
+		authority.setAuthority(VETERINARY);
+		result.add(authority);
 
 		return result;
 	}
