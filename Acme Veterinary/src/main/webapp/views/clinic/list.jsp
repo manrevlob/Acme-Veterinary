@@ -38,6 +38,11 @@
 	<display:column property="pictures" title="${picturesHeader}"
 		sortable="true" />
 
+	<display:column title="${veterinariesHeader}">
+		<a href="veterinary/list.do?clinicId=${row.id}"> <spring:message
+				code="clinic.veterinaries" />
+		</a>
+	</display:column>
 
 	<display:column title="${detailsHeader}">
 		<a href="clinic/details.do?clinicId=${row.id}"> <spring:message

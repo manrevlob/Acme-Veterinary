@@ -525,11 +525,14 @@
 	<!-- Appointments -->
 
 	<bean id="appointment1" class="domain.Appointment">
-		<property name="moment" value="05/05/2015 10:00" />
+		<property name="moment" value="05/03/2016 10:00" />
 		<property name="reason" value="Appointment1Reason" />
 		<property name="veterinary" ref="veterinary1" />
 		<property name="pet" ref="pet1" />
 		<property name="history" ref="history1" />
+		<property name="day" value="05/16/2016" />
+		<property name="startTime" value="9" />
+		<property name="endTime" value="10" />
 	</bean>
 	
 	<bean id="appointment2" class="domain.Appointment">
@@ -537,6 +540,10 @@
 		<property name="reason" value="Appointment2Reason" />
 		<property name="veterinary" ref="veterinary1" />
 		<property name="pet" ref="pet1" />
+		<property name="day" value="03/08/2016" />
+		<property name="startTime" value="11" />
+		<property name="endTime" value="12" />
+		
 	</bean>
 	
 	<bean id="appointment3" class="domain.Appointment">
@@ -545,6 +552,10 @@
 		<property name="veterinary" ref="veterinary2" />
 		<property name="pet" ref="pet2" />
 		<property name="history" ref="history3" />
+		<property name="day" value="03/07/2016" />
+		<property name="startTime" value="11" />
+		<property name="endTime" value="12" />
+		
 	</bean>
 	
 	<bean id="appointment4" class="domain.Appointment">
@@ -553,6 +564,10 @@
 		<property name="veterinary" ref="veterinary2" />
 		<property name="pet" ref="pet3" />
 		<property name="history" ref="history4" />
+		<property name="day" value="03/07/2016" />
+		<property name="startTime" value="15" />
+		<property name="endTime" value="16" />
+		
 	</bean>
 	
 	<!-- Histories -->
