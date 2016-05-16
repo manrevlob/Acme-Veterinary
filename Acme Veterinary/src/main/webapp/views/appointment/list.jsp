@@ -32,17 +32,15 @@
 	<display:column property="reason" title="${reasonHeader}"
 		sortable="true" />
 
-	<security:authorize access="hasRole('VETERINARY')">
+	<display:column title="${detailsHeader}">
 
-		<display:column title="${createHistoryHeader}">
-			<jstl:if test="${row.history == null}">
-				<a href="history/veterinary/create.do?appointmentId=${row.id}">
-					<spring:message code="appointment.create" />
-				</a>
-			</jstl:if>
-		</display:column>
+		<a href="appointment/veterinary/details.do?appointmentId=${row.id}">
+			<spring:message code="appointment.details" />
+		</a>
 
-	</security:authorize>
+	</display:column>
+
+
 
 </display:table>
 

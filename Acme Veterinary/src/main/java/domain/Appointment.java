@@ -100,4 +100,11 @@ public class Appointment extends DomainEntity {
 		this.pet = pet;
 	}
 
+	@Override
+	public String toString() {
+		return "Appointment [moment=" + moment + ", reason=" + reason
+				+ ", veterinary=" + veterinary + ", payment=" + payment
+				+ ", history=" + history + ", pet=" + pet + "]";
+	}
+
 }

@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PaymentRepository;
+import utilities.Utiles;
+import domain.Appointment;
+import domain.Money;
 import domain.Payment;
 
 @Service
@@ -18,6 +22,8 @@ public class PaymentService {
 
 	@Autowired
 	private PaymentRepository paymentRepository;
+	@Autowired
+	private ActorService actorService;
 
 	// Supporting services ----------------------------------------------------
 
@@ -29,9 +35,14 @@ public class PaymentService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Payment create() {
+	public Payment create(Appointment appointment) {
 		Payment result;
 		result = new Payment();
+		result.setMoment(new Date(System.currentTimeMillis() - 1000));
+		result.setAppointment(appointment);
+		Money money = new Money();
+		money.setCurrency("Euros");
+		result.setTotalCost(money);
 		return result;
 	}
 
@@ -48,13 +59,25 @@ public class PaymentService {
 	}
 
 	public Payment save(Payment payment) {
+		Assert.isTrue(actorService.isVeterinary());
 		Assert.notNull(payment);
-		return paymentRepository.save(payment);
+		Assert.isTrue(payment.getTotalCost().getAmount() > 0);
+		Assert.isTrue(Utiles.checkCreditCard(payment.getCreditCard())
+				|| Utiles.checkEmptyCreditCard(payment.getCreditCard()));
+		Appointment appointment = payment.getAppointment();
+
+		if (Utiles.checkEmptyCreditCard(payment.getCreditCard())) {
+			payment.setCreditCard(null);
+		}
+
+		payment = paymentRepository.save(payment);
+		appointment.setPayment(payment);
+		return payment;
 	}
-	
+
 	public void delete(Payment payment) {
 		paymentRepository.delete(payment);
 	}
-	
+
 	// Other business methods -------------------------------------------------
 }
