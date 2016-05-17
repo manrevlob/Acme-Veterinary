@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import repositories.AppointmentRepository;
 import domain.Appointment;
 import domain.Customer;
+import domain.Message;
 import domain.Veterinary;
 import forms.AppointmentForm;
 
@@ -35,6 +36,8 @@ public class AppointmentService {
 	private VeterinaryService veterinaryService;
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private MessageService messageService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -72,13 +75,22 @@ public class AppointmentService {
 	}
 	
 	// Other business methods -------------------------------------------------
-	
+	//Devuelve todas las citas de veterinario principal
 	public Collection<Appointment> findAllOwn() {
 		Assert.isTrue(actorService.isVeterinary());
 		Collection<Appointment> result;
 		Veterinary veterinary;
 		veterinary = veterinaryService.findByPrincipal();
 		result = appointmentRepository.findAllOwn(veterinary);
+		return result;
+	}
+	//Devuelve todas las citas de veterinario principal NO EXPIRADAS y ordenadas por el dia y la hora
+	public Collection<Appointment> findAllOwnNoExpired() {
+		Assert.isTrue(actorService.isVeterinary());
+		Collection<Appointment> result;
+		Veterinary veterinary;
+		veterinary = veterinaryService.findByPrincipal();
+		result = appointmentRepository.findAllOwnNoExpired(veterinary);
 		return result;
 	}
 	
@@ -148,4 +160,18 @@ public class AppointmentService {
 		Appointment appointment = findOne(appointmentId);
 		delete(appointment);
 	}
+
+	//Borrar una cita siendo veterinario
+	public void cancelAppointmentVeterinary(int appointmentId) {
+		sendVeterinaryMessageCancel(appointmentId);
+		cancelAppointment(appointmentId);
+	}
+	public void sendVeterinaryMessageCancel(int appointmentId){		
+		Appointment appointment = findOne(appointmentId);
+		Veterinary veterinary = veterinaryService.findByPrincipal();
+		Customer customer = appointment.getPet().getCustomer();
+		Message message = messageService.create(veterinary,customer,"APPOINTMENT CANCEL", "Your appointment "+appointment.getDay().toString()+" has been cancelled. Sorry about that.");
+		messageService.sendMessage(message);
+	}
+
 }
