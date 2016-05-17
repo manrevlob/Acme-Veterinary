@@ -49,17 +49,17 @@
 				code="clinic.details" />
 		</a>
 	</display:column>
-	
+	<security:authorize access="hasRole('ADMIN')">
 		<display:column title="${editHeader}">
-		<a href="clinic/administrator/edit.do?clinicId=${row.id}"> <spring:message
-				code="clinic.edit" />
-		</a>
-	</display:column>
-
+			<a href="clinic/administrator/edit.do?clinicId=${row.id}"> <spring:message
+					code="clinic.edit" />
+			</a>
+		</display:column>
+	</security:authorize>
 </display:table>
 
 <security:authorize access="hasRole('ADMIN')">
 <a href="clinic/administrator/create.do"> <spring:message
-				code="clinic.create" />
-		</a>
+		code="clinic.create" />
+</a>
 </security:authorize>

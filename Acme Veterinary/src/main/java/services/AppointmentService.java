@@ -94,7 +94,14 @@ public class AppointmentService {
 		return result;
 	}
 	
-	//Este metodo se podrá utilizar sin estar logueado, x eso no lleva asserts
+	//Devuelve todas las citas de un veterinario NO EXPIRADAS y ordenadas por el dia y la hora
+	public Collection<Appointment> findAllByVeterinaryNoExpired(Veterinary veterinary) {
+		Collection<Appointment> result;
+		result = appointmentRepository.findAllOwnNoExpired(veterinary);
+		return result;
+	}
+	
+	//Este metodo se podrá utilizar sin estar logueado, por eso no lleva asserts
 	public boolean getVeterinaryisBooked(String day, String startTime,	String endTime, Veterinary veterinary) {
 		boolean res = false;
 		@SuppressWarnings("deprecation")

@@ -336,6 +336,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="isDeleted" value="false" />
 	</bean>
 
 	<!-- Administrators -->

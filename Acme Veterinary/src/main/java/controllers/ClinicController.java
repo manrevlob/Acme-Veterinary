@@ -45,7 +45,7 @@ public class ClinicController extends AbstractController {
 
 			Collection<Clinic> clinics;
 
-			clinics = clinicService.findAll();
+			clinics = clinicService.findAllNotDeleted();
 
 			result = new ModelAndView("clinic/list");
 			result.addObject("requestURI", "clinic/list.do");

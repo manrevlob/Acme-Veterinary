@@ -27,6 +27,7 @@ public class Clinic extends DomainEntity {
 	private String address;
 	private String zipCode;
 	private String pictures;
+	private Boolean isDeleted;
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
@@ -65,8 +66,20 @@ public class Clinic extends DomainEntity {
 	public void setPictures(String pictures) {
 		this.pictures = pictures;
 	}
+	
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
 
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	
 	// Relationships ---------------------------------------------------------
+
+
+
 
 	private Collection<Veterinary> veterinaries;
 	private Collection<Bulletin> bulletins;
