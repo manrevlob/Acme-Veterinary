@@ -20,6 +20,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<security:authorize access="hasRole('VETERINARY')">
+	<h2><spring:message code="appointment.infoVet"/></h2>
+</security:authorize>
+
 <display:table name="appointments" pagesize="10" class="displaytag"
 	requestURI="${requestURI}" id="row">
 
@@ -29,7 +33,7 @@
 	</display:column>
 
 	<spring:message code="appointment.day" var="dayHeader" />
-	<display:column title="${momentHeader}">
+	<display:column title="${dayHeader}" sortable="true">
 		<fmt:formatDate pattern="dd-MM-yyyy" value="${row.day}" />
 	</display:column>
 
@@ -53,13 +57,24 @@
 	</display:column>
 	
 	<security:authorize access="isAuthenticated()">
+		<security:authorize access="hasRole('CUSTOMER')">
 		<display:column title="${cancelHeader}">
-			<a 
-			onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
-			href="appointment/customer/cancel.do?appointmentId=${row.id}">
-				<spring:message code="appointment.cancel" />
-			</a>
-		</display:column>
+				<a 
+				onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
+				href="appointment/customer/cancel.do?appointmentId=${row.id}">
+					<spring:message code="appointment.cancel" />
+				</a>
+			</display:column>
+		</security:authorize>
+		<security:authorize access="hasRole('VETERINARY')">
+			<display:column title="${cancelHeader}">
+				<a 
+				onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
+				href="appointment/veterinary/cancel.do?appointmentId=${row.id}">
+					<spring:message code="appointment.cancel" />
+				</a>
+			</display:column>
+		</security:authorize>
 	</security:authorize>
 
 

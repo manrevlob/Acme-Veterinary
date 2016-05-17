@@ -53,6 +53,19 @@ public class MessageService {
 		result.setSender(actor);
 		return result;
 	}
+	
+	public Message create(Actor sender, Actor recipient, String subject, String body) {
+		Message result;
+		result = new Message();
+		result.setMoment(new Date(System.currentTimeMillis() - 1000));
+		MessageFolder messageFolder = messageFolderService.findFolder(sender, "In box");
+		result.setMessageFolder(messageFolder);
+		result.setSender(sender);
+		result.setRecipient(recipient);
+		result.setSubject(subject);
+		result.setBody(body);
+		return result;
+	}
 
 	public Message save(Message message) {
 		Assert.isTrue(actorService.isAuthenticated());

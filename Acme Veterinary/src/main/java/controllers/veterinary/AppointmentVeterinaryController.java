@@ -31,16 +31,17 @@ public class AppointmentVeterinaryController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required = false) String message) {
 		ModelAndView result;
 
 		Collection<Appointment> appointments;
 
-		appointments = appointmentService.findAllOwn();
+		appointments = appointmentService.findAllOwnNoExpired();
 
 		result = new ModelAndView("appointment/list");
 		result.addObject("requestURI", "appointment/veterinary/list.do");
 		result.addObject("appointments", appointments);
+		result.addObject("message", message);
 
 		return result;
 	}
@@ -61,4 +62,19 @@ public class AppointmentVeterinaryController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping("/cancel")
+	public ModelAndView cancel(int appointmentId) {
+		ModelAndView result;
+
+		
+		try {
+			appointmentService.cancelAppointmentVeterinary(appointmentId);
+			result = new ModelAndView("redirect:/appointment/veterinary/list.do");
+		} catch (Exception e) {
+			result = new ModelAndView("redirect:/appointment/veterinary/list.do?message=appointment.error");
+		}
+		
+		
+		return result;
+	}
 }

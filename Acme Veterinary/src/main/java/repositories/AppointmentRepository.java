@@ -17,12 +17,15 @@ public interface AppointmentRepository extends
 
 	@Query("select a from Appointment a where a.veterinary = ?1 ")
 	Collection<Appointment> findAllOwn(Veterinary veterinary);
-
+	
+	@Query("select a from Appointment a where a.veterinary = ?1 and a.day >= current_timestamp() order by day, startTime")
+	Collection<Appointment> findAllOwnNoExpired(Veterinary veterinary);
 	
 	@Query("select a from Appointment a where a.veterinary = ?4 and a.day = ?1 and a.startTime = ?2 and a.endTime = ?3") 	
 	Collection<Appointment> getVeterinaryIsBooked(Date day, String startTime, String endTime, Veterinary veterinary);
 
 	@Query("select a from Appointment a where a.pet.customer = ?1 and a.day >= current_timestamp()")
 	Collection<Appointment> findByPrincipalNoExpired(Customer principal);
+
 
 }
