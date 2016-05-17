@@ -150,6 +150,7 @@
 		<property name="system" value="true" />
 		<property name="messages">
 			<list>
+				<ref bean="message1" />
 			</list>
 		</property>
 	</bean>
@@ -177,6 +178,7 @@
 		<property name="system" value="true" />
 		<property name="messages">
 			<list>
+				<ref bean="message2" />
 			</list>
 		</property>
 	</bean>
@@ -466,6 +468,26 @@
 				<ref bean="appointment4" />
 			</list>
 		</property>
+	</bean>
+	
+	<!-- Message -->
+
+	<bean id="message1" class="domain.Message">
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="customer1" />
+		<property name="moment" value="11/11/2011 11:11" />
+		<property name="subject" value="subject1" />
+		<property name="body" value="body1" />
+		<property name="messageFolder" ref="outbox1" />
+	</bean>
+
+	<bean id="message2" class="domain.Message">
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="customer1" />
+		<property name="moment" value="11/11/2011 11:11" />
+		<property name="subject" value="subject1" />
+		<property name="body" value="body1" />
+		<property name="messageFolder" ref="inbox2" />
 	</bean>
 
 	<!-- Pets -->
