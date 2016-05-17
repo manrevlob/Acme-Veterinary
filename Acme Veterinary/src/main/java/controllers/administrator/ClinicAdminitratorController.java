@@ -62,20 +62,11 @@ public class ClinicAdminitratorController extends AbstractController {
 					result = new ModelAndView("clinic/edit");
 				} else {
 					try {
-						//TODO comprobamos que sean de Flickr?
-						//if(Utiles.checkURL(clinic.getPictures()) || clinic.getPictures()== ""){
 							
 							clinic = clinicService.save(clinic);
 							result = new ModelAndView(
 								"redirect:/clinic/list.do");
-//						}else{
-//							result = new ModelAndView("clinic/edit");
-//							result.addObject("clinic", clinic);
-//							result.addObject("message", "clinic.commit.errorURL");
-//						}
-//						
-						
-						
+
 					} catch (Throwable oops) {
 						result = new ModelAndView("clinic/edit");
 						result.addObject("clinic", clinic);
@@ -94,7 +85,8 @@ public class ClinicAdminitratorController extends AbstractController {
 
 				} else {
 					try {
-						clinicService.delete(clinic);
+						
+						clinicService.deleteClinic(clinic.getId());
 						result = new ModelAndView(
 									"redirect:/clinic/list.do");
 						

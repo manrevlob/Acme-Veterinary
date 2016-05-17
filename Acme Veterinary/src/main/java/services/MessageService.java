@@ -12,6 +12,7 @@ import repositories.MessageRepository;
 import domain.Actor;
 import domain.Message;
 import domain.MessageFolder;
+import domain.SpamWord;
 
 @Service
 @Transactional
@@ -27,6 +28,9 @@ public class MessageService {
 	private ActorService actorService;
 	@Autowired
 	private MessageFolderService messageFolderService;
+	
+	@Autowired
+	private SpamWordService spamWordService;
 	
 
 	// Constructors -----------------------------------------------------------
@@ -192,7 +196,15 @@ public class MessageService {
 		messageReceived.setRecipient(recipient);
 		messageReceived.setSender(message.getSender());
 
-		recipientInbox = messageFolderService.findFolder(recipient, "In box");
+		if (containsSpam(message)) {
+			recipientInbox = messageFolderService.findFolder(recipient,
+					"Spam box");
+
+		} else {
+
+			recipientInbox = messageFolderService.findFolder(recipient,
+					"In box");
+		}
 
 		messageReceived.setMessageFolder(recipientInbox);
 
@@ -204,9 +216,10 @@ public class MessageService {
 		save(messageReceived);
 		messageFolderService.save(recipientInbox);
 		
+		}
 	
 
-	}
+	
 
 	public Message createReply(Message message) {
 		Message result;
@@ -287,6 +300,21 @@ public class MessageService {
 		Actor actor = actorService.findByPrincipal();
 		if (actor.getMessageFolders().contains(message.getMessageFolder())) {
 			result = true;
+		}
+		return result;
+	}
+	
+	public boolean containsSpam(Message message) {
+		Collection<SpamWord> spams = spamWordService.findAll();
+		Boolean result = false;
+
+		for (SpamWord s : spams) {
+			if (message.getSubject().toLowerCase().contains(s.getKeyWord())
+					|| message.getBody().toLowerCase().contains(s.getKeyWord())) {
+				result = true;
+				break;
+			}
+
 		}
 		return result;
 	}
