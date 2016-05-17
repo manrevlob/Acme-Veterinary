@@ -43,6 +43,8 @@
 					<li class="arrow"></li>
 					<li><a href="pet/customer/list.do"><spring:message
 								code="master.page.customer.myPet" /></a></li>
+					<li><a href="appointment/customer/list.do"><spring:message
+						code="master.page.myAppointment" /> </a></li>
 				</ul></li>
 		</security:authorize>
 

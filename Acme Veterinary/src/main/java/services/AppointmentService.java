@@ -85,6 +85,7 @@ public class AppointmentService {
 	//Este metodo se podrá utilizar sin estar logueado, x eso no lleva asserts
 	public boolean getVeterinaryisBooked(String day, String startTime,	String endTime, Veterinary veterinary) {
 		boolean res = false;
+		@SuppressWarnings("deprecation")
 		Date dayDate = new Date(day);
 		Collection<Appointment> appointments = appointmentRepository.getVeterinaryIsBooked(dayDate, startTime, endTime, veterinary);
 		if ((appointments != null) && (appointments.size() != 0))
@@ -120,6 +121,7 @@ public class AppointmentService {
 	public Appointment reconstruct(AppointmentForm appointmentForm) {
 		Assert.isTrue(actorService.isCustomer());
 		Appointment appointment= new Appointment();
+		@SuppressWarnings("deprecation")
 		Date day = new Date(appointmentForm.getStartMoment());
 		appointment.setDay(day);
 		appointment.setStartTime(appointmentForm.getStartTime());
@@ -137,5 +139,13 @@ public class AppointmentService {
 		Customer principal = customerService.findByPrincipal();
 		result = appointmentRepository.findByPrincipalNoExpired(principal);
 		return result;
+	}	
+
+	
+	//Borra una cita
+	public void cancelAppointment(int appointmentId) {
+		Assert.isTrue(actorService.isCustomer() || actorService.isAdministrator() || actorService.isVeterinary());
+		Appointment appointment = findOne(appointmentId);
+		delete(appointment);
 	}
 }

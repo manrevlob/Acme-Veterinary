@@ -28,18 +28,39 @@
 		<fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${row.moment}" />
 	</display:column>
 
+	<spring:message code="appointment.day" var="dayHeader" />
+	<display:column title="${momentHeader}">
+		<fmt:formatDate pattern="dd-MM-yyyy" value="${row.day}" />
+	</display:column>
+
+	<spring:message code="appointment.startTime" var="startTimeHeader" />
+	<display:column property="startTime" title="${startTimeHeader}"
+		sortable="true" />
+	
+	<spring:message code="appointment.endTime" var="endTimeHeader" />
+	<display:column property="endTime" title="${endTimeHeader}"
+		sortable="true" />	
+		
+
 	<spring:message code="appointment.reason" var="reasonHeader" />
 	<display:column property="reason" title="${reasonHeader}"
 		sortable="true" />
 
 	<display:column title="${detailsHeader}">
-
 		<a href="appointment/veterinary/details.do?appointmentId=${row.id}">
 			<spring:message code="appointment.details" />
 		</a>
-
 	</display:column>
-
+	
+	<security:authorize access="isAuthenticated()">
+		<display:column title="${cancelHeader}">
+			<a 
+			onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
+			href="appointment/customer/cancel.do?appointmentId=${row.id}">
+				<spring:message code="appointment.cancel" />
+			</a>
+		</display:column>
+	</security:authorize>
 
 
 </display:table>

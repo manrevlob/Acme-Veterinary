@@ -83,4 +83,20 @@ public class AppointmentCustomerController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping("/cancel")
+	public ModelAndView cancel(int appointmentId) {
+		ModelAndView result;
+
+		
+		try {
+			appointmentService.cancelAppointment(appointmentId);
+			result = new ModelAndView("redirect:/appointment/customer/list.do");
+		} catch (Exception e) {
+			result = new ModelAndView("redirect:/appointment/customer/list.do");
+		}
+		
+		
+		return result;
+	}
 }
