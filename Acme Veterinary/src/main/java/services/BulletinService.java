@@ -41,20 +41,26 @@ public class BulletinService {
 		return result;
 	}
 
-	public Collection<Bulletin> findAll() {
-		Collection<Bulletin> result;
-		result = bulletinRepository.findAll();
-		return result;
-	}
-
 	public Bulletin save(Bulletin bulletin) {
 		Assert.notNull(bulletin);
 		return bulletinRepository.save(bulletin);
 	}
-	
+
 	public void delete(Bulletin bulletin) {
 		bulletinRepository.delete(bulletin);
 	}
-	
+
 	// Other business methods -------------------------------------------------
+
+	public Collection<Bulletin> findAllFromClinic(int clinicId) {
+		Collection<Bulletin> result;
+		result = bulletinRepository.findAllFromClinic(clinicId);
+		return result;
+	}
+
+	public Collection<Object[]> findAll() {
+		Collection<Object[]> result;
+		result = bulletinRepository.findAllBulletins();
+		return result;
+	}
 }

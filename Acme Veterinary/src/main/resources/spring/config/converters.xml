@@ -47,19 +47,22 @@
 
 		<bean class="converters.ClinicToStringConverter" />
 		<bean class="converters.StringToClinicConverter" />
-		
+
 		<bean class="converters.SpamWordToStringConverter" />
 		<bean class="converters.StringToSpamWordConverter" />
-		
+
 		<bean class="converters.PaymentToStringConverter" />
 		<bean class="converters.StringToPaymentConverter" />
-		
+
 		<bean class="converters.CategoryToStringConverter" />
 		<bean class="converters.StringToCategoryConverter" />
-		
+
 		<bean class="converters.ItemToStringConverter" />
 		<bean class="converters.StringToItemConverter" />
-		
+
+		<bean class="converters.BulletinToStringConverter" />
+		<bean class="converters.StringToBulletinConverter" />
+
 	</util:list>
 
 </beans>

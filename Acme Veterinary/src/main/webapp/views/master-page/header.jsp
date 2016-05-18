@@ -69,6 +69,8 @@
 						code="master.page.item" /></a></li>
 			<li><a href="clinic/list.do"><spring:message
 						code="master.page.clinic" /></a></li>
+			<li><a href="bulletin/list.do"><spring:message
+						code="master.page.bulletin" /></a></li>
 			<li><a href="register/createCustomer.do"> <spring:message
 						code="master.page.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message

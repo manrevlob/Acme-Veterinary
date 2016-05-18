@@ -72,6 +72,18 @@
 		</property>
 	</bean>
 
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="veterinary3" />
+		<property name="password" value="bb9bb26b56532876439662830c4dea37" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VETERINARY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
 	<!-- Other domain beans come here -->
 
 	<!-- Money -->
@@ -113,13 +125,13 @@
 		<property name="startMoment" value="05/05/2015" />
 		<property name="endMoment" value="05/06/2015" />
 	</bean>
-	
+
 	<bean id="treatment2" class="domain.Treatment">
 		<property name="description" value="Treatment2Description" />
 		<property name="startMoment" value="05/06/2015" />
 		<property name="endMoment" value="05/07/2015" />
 	</bean>
-	
+
 	<bean id="treatment3" class="domain.Treatment">
 		<property name="description" value="Treatment3Description" />
 		<property name="startMoment" value="10/05/2015" />
@@ -133,7 +145,7 @@
 	</bean>
 
 	<!-- PetType -->
-	
+
 	<bean id="petType1" class="domain.PetType">
 		<property name="name" value="PetType1" />
 		<property name="description" value="PetType1Description" />
@@ -143,12 +155,12 @@
 		<property name="name" value="PetType2" />
 		<property name="description" value="PetType2Description" />
 	</bean>
-	
+
 	<bean id="petType3" class="domain.PetType">
 		<property name="name" value="PetType3" />
 		<property name="description" value="PetType3Description" />
 	</bean>
-	
+
 	<!-- Category -->
 
 	<bean id="category1" class="domain.Category">
@@ -170,7 +182,7 @@
 		<property name="name" value="Category4Name" />
 		<property name="description" value="Category4Description" />
 	</bean>
-	
+
 	<!-- Item -->
 
 	<bean id="item1" class="domain.Item">
@@ -420,13 +432,50 @@
 		</property>
 	</bean>
 
+	<bean id="inbox6" class="domain.MessageFolder">
+		<property name="name" value="In box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="outbox6" class="domain.MessageFolder">
+		<property name="name" value="Out box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="trashbox6" class="domain.MessageFolder">
+		<property name="name" value="Trash box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="spambox6" class="domain.MessageFolder">
+		<property name="name" value="Spam box" />
+		<property name="system" value="true" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
 	<!-- Clinic -->
 
 	<bean id="clinic1" class="domain.Clinic">
 		<property name="name" value="Clinic1Name" />
 		<property name="address" value="Clinic1Address" />
 		<property name="zipCode" value="41000" />
-		<property name="pictures" value="https://www.flickr.com/photos/socalwildlife/26945652995/in/explore-2016-05-11/" />
+		<property name="pictures"
+			value="https://www.flickr.com/photos/socalwildlife/26945652995/in/explore-2016-05-11/" />
 		<property name="veterinaries">
 			<list>
 				<ref bean="veterinary1" />
@@ -435,6 +484,27 @@
 		</property>
 		<property name="bulletins">
 			<list>
+				<ref bean="bulletin1" />
+				<ref bean="bulletin2" />
+			</list>
+		</property>
+		<property name="isDeleted" value="false" />
+	</bean>
+
+	<bean id="clinic2" class="domain.Clinic">
+		<property name="name" value="Clinic2Name" />
+		<property name="address" value="Clinic2Address" />
+		<property name="zipCode" value="41000" />
+		<property name="pictures"
+			value="https://www.flickr.com/photos/socalwildlife/26945652995/in/explore-2016-05-11/" />
+		<property name="veterinaries">
+			<list>
+				<ref bean="veterinary3" />
+			</list>
+		</property>
+		<property name="bulletins">
+			<list>
+				<ref bean="bulletin3" />
 			</list>
 		</property>
 		<property name="isDeleted" value="false" />
@@ -571,7 +641,36 @@
 			</list>
 		</property>
 	</bean>
-	
+
+	<bean id="veterinary3" class="domain.Veterinary">
+		<property name="name" value="Veterinary3Name" />
+		<property name="surname" value="Veterinary3Surname" />
+		<property name="email" value="Veterinary3@acme.com" />
+		<property name="phone" value="954121612" />
+		<property name="userAccount" ref="userAccount6" />
+		<property name="messageFolders">
+			<list>
+				<ref bean="inbox6" />
+				<ref bean="outbox6" />
+				<ref bean="trashbox6" />
+				<ref bean="spambox6" />
+			</list>
+		</property>
+		<property name="clinic" ref="clinic2" />
+		<property name="histories">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="appointments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
 	<!-- Message -->
 
 	<bean id="message1" class="domain.Message">
@@ -645,7 +744,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Appointments -->
 
 	<bean id="appointment1" class="domain.Appointment">
@@ -658,7 +757,7 @@
 		<property name="startTime" value="9" />
 		<property name="endTime" value="10" />
 	</bean>
-	
+
 	<bean id="appointment2" class="domain.Appointment">
 		<property name="moment" value="05/06/2015 10:00" />
 		<property name="reason" value="Appointment2Reason" />
@@ -667,9 +766,9 @@
 		<property name="day" value="03/08/2016" />
 		<property name="startTime" value="11" />
 		<property name="endTime" value="12" />
-		
+
 	</bean>
-	
+
 	<bean id="appointment3" class="domain.Appointment">
 		<property name="moment" value="10/05/2015 10:00" />
 		<property name="reason" value="Appointment3Reason" />
@@ -679,9 +778,9 @@
 		<property name="day" value="03/07/2016" />
 		<property name="startTime" value="11" />
 		<property name="endTime" value="12" />
-		
+
 	</bean>
-	
+
 	<bean id="appointment4" class="domain.Appointment">
 		<property name="moment" value="10/06/2015 10:00" />
 		<property name="reason" value="Appointment4Reason" />
@@ -691,9 +790,9 @@
 		<property name="day" value="03/07/2016" />
 		<property name="startTime" value="15" />
 		<property name="endTime" value="16" />
-		
+
 	</bean>
-	
+
 	<!-- Histories -->
 
 	<bean id="history1" class="domain.History">
@@ -704,7 +803,7 @@
 		<property name="pet" ref="pet1" />
 		<property name="appointment" ref="appointment1" />
 	</bean>
-	
+
 	<bean id="history3" class="domain.History">
 		<property name="moment" value="10/05/2015 10:00" />
 		<property name="diagnosis" value="History3Diagnosis" />
@@ -722,7 +821,23 @@
 		<property name="pet" ref="pet3" />
 		<property name="appointment" ref="appointment4" />
 	</bean>
-	
 
+	<!-- Bulletin -->
+
+	<bean id="bulletin1" class="domain.Bulletin">
+		<property name="moment" value="10/06/2015 10:00" />
+		<property name="description" value="bulletin1Description" />
+		<property name="clinic" ref="clinic1" />
+	</bean>
+	<bean id="bulletin2" class="domain.Bulletin">
+		<property name="moment" value="10/06/2015 11:00" />
+		<property name="description" value="bulletin1Description" />
+		<property name="clinic" ref="clinic1" />
+	</bean>
+	<bean id="bulletin3" class="domain.Bulletin">
+		<property name="moment" value="10/06/2015 10:00" />
+		<property name="description" value="bulletin1Description" />
+		<property name="clinic" ref="clinic2" />
+	</bean>
 
 </beans>
