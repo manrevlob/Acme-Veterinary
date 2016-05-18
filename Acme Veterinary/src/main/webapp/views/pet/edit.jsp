@@ -28,7 +28,7 @@
 	<acme:textbox code="pet.name" path="name" />
 
 	<acme:textbox code="pet.birthDate" path="birthDate"
-		text="pet.birthDate.format" />
+		placeholder="dd/MM/yyyy" />
 
 	<acme:select items="${petTypes}" itemLabel="name" code="pet.petType"
 		path="petType" />
