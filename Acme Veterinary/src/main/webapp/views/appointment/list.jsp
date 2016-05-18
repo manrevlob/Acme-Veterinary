@@ -75,6 +75,15 @@
 				</a>
 			</display:column>
 		</security:authorize>
+		<security:authorize access="hasRole('ADMIN')">
+			<display:column title="${cancelHeader}">
+				<a 
+				onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
+				href="appointment/administrator/cancel.do?appointmentId=${row.id}">
+					<spring:message code="appointment.cancel" />
+				</a>
+			</display:column>
+		</security:authorize>
 	</security:authorize>
 
 

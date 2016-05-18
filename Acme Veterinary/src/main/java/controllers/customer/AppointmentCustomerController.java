@@ -66,14 +66,15 @@ public class AppointmentCustomerController extends AbstractController {
 	public ModelAndView save(@Valid AppointmentForm appointmentForm, BindingResult binding) {
 		ModelAndView result;
 		
-		Appointment appointment= appointmentService.reconstruct(appointmentForm);
+		
 		if (binding.hasErrors()) {
 			result = new ModelAndView("appointment/create");
 			result.addObject("appointmentForm", "appointmentForm");
 		} else {
 			try {
-					appointmentService.save(appointment);
-					result = new ModelAndView("redirect:/appointment/customer/list.do");
+				Appointment appointment= appointmentService.reconstruct(appointmentForm);
+				appointmentService.save(appointment);
+				result = new ModelAndView("redirect:/appointment/customer/list.do");
 				
 			} catch (Throwable oops) {
 				result = new ModelAndView("appointment/create");

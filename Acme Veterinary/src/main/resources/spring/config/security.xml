@@ -57,6 +57,7 @@
 		<security:intercept-url pattern="/spamword/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/category/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/item/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/appointment/administrator/**" access="hasRole('ADMIN')" />
 
 		<security:intercept-url pattern="/pet/customer/**" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/history/customer/**" access="hasRole('CUSTOMER')" />
