@@ -37,6 +37,8 @@
 		<value>/views/appointment/messages</value>
 		<value>/views/spamWord/messages</value>
 		<value>/views/veterinary/messages</value>
+		<value>/views/category/messages</value>
+		<value>/views/item/messages</value>
 	</util:list>
 
 </beans>
