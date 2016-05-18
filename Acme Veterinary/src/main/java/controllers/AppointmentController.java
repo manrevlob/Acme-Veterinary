@@ -1,6 +1,5 @@
 package controllers;
 
-import java.util.Date;
 import java.util.LinkedHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class AppointmentController extends AbstractController {
 	private AppointmentService appointmentService;
 	@Autowired
 	private VeterinaryService veterinaryService;
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public AppointmentController() {
@@ -35,7 +34,8 @@ public class AppointmentController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 
 	@RequestMapping(value = "/list")
-	public ModelAndView create(@RequestParam(defaultValue = "0", required = true) int veterinaryId) {
+	public ModelAndView create(
+			@RequestParam(defaultValue = "0", required = true) int veterinaryId) {
 		ModelAndView result;
 		AppointmentForm appointmentForm = new AppointmentForm();
 		Veterinary veterinary = veterinaryService.findOne(veterinaryId);
@@ -50,8 +50,8 @@ public class AppointmentController extends AbstractController {
 	@RequestMapping(value = "/listDate", method = RequestMethod.POST, params = "datedate")
 	public ModelAndView createDate(AppointmentForm appointmentForm) {
 		ModelAndView result;
-		result = createModel(appointmentForm.getStartMoment().toString(), appointmentForm,
-				appointmentForm.getVeterinary());
+		result = createModel(appointmentForm.getStartMoment().toString(),
+				appointmentForm, appointmentForm.getVeterinary());
 		return result;
 	}
 

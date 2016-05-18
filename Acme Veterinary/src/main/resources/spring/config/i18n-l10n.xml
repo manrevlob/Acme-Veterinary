@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * i18n-l10n.xml
- *
- * Copyright (C) 2014 Universidad de Sevilla
- * Author (A) 2012 Rafael Corchuelo (corchu@us.es)
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * i18n-l10n.xml * * Copyright (C) 2014 Universidad de Sevilla * Author 
+	(A) 2012 Rafael Corchuelo (corchu@us.es) * * The use of this project is hereby 
+	constrained to the conditions of the * TDG Licence, a copy of which you may 
+	download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
@@ -21,10 +15,10 @@
 	<util:list id="messages">
 		<value>/views/master-page/messages</value>
 		<value>/views/misc/messages</value>
-		<value>/views/security/messages</value>		
+		<value>/views/security/messages</value>
 		<value>/views/welcome/messages</value>
 		<value>/views/legal/messages</value>
-		
+
 		<value>/views/administrator/messages</value>
 		<value>/views/customer/messages</value>
 		<value>/views/profile/messages</value>
@@ -39,6 +33,7 @@
 		<value>/views/veterinary/messages</value>
 		<value>/views/category/messages</value>
 		<value>/views/item/messages</value>
+		<value>/views/bulletin/messages</value>
 	</util:list>
 
 </beans>

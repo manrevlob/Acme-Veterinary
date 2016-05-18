@@ -38,6 +38,7 @@
 	<display:column property="pictures" title="${picturesHeader}"
 		sortable="true" />
 
+
 	<display:column title="${veterinariesHeader}">
 		<a href="veterinary/list.do?clinicId=${row.id}"> <spring:message
 				code="clinic.veterinaries" />
@@ -49,6 +50,14 @@
 				code="clinic.details" />
 		</a>
 	</display:column>
+
+
+	<display:column title="${bulletinHeader}">
+		<a href="bulletin/listByClinic.do?clinicId=${row.id}"> <spring:message
+				code="clinic.bulletins" />
+		</a>
+	</display:column>
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column title="${editHeader}">
 			<a href="clinic/administrator/edit.do?clinicId=${row.id}"> <spring:message
@@ -59,7 +68,7 @@
 </display:table>
 
 <security:authorize access="hasRole('ADMIN')">
-<a href="clinic/administrator/create.do"> <spring:message
-		code="clinic.create" />
-</a>
+	<a href="clinic/administrator/create.do"> <spring:message
+			code="clinic.create" />
+	</a>
 </security:authorize>

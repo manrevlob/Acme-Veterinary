@@ -46,6 +46,8 @@
 		<security:intercept-url pattern="/appointment/listDate.do" access="permitAll" /> 
 		<security:intercept-url pattern="/item/list.do" access="permitAll" />
 		<security:intercept-url pattern="/item/search.do" access="permitAll" />  
+		<security:intercept-url pattern="/bulletin/list.do" access="permitAll" />
+		<security:intercept-url pattern="/bulletin/listByClinic.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
 		<security:intercept-url pattern="/register/createCustomer.do" access="permitAll" />  
