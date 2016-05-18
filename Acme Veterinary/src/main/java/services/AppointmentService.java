@@ -1,6 +1,7 @@
 package services;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
@@ -93,6 +94,13 @@ public class AppointmentService {
 		result = appointmentRepository.findAllOwnNoExpired(veterinary);
 		return result;
 	}
+	//Devuelve todas las citas de veterinario principal NO EXPIRADAS y ordenadas por el dia y la hora
+		public Collection<Appointment> findAllOwnNoExpired(Veterinary veterinary) {
+			Assert.isTrue(actorService.isAdministrator());
+			Collection<Appointment> result;
+			result = appointmentRepository.findAllOwnNoExpired(veterinary);
+			return result;
+		}
 	
 	//Devuelve todas las citas de un veterinario NO EXPIRADAS y ordenadas por el dia y la hora
 	public Collection<Appointment> findAllByVeterinaryNoExpired(Veterinary veterinary) {
@@ -102,10 +110,10 @@ public class AppointmentService {
 	}
 	
 	//Este metodo se podrá utilizar sin estar logueado, por eso no lleva asserts
-	public boolean getVeterinaryisBooked(String day, String startTime,	String endTime, Veterinary veterinary) {
+	public boolean getVeterinaryisBooked(String day, String startTime,	String endTime, Veterinary veterinary) throws ParseException {
 		boolean res = false;
-		@SuppressWarnings("deprecation")
-		Date dayDate = new Date(day);
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date dayDate = dateFormat.parse(day);
 		Collection<Appointment> appointments = appointmentRepository.getVeterinaryIsBooked(dayDate, startTime, endTime, veterinary);
 		if ((appointments != null) && (appointments.size() != 0))
 			res = true;
@@ -137,11 +145,11 @@ public class AppointmentService {
 		return day;
 	}
 	
-	public Appointment reconstruct(AppointmentForm appointmentForm) {
+	public Appointment reconstruct(AppointmentForm appointmentForm) throws ParseException {
 		Assert.isTrue(actorService.isCustomer());
 		Appointment appointment= new Appointment();
-		@SuppressWarnings("deprecation")
-		Date day = new Date(appointmentForm.getStartMoment());
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date day = dateFormat.parse(appointmentForm.getStartMoment());
 		appointment.setDay(day);
 		appointment.setStartTime(appointmentForm.getStartTime());
 		appointment.setEndTime(appointmentForm.getEndTime());
@@ -170,14 +178,21 @@ public class AppointmentService {
 
 	//Borrar una cita siendo veterinario
 	public void cancelAppointmentVeterinary(int appointmentId) {
-		sendVeterinaryMessageCancel(appointmentId);
+		Veterinary veterinary = veterinaryService.findByPrincipal();
+		sendVeterinaryMessageCancel(appointmentId, veterinary);
 		cancelAppointment(appointmentId);
 	}
-	public void sendVeterinaryMessageCancel(int appointmentId){		
+	//Borrar una cita siendo administrador
+	public void cancelAppointmentAdministrator(int appointmentId) {
 		Appointment appointment = findOne(appointmentId);
-		Veterinary veterinary = veterinaryService.findByPrincipal();
+		sendVeterinaryMessageCancel(appointmentId, appointment.getVeterinary());
+		cancelAppointment(appointmentId);
+	}
+	public void sendVeterinaryMessageCancel(int appointmentId, Veterinary veterinary){		
+		Appointment appointment = findOne(appointmentId);
 		Customer customer = appointment.getPet().getCustomer();
-		Message message = messageService.create(veterinary,customer,"APPOINTMENT CANCEL", "Your appointment "+appointment.getDay().toString()+" has been cancelled. Sorry about that.");
+		DateFormat ndf = new SimpleDateFormat("dd/MM/yyyy");
+		Message message = messageService.create(veterinary,customer,"APPOINTMENT CANCEL", "Your appointment "+ndf.format(appointment.getDay())+" has been cancelled. Sorry about that.");
 		messageService.sendMessage(message);
 	}
 
