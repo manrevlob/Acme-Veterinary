@@ -77,17 +77,32 @@
 	<!-- Money -->
 
 	<bean id="money1" class="domain.Money">
-		<property name="amount" value="10" />
+		<property name="amount" value="3.8" />
 		<property name="currency" value="Euro" />
 	</bean>
 
 	<bean id="money2" class="domain.Money">
-		<property name="amount" value="20" />
+		<property name="amount" value="3.00" />
 		<property name="currency" value="Euro" />
 	</bean>
 
 	<bean id="money3" class="domain.Money">
-		<property name="amount" value="30" />
+		<property name="amount" value="1.58" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money4" class="domain.Money">
+		<property name="amount" value="1.07" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money5" class="domain.Money">
+		<property name="amount" value="2.1" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money6" class="domain.Money">
+		<property name="amount" value="7.2" />
 		<property name="currency" value="Euro" />
 	</bean>
 
@@ -132,6 +147,92 @@
 	<bean id="petType3" class="domain.PetType">
 		<property name="name" value="PetType3" />
 		<property name="description" value="PetType3Description" />
+	</bean>
+	
+	<!-- Category -->
+
+	<bean id="category1" class="domain.Category">
+		<property name="name" value="Category1Name" />
+		<property name="description" value="Category1Description" />
+	</bean>
+
+	<bean id="category2" class="domain.Category">
+		<property name="name" value="Category2Name" />
+		<property name="description" value="Category2Description" />
+	</bean>
+
+	<bean id="category3" class="domain.Category">
+		<property name="name" value="Category3Name" />
+		<property name="description" value="Category3Description" />
+	</bean>
+
+	<bean id="category4" class="domain.Category">
+		<property name="name" value="Category4Name" />
+		<property name="description" value="Category4Description" />
+	</bean>
+	
+	<!-- Item -->
+
+	<bean id="item1" class="domain.Item">
+		<property name="name" value="Item1Name" />
+		<property name="sku" value="01-ABCD" />
+		<property name="description" value="Item1Description" />
+		<property name="price" ref="money1" />
+		<property name="picture"
+			value="http://www.smashbros.com/wii/en_us/items/images/item15/item15_080305_06-l.jpg" />
+		<property name="isDeleted" value="false" />
+		<property name="category" ref="category1" />
+	</bean>
+
+	<bean id="item2" class="domain.Item">
+		<property name="name" value="Item2Name" />
+		<property name="sku" value="02-EFGH" />
+		<property name="description" value="Item2Description" />
+		<property name="price" ref="money2" />
+		<property name="isDeleted" value="false" />
+		<property name="category" ref="category2" />
+	</bean>
+
+	<bean id="item3" class="domain.Item">
+		<property name="name" value="Item3Name" />
+		<property name="sku" value="03-IJKL" />
+		<property name="description" value="Item3Description" />
+		<property name="price" ref="money3" />
+		<property name="picture"
+			value="http://www.smashbros.com/wii/en_us/items/images/item15/item15_080305_06-l.jpg" />
+		<property name="isDeleted" value="false" />
+		<property name="category" ref="category3" />
+	</bean>
+
+	<bean id="item4" class="domain.Item">
+		<property name="name" value="Item4Name" />
+		<property name="sku" value="04-MNOP" />
+		<property name="description" value="Item4Description" />
+		<property name="price" ref="money4" />
+		<property name="picture"
+			value="http://www.smashbros.com/wii/en_us/items/images/item15/item15_080305_06-l.jpg" />
+		<property name="isDeleted" value="false" />
+		<property name="category" ref="category1" />
+	</bean>
+
+	<bean id="item5" class="domain.Item">
+		<property name="name" value="Item5Name" />
+		<property name="sku" value="05-QRST" />
+		<property name="description" value="Item5Description" />
+		<property name="price" ref="money5" />
+		<property name="picture"
+			value="http://www.smashbros.com/wii/en_us/items/images/item15/item15_080305_06-l.jpg" />
+		<property name="isDeleted" value="false" />
+		<property name="category" ref="category2" />
+	</bean>
+
+	<bean id="item6" class="domain.Item">
+		<property name="name" value="Item6Name" />
+		<property name="sku" value="06-UVWX" />
+		<property name="description" value="Item6Description" />
+		<property name="price" ref="money6" />
+		<property name="isDeleted" value="false" />
+		<property name="category" ref="category3" />
 	</bean>
 
 	<!-- MessageFolder -->

@@ -28,11 +28,15 @@
 			<li><a href="register/createVeterinary.do"> <spring:message
 						code="master.page.register.veterinary" /></a></li>
 			<li><a class="fNiv"><spring:message
-						code="master.page.administrator" /></a>
+						code="master.page.manage" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="spamword/administrator/list.do"><spring:message
 								code="master.page.administrator.spamWord" /></a></li>
+					<li><a href="item/administrator/list.do"><spring:message
+								code="master.page.administrator.item" /></a></li>
+					<li><a href="category/administrator/list.do"><spring:message
+								code="master.page.administrator.category" /></a></li>
 				</ul></li>
 		</security:authorize>
 
@@ -61,6 +65,8 @@
 		</security:authorize>
 
 		<security:authorize access="isAnonymous()">
+			<li><a href="item/list.do"><spring:message
+						code="master.page.item" /></a></li>
 			<li><a href="clinic/list.do"><spring:message
 						code="master.page.clinic" /></a></li>
 			<li><a href="register/createCustomer.do"> <spring:message
