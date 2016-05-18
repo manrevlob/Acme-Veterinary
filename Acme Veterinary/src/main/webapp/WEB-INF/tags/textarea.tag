@@ -37,7 +37,7 @@
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" />
+	<form:textarea path="${path}" readonly="${readonly}" class="form-control"/>
 	<jstl:if test="${text != null}">
 		<spring:message code="${text}"/>
 	</jstl:if>

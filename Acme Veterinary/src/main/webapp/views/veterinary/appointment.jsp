@@ -11,17 +11,15 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-			<div class="row contact-wrap">
 				<form:form action="appointment/listDate.do"
-					modelAttribute="appointmentForm">
-					<form:hidden path="veterinary" />
-					<div class=" col-sm-offset-1">
+					modelAttribute="appointmentForm" class="form-inline">
+					<form:hidden path="veterinary" />					
 						<div class="form-group">
 						<form:label path="startMoment">
 							<spring:message code="appointment.startMoment" />:
 						</form:label>
 						
-						<form:select path="startMoment">
+						<form:select path="startMoment" class="form-control">
 							<form:option value="0" label="----" />
 							<form:options items="${days}" />
 						</form:select>
@@ -29,20 +27,18 @@
 							<spring:message code="appointment.changeDay" />
 						</button>
 						</div>
-					</div>
 					
 				</form:form>
 
-			</div>
 			<div class="table-responsive">
 			<table class="bookHours table">
 				<tr>
-					<th colspan="5" style="text-align: center;"><spring:message code="appointment.schedule" /></th>
+					<th colspan="5" class="center"><spring:message code="appointment.schedule" /></th>
 				</tr>
 				<tr class="bold">
 
 					<jstl:forEach var="i" begin="8" end="12">
-						<td style="background-color: white;">${i}:00 - ${i+1}:00</td>
+						<td style="background-color: white;" class="center">${i}:00 - ${i+1}:00</td>
 					</jstl:forEach>
 				</tr>
 				<tr>
@@ -50,12 +46,11 @@
 						<jstl:choose>
 							<jstl:when
 								test="${appointmentService.getVeterinaryisBooked(daySelected,i,i+1,veterinary)}">
-								<td style="background-color: lightPink;"><jstl:out
-										value="Reservado"></jstl:out></td>
+								<td style="background-color: lightPink;" class="center"> <spring:message code="appointment.booked"/></td>
 							</jstl:when>
 							<jstl:otherwise>
 
-								<td style="background-color: #d3e8a3;"><form:form
+								<td style="background-color: #d3e8a3;" class="center"><form:form
 										action="appointment/customer/create.do" modelAttribute="appointmentForm">
 										<form:hidden path="veterinary" />
 										<form:hidden path="startTime" value="${i}" />
@@ -70,7 +65,7 @@
 				<tr class="bold">
 
 					<jstl:forEach var="i" begin="13" end="17">
-						<td style="background-color: white;">${i}:00 - ${i+1}:00</td>
+						<td style="background-color: white;" class="center">${i}:00 - ${i+1}:00</td>
 					</jstl:forEach>
 				</tr>
 				<tr>
@@ -78,11 +73,10 @@
 						<jstl:choose>
 							<jstl:when
 								test="${appointmentService.getVeterinaryisBooked(daySelected,i,i+1,veterinary)}">
-								<td style="background-color: lightPink;"><jstl:out
-										value="Reservado"></jstl:out></td>
+								<td style="background-color: lightPink;" class="center"> <spring:message code="appointment.booked"/></td>
 							</jstl:when>
 							<jstl:otherwise>
-								<td style="background-color: #d3e8a3;"><form:form
+								<td style="background-color: #d3e8a3;" class="center"><form:form
 										action="appointment/customer/create.do" modelAttribute="appointmentForm">
 										<form:hidden path="veterinary" />
 										<form:hidden path="startTime" value="${i}" />
@@ -98,7 +92,7 @@
 				<tr class="bold">
 
 					<jstl:forEach var="i" begin="18" end="22">
-						<td style="background-color: white;">${i}:00 - ${i+1}:00</td>
+						<td style="background-color: white;" class="center">${i}:00 - ${i+1}:00</td>
 					</jstl:forEach>
 				</tr>
 				<tr>
@@ -106,11 +100,10 @@
 						<jstl:choose>
 							<jstl:when
 								test="${appointmentService.getVeterinaryisBooked(daySelected,i,i+1,veterinary)}">
-								<td style="background-color: lightPink;"><jstl:out
-										value="Reservado"></jstl:out></td>
+								<td style="background-color: lightPink;" class="center"> <spring:message code="appointment.booked"/></td>
 							</jstl:when>
 							<jstl:otherwise>
-								<td style="background-color: #d3e8a3;"><form:form
+								<td style="background-color: #d3e8a3;" class="center"><form:form
 										action="appointment/customer/create.do" modelAttribute="appointmentForm">
 										<form:hidden path="veterinary" />
 										<form:hidden path="startTime" value="${i}" />

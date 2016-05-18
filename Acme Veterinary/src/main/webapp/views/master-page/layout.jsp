@@ -17,8 +17,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <base
 	href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 
@@ -34,6 +35,10 @@
 <link rel="stylesheet" href="styles/jmenu.css" media="screen"
 	type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
+<link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="styles/bootstrap-theme.min.css" type="text/css">
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
@@ -66,7 +71,7 @@ window.onload = function() {
 </head>
 
 <body> 
-
+	<div class="container-fluid">
 	<div>
 		<tiles:insertAttribute name="header" />
 	</div>
@@ -74,11 +79,13 @@ window.onload = function() {
 		<h1>
 			<tiles:insertAttribute name="title" />
 		</h1>
-		<tiles:insertAttribute name="body" />	
-		<jstl:if test="${message != null}">
-			<br />
-			<span class="message"><spring:message code="${message}" /></span>
-		</jstl:if>	
+		
+			<tiles:insertAttribute name="body" />	
+			<jstl:if test="${message != null}">
+				<br />
+				<span class="message"><spring:message code="${message}" /></span>
+			</jstl:if>	
+		</div>
 	</div>
 	<div>
 		<tiles:insertAttribute name="footer" />

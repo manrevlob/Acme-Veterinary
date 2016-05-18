@@ -20,6 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+
 <jstl:if test="${requestURI == 'item/list.do'}">
 	<form:form action="item/search.do" modelAttribute="searchForm">
 
