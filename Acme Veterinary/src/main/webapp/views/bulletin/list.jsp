@@ -53,8 +53,29 @@
 		<spring:message code="bulletin.moment" var="momentHeader" />
 		<display:column value="${row.moment}" title="${momentHeader}"
 			sortable="true" />
+		<security:authorize access="hasRole('ADMIN')">
+			<display:column>
+				<a href="bulletin/administrator/edit.do?bulletinId=${row.id}"> <spring:message
+						code="bulletin.edit" />
+				</a>
+			</display:column>
 
+			<display:column>
+				<a
+					onclick="return confirm('<spring:message code="bulletin.delete.confirm" />')"
+					href="bulletin/administrator/delete.do?bulletinId=${row.id}"> <spring:message
+						code="bulletin.delete" />
+				</a>
+			</display:column>
+		</security:authorize>
 	</display:table>
+
+	<security:authorize access="hasRole('ADMIN')">
+
+		<a href="bulletin/administrator/create.do?clinicId=${clinicId}"> <spring:message
+				code="bulletin.create" />
+		</a>
+	</security:authorize>
 </jstl:if>
 
 

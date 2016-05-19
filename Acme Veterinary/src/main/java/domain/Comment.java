@@ -10,6 +10,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -40,6 +42,7 @@ public class Comment extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}
@@ -49,6 +52,7 @@ public class Comment extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTitle() {
 		return title;
 	}
@@ -58,6 +62,7 @@ public class Comment extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getText() {
 		return text;
 	}
@@ -70,7 +75,7 @@ public class Comment extends DomainEntity {
 
 	private Customer customer;
 	private Item item;
-	private Veterinary veterinary; 
+	private Veterinary veterinary;
 	private Bulletin bulletin;
 
 	@Valid
@@ -92,7 +97,7 @@ public class Comment extends DomainEntity {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	
+
 	@Valid
 	@ManyToOne(optional = false)
 	public Veterinary getVeterinary() {
@@ -102,7 +107,7 @@ public class Comment extends DomainEntity {
 	public void setVeterinary(Veterinary veterinary) {
 		this.veterinary = veterinary;
 	}
-	
+
 	@Valid
 	@ManyToOne(optional = false)
 	public Bulletin getBulletin() {

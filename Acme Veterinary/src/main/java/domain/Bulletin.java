@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -30,8 +32,10 @@ public class Bulletin extends DomainEntity {
 	// Identification ---------------------------------------------------------
 	private String description;
 	private Date moment;
+	private boolean isDeleted;
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDescription() {
 		return description;
 	}
@@ -50,6 +54,14 @@ public class Bulletin extends DomainEntity {
 
 	public void setMoment(Date moment) {
 		this.moment = moment;
+	}
+
+	public boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	// Relationships ---------------------------------------------------------
