@@ -671,6 +671,28 @@
 		</property>
 	</bean>
 
+	<!-- ShoppingCart -->
+
+	<bean id="shoppingCart1" class="domain.ShoppingCart">
+		<property name="customer" ref="customer1" />
+		<property name="comment" value="I like it!" />
+	</bean>
+
+	<!-- ShoppingCartLine -->
+
+	<bean id="shoppingCartLine1" class="domain.ShoppingCartLine">
+		<property name="price" ref="money2" />
+		<property name="quantity" value="1" />
+		<property name="item" ref="item2" />
+		<property name="shoppingCart" ref="shoppingCart1" />
+	</bean>
+	<bean id="shoppingCartLine2" class="domain.ShoppingCartLine">
+		<property name="price" ref="money3" />
+		<property name="quantity" value="2" />
+		<property name="item" ref="item3" />
+		<property name="shoppingCart" ref="shoppingCart1" />
+	</bean>
+
 	<!-- Message -->
 
 	<bean id="message1" class="domain.Message">

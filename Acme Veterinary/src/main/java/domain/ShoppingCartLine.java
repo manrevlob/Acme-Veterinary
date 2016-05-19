@@ -19,6 +19,7 @@ public class ShoppingCartLine extends DomainEntity {
 
 	// Identification ---------------------------------------------------------
 	private Integer quantity;
+	private Money price;
 
 	@Min(0)
 	public Integer getQuantity() {
@@ -27,6 +28,14 @@ public class ShoppingCartLine extends DomainEntity {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	
+	public Money getPrice() {
+		return price;
+	}
+
+	public void setPrice(Money price) {
+		this.price = price;
 	}
 
 	// Relationships ---------------------------------------------------------

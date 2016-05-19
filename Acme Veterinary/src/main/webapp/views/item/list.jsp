@@ -68,7 +68,7 @@
 
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column>
-			<a href="shoppingCart/consumer/addItem.do?itemId=${row.id}"> <spring:message
+			<a href="shoppingCart/customer/addItem.do?itemId=${row.id}"> <spring:message
 					code="item.add" />
 			</a>
 		</display:column>
