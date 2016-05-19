@@ -55,6 +55,7 @@ public class bulletinController extends AbstractController {
 		result = new ModelAndView("bulletin/list");
 		result.addObject("requestURI", "bulletin/listByClinic.do");
 		result.addObject("bulletins", bulletins);
+		result.addObject("clinicId", clinicId);
 
 		return result;
 

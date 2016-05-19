@@ -11,10 +11,10 @@ import domain.Bulletin;
 @Repository
 public interface BulletinRepository extends JpaRepository<Bulletin, Integer> {
 
-	@Query("select c.bulletins from Clinic c where c.id = ?1")
+	@Query("select b from Bulletin b where b.clinic.id = ?1 and b.isDeleted= false")
 	Collection<Bulletin> findAllFromClinic(int clinicId);
 
-	@Query("select c, c.bulletins from Clinic c")
+	@Query("select b.clinic, b from Bulletin b where b.isDeleted= false")
 	Collection<Object[]> findAllBulletins();
 
 }

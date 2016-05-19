@@ -19,24 +19,22 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="pet/customer/edit.do" modelAttribute="pet">
+<form:form action="bulletin/administrator/edit.do"
+	modelAttribute="bulletin">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="customer" />
+	<form:hidden path="clinic" />
+	<form:hidden path="moment" />
 
-	<acme:textbox code="pet.name" path="name" />
 
-	<acme:textbox code="pet.birthDate" path="birthDate"
-		text="pet.birthDate.format" />
+	<acme:textarea code="bulletin.description" path="description" />
 
-	<acme:select items="${petTypes}" itemLabel="name" code="pet.petType"
-		path="petType" />
 
-	<acme:submit name="save" code="pet.save" />
+	<acme:submit name="save" code="bulletin.save" />
 
 	<input type="button" name="cancel"
-		value="<spring:message code="pet.cancel" />"
-		onclick="javascript: window.location.replace('pet/customer/list.do')" />
+		value="<spring:message code="bulletin.cancel" />"
+		onclick="javascript: window.location.replace('bulletin/list.do')" />
 
 </form:form>

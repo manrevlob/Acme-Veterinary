@@ -850,16 +850,20 @@
 		<property name="moment" value="10/06/2015 10:00" />
 		<property name="description" value="bulletin1Description" />
 		<property name="clinic" ref="clinic1" />
+		<property name="isDeleted" value="false" />
 	</bean>
 	<bean id="bulletin2" class="domain.Bulletin">
 		<property name="moment" value="10/06/2015 11:00" />
-		<property name="description" value="bulletin1Description" />
+		<property name="description" value="bulletin3Description" />
 		<property name="clinic" ref="clinic1" />
+		<property name="isDeleted" value="true" />
 	</bean>
 	<bean id="bulletin3" class="domain.Bulletin">
 		<property name="moment" value="10/06/2015 10:00" />
-		<property name="description" value="bulletin1Description" />
+		<property name="description" value="bulletin3Description" />
 		<property name="clinic" ref="clinic2" />
+		<property name="isDeleted" value="false" />
+
 	</bean>
 
 </beans>
