@@ -24,6 +24,9 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 
+		<li><a href="item/list.do"><spring:message
+						code="master.page.item" /></a></li>
+
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a href="register/createVeterinary.do"> <spring:message
 						code="master.page.register.veterinary" /></a></li>
@@ -41,6 +44,8 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">
+			<li><a href="shoppingCart/customer/show.do"><spring:message 
+						code="master.page.consumer.shoppingcart" /></a></li>
 			<li><a class="fNiv"><spring:message
 						code="master.page.manage" /></a>
 				<ul>
@@ -65,8 +70,6 @@
 		</security:authorize>
 
 		<security:authorize access="isAnonymous()">
-			<li><a href="item/list.do"><spring:message
-						code="master.page.item" /></a></li>
 			<li><a href="clinic/list.do"><spring:message
 						code="master.page.clinic" /></a></li>
 			<li><a href="bulletin/list.do"><spring:message
