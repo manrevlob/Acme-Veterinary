@@ -23,7 +23,7 @@
 
 	<definition name="order/edit" extends="master.page">
 		<put-attribute name="title" value="Crear Pedido" />
-		<put-attribute name="body" value="/views/order/edit.jsp" />
+		<put-attribute name="body" value="/views/order/create.jsp" />
 	</definition>
 
 </tiles-definitions>

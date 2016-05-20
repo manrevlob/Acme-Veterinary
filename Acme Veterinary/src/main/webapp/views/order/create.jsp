@@ -7,7 +7,7 @@
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  --%>
- 
+
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -19,17 +19,17 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="order/consumer/edit.do" modelAttribute="order">
+<form:form action="order/customer/create.do" modelAttribute="order">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="consumer"/>
+	<form:hidden path="customer" />
 	<form:hidden path="ticker" />
 	<form:hidden path="comment" />
-	<form:hidden path="moment"/>
-	<form:hidden path="totalPrice.amount"/>
-	<form:hidden path="totalPrice.currency"/>
-	<form:hidden path="isCanceled"/>
-	
+	<form:hidden path="moment" />
+	<form:hidden path="totalPrice.amount" />
+	<form:hidden path="totalPrice.currency" />
+	<form:hidden path="isCanceled" />
+
 	<form:label path="fullName">
 		<spring:message code="order.fullName" />:
 	</form:label>
@@ -43,7 +43,7 @@
 	<form:input path="address" />
 	<form:errors cssClass="error" path="address" />
 	<br />
-	
+
 	<form:label path="creditCard.name">
 		<spring:message code="order.ccName" />:
 	</form:label>
@@ -57,28 +57,28 @@
 	<form:input path="creditCard.brand" />
 	<form:errors cssClass="error" path="creditCard.brand" />
 	<br />
-	
+
 	<form:label path="creditCard.number">
 		<spring:message code="order.ccNumber" />:
 	</form:label>
 	<form:input path="creditCard.number" />
 	<form:errors cssClass="error" path="creditCard.number" />
 	<br />
-	
+
 	<form:label path="creditCard.expirationMonth">
 		<spring:message code="order.ccExpirationMonth" />:
 	</form:label>
 	<form:input path="creditCard.expirationMonth" /> (mm)
 	<form:errors cssClass="error" path="creditCard.expirationMonth" />
 	<br />
-	
+
 	<form:label path="creditCard.expirationYear">
 		<spring:message code="order.ccExpirationYear" />:
 	</form:label>
 	<form:input path="creditCard.expirationYear" /> (YYYY)
 	<form:errors cssClass="error" path="creditCard.expirationYear" />
 	<br />
-	
+
 	<form:label path="creditCard.cvv">
 		<spring:message code="order.ccCvv" />:
 	</form:label>

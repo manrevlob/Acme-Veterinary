@@ -13,9 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.OrderRepository;
 import utilities.Utiles;
-import domain.CreditCard;
 import domain.Customer;
-import domain.Money;
 import domain.Order;
 import domain.ShoppingCart;
 
@@ -49,26 +47,18 @@ public class OrderService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Order create() {
-		Order result;
-		result = new Order();
-		return result;
-	}
-
-	public Order create(Customer customer, CreditCard creditCard,
-			String address, String fullName, Boolean isCanceled, String ticker,
-			Money totalPrice, String comment) {
 		Assert.isTrue(actorService.isCustomer());
 		Order result;
 		result = new Order();
-		result.setCustomer(customer);
-		result.setComment(comment);
-		result.setCreditCard(creditCard);
-		result.setAddress(address);
-		result.setFullName(fullName);
-		result.setIsCanceled(isCanceled);
-		result.setMoment(new Date(System.currentTimeMillis() - 1000));
-		result.setTicker(ticker);
-		result.setTotalPrice(totalPrice);
+		ShoppingCart shoppingCart;
+		shoppingCart = shoppingCartService.findByCustomerPrincipal();
+
+		result.setComment(shoppingCart.getComment());
+		result.setCustomer(customerService.findByPrincipal());
+		result.setIsCanceled(false);
+		result.setMoment(new Date(System.currentTimeMillis() - 100));
+		result.setTicker(generateTicker());
+		result.setTotalPrice(shoppingCartService.calculateTotalPrice());
 		return result;
 	}
 
@@ -114,7 +104,7 @@ public class OrderService {
 	}
 
 	public boolean canBeCanceled(Order order) {
-		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(actorService.isCustomer());
 
 		long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
 		Date currentTime = new Date(System.currentTimeMillis());
@@ -141,30 +131,28 @@ public class OrderService {
 	}
 
 	// Create order and their ItemOrders and delete ShoppingCart
-	public Order createShoppingCartAndPlaceOrder(ShoppingCart shoppingCart,
-			String fullName, String address, CreditCard creditCard) {
+	public Order createShoppingCartAndPlaceOrder(Order order) {
 		Assert.isTrue(actorService.isCustomer());
-		Assert.notNull(shoppingCart);
-		Assert.notNull(fullName);
-		Assert.notNull(address);
-		Assert.notNull(creditCard);
-		Utiles.checkCreditCard(creditCard);
+		Assert.notNull(order);
+		Assert.notNull(order.getFullName());
+		Assert.notNull(order.getAddress());
+		Assert.notNull(order.getCreditCard());
+		Utiles.checkCreditCard(order.getCreditCard());
 
-		String ticker;
-		Order result;
+		ShoppingCart shoppingCart = shoppingCartService
+				.findByCustomerPrincipal();
 
-		ticker = generateTicker();
-		result = create(shoppingCart.getCustomer(), creditCard, address,
-				fullName, false, ticker,
-				shoppingCartService.calculateTotalPrice(),
-				shoppingCart.getComment());
-		result.setMoment(new Date(System.currentTimeMillis() - 100));
-		result = save(result);
+		order.setTotalPrice(shoppingCartService.calculateTotalPrice());
+		order = save(order);
+		Customer customer = customerService.findByPrincipal();
+		Collection<Order> orders = customer.getOrders();
+		orders.add(order);
+		customer.setOrders(orders);
 
-		itemOrderService.importShoppingCartLines(shoppingCart, result);
+		itemOrderService.importShoppingCartLines(shoppingCart, order);
 		shoppingCartService.delete(shoppingCart);
 
-		return result;
+		return order;
 	}
 
 	public String generateTicker() {

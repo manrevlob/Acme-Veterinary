@@ -1,13 +1,11 @@
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,6 +59,7 @@ public class Order extends DomainEntity {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getComment() {
 		return comment;
@@ -121,7 +120,6 @@ public class Order extends DomainEntity {
 
 	private Customer customer;
 	private Voucher voucher;
-	private Collection<ItemOrder> itemOrders;
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -143,14 +141,13 @@ public class Order extends DomainEntity {
 		this.voucher = voucher;
 	}
 
-	@Valid
-	@OneToMany(mappedBy = "order")
-	public Collection<ItemOrder> getItemOrders() {
-		return itemOrders;
-	}
-
-	public void setItemOrders(Collection<ItemOrder> itemOrders) {
-		this.itemOrders = itemOrders;
+	@Override
+	public String toString() {
+		return "Order [ticker=" + ticker + ", fullName=" + fullName
+				+ ", comment=" + comment + ", address=" + address
+				+ ", creditCard=" + creditCard + ", moment=" + moment
+				+ ", totalPrice=" + totalPrice + ", isCanceled=" + isCanceled
+				+ ", customer=" + customer + ", voucher=" + voucher + "]";
 	}
 
 }

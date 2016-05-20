@@ -27,13 +27,6 @@
 			<display:table pagesize="10" class="displaytag" keepStatus="true"
 				name="shoppingCartLines" requestURI="${requestURI}" id="row">
 
-				<display:column>
-					<a
-						href="shoppingCart/customer/delete.do?shoppingCartLineId=${row.id}">
-						<spring:message code="shoppingCartLine.delete" />
-					</a>
-				</display:column>
-
 				<spring:message code="shoppingCartLine.itemName" var="nameHeader" />
 				<display:column property="item.name" title="${nameHeader}"
 					sortable="true" />
@@ -44,8 +37,8 @@
 
 				<spring:message code="shoppingCartLine.price" var="priceHeader" />
 				<display:column title="${priceHeader}" sortable="true">
-					<fmt:formatNumber type="number"
-						value="${row.price.amount}" maxFractionDigits="2" />
+					<fmt:formatNumber type="number" value="${row.price.amount}"
+						maxFractionDigits="2" />
 				</display:column>
 
 				<spring:message code="shoppingCartLine.currency"
@@ -71,7 +64,12 @@
 						</a>
 					</jstl:if>
 				</display:column>
-
+				<display:column>
+					<a
+						href="shoppingCart/customer/delete.do?shoppingCartLineId=${row.id}">
+						<spring:message code="shoppingCartLine.delete" />
+					</a>
+				</display:column>
 
 			</display:table>
 
