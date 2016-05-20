@@ -25,7 +25,7 @@
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 
 		<li><a href="item/list.do"><spring:message
-						code="master.page.item" /></a></li>
+					code="master.page.item" /></a></li>
 
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a href="register/createVeterinary.do"> <spring:message
@@ -44,7 +44,7 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a href="shoppingCart/customer/show.do"><spring:message 
+			<li><a href="shoppingCart/customer/show.do"><spring:message
 						code="master.page.consumer.shoppingcart" /></a></li>
 			<li><a class="fNiv"><spring:message
 						code="master.page.manage" /></a>
@@ -53,7 +53,9 @@
 					<li><a href="pet/customer/list.do"><spring:message
 								code="master.page.customer.myPet" /></a></li>
 					<li><a href="appointment/customer/list.do"><spring:message
-						code="master.page.myAppointment" /> </a></li>
+								code="master.page.myAppointment" /> </a></li>
+					<li><a href="order/customer/list.do"><spring:message
+								code="master.page.customer.myOrders" /> </a></li>
 				</ul></li>
 		</security:authorize>
 

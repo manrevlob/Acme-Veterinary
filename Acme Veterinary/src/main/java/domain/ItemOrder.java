@@ -26,7 +26,6 @@ public class ItemOrder extends DomainEntity {
 	private String sku;
 	private Money price;
 	private Integer quantity;
-	private String status;
 
 	@NotBlank
 	public String getName() {
@@ -61,15 +60,6 @@ public class ItemOrder extends DomainEntity {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
-	}
-
-	@Pattern(regexp = "^pending$|^accepted$|^rejected$")
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	// RelationsShips ---------------------------------------------------------

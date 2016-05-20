@@ -17,6 +17,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -38,8 +40,10 @@ public class Order extends DomainEntity {
 	private CreditCard creditCard;
 	private Date moment;
 	private Money totalPrice;
+	private boolean isCanceled;
 
 	@Pattern(regexp = "^\\d{6}(\\-\\w{4})?$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTicker() {
 		return ticker;
 	}
@@ -49,6 +53,7 @@ public class Order extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getFullName() {
 		return fullName;
 	}
@@ -56,7 +61,7 @@ public class Order extends DomainEntity {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getComment() {
 		return comment;
 	}
@@ -66,6 +71,7 @@ public class Order extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddress() {
 		return address;
 	}
@@ -101,6 +107,14 @@ public class Order extends DomainEntity {
 
 	public void setTotalPrice(Money totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public boolean getIsCanceled() {
+		return isCanceled;
+	}
+
+	public void setIsCanceled(boolean isCanceled) {
+		this.isCanceled = isCanceled;
 	}
 
 	// RelationsShips ---------------------------------------------------------
