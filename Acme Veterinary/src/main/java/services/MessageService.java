@@ -12,6 +12,7 @@ import repositories.MessageRepository;
 import domain.Actor;
 import domain.Message;
 import domain.MessageFolder;
+import domain.Order;
 import domain.SpamWord;
 
 @Service
@@ -28,10 +29,9 @@ public class MessageService {
 	private ActorService actorService;
 	@Autowired
 	private MessageFolderService messageFolderService;
-	
+
 	@Autowired
 	private SpamWordService spamWordService;
-	
 
 	// Constructors -----------------------------------------------------------
 
@@ -57,12 +57,14 @@ public class MessageService {
 		result.setSender(actor);
 		return result;
 	}
-	
-	public Message create(Actor sender, Actor recipient, String subject, String body) {
+
+	public Message create(Actor sender, Actor recipient, String subject,
+			String body) {
 		Message result;
 		result = new Message();
 		result.setMoment(new Date(System.currentTimeMillis() - 1000));
-		MessageFolder messageFolder = messageFolderService.findFolder(sender, "In box");
+		MessageFolder messageFolder = messageFolderService.findFolder(sender,
+				"In box");
 		result.setMessageFolder(messageFolder);
 		result.setSender(sender);
 		result.setRecipient(recipient);
@@ -154,22 +156,24 @@ public class MessageService {
 		messageFolderService.save(senderOutbox);
 
 	}
-	
-	public void sendAutoReplyMessage(String messageText, Actor sender, Actor recipient) {
+
+	public void sendAutoReplyMessage(String messageText, Actor sender,
+			Actor recipient) {
 		Assert.notNull(sender);
 		Assert.notNull(recipient);
-		
+
 		Collection<Message> messages;
 		MessageFolder senderOutbox;
 		Message message;
 		message = create();
-		
+
 		message.setSender(sender);
 		message.setRecipient(recipient);
 		message.setSubject("AUTO-REPLY --");
 		message.setBody(messageText);
-		
-		senderOutbox = messageFolderService.findFolder(sender, "Auto-Reply box");
+
+		senderOutbox = messageFolderService
+				.findFolder(sender, "Auto-Reply box");
 
 		receiveMessage(message, recipient);
 
@@ -215,11 +219,8 @@ public class MessageService {
 
 		save(messageReceived);
 		messageFolderService.save(recipientInbox);
-		
-		}
-	
 
-	
+	}
 
 	public Message createReply(Message message) {
 		Message result;
@@ -227,7 +228,7 @@ public class MessageService {
 		Assert.notNull(message);
 		Assert.isTrue(actorService.findByPrincipal().equals(
 				message.getRecipient()));
-	
+
 		result = create();
 
 		result.setSubject("RE: " + message.getSubject());
@@ -303,7 +304,7 @@ public class MessageService {
 		}
 		return result;
 	}
-	
+
 	public boolean containsSpam(Message message) {
 		Collection<SpamWord> spams = spamWordService.findAll();
 		Boolean result = false;
@@ -317,5 +318,20 @@ public class MessageService {
 
 		}
 		return result;
+	}
+
+	public void sendCancelOrderMessage(Order order) {
+		Assert.isTrue(actorService.isAdministrator());
+		Message message = create();
+		message.setSender(actorService.findByPrincipal());
+		message.setRecipient(order.getCustomer());
+		message.setSubject("Your order has been canceled");
+
+		String body = "We are sorry to announce you that your order with ticker "
+				+ order.getTicker() + " has been canceled. ";
+		message.setBody(body);
+
+		sendMessage(message);
+
 	}
 }

@@ -37,6 +37,8 @@ public class OrderService {
 	private ItemOrderService itemOrderService;
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private MessageService messageService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -94,6 +96,7 @@ public class OrderService {
 	// Other business methods -------------------------------------------------
 
 	public Collection<Order> findAllByCustomer() {
+		Assert.isTrue(actorService.isCustomer());
 		Customer customer;
 		Collection<Order> result;
 
@@ -103,9 +106,15 @@ public class OrderService {
 		return result;
 	}
 
+	public Collection<Order> findAllNotCanceled() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Order> result;
+		result = orderRepository.findOrdersNotCanceled();
+		return result;
+	}
+
 	public boolean canBeCanceled(Order order) {
-		Assert.isTrue(actorService.isCustomer()
-				|| actorService.isAdministrator());
+		Assert.isTrue(actorService.isAdministrator());
 
 		long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
 		Date currentTime = new Date(System.currentTimeMillis());
@@ -116,13 +125,19 @@ public class OrderService {
 		return result;
 	}
 
-	public void cancelOrder(Order order) {
-		Assert.isTrue(actorService.isCustomer()
-				|| actorService.isAdministrator());
+	public void cancelOrderCustomer(Order order) {
+		Assert.isTrue(actorService.isCustomer());
 		Assert.isTrue(canBeCanceled(order));
 
 		order.setIsCanceled(true);
 		orderRepository.save(order);
+	}
+
+	public void cancelOrderAdminstrator(Order order) {
+		Assert.isTrue(actorService.isAdministrator());
+		order.setIsCanceled(true);
+		orderRepository.save(order);
+		messageService.sendCancelOrderMessage(order);
 	}
 
 	// Create order and their ItemOrders and delete ShoppingCart

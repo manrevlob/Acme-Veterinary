@@ -88,3 +88,11 @@
 	</jstl:if>
 </security:authorize>
 
+<security:authorize access="hasRole('ADMIN')">
+	<jstl:if test="${order.isCanceled == false}">
+		<a href="order/administrator/cancel.do?orderId=${order.id}"> <spring:message
+				code="order.cancel" />
+		</a>
+	</jstl:if>
+</security:authorize>
+

@@ -40,6 +40,8 @@
 								code="master.page.administrator.item" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message
 								code="master.page.administrator.category" /></a></li>
+					<li><a href="order/administrator/list.do"><spring:message
+								code="master.page.administrator.order" /></a></li>
 				</ul></li>
 		</security:authorize>
 
