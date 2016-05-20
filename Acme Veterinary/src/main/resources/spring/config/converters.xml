@@ -62,13 +62,15 @@
 
 		<bean class="converters.BulletinToStringConverter" />
 		<bean class="converters.StringToBulletinConverter" />
-		
+
 		<bean class="converters.ShoppingCartToStringConverter" />
 		<bean class="converters.StringToShoppingCartConverter" />
 
 		<bean class="converters.ShoppingCartLineToStringConverter" />
 		<bean class="converters.StringToShoppingCartLineConverter" />
 
+		<bean class="converters.OrderToStringConverter" />
+		<bean class="converters.StringToOrderConverter" />
 	</util:list>
 
 </beans>

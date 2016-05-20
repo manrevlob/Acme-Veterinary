@@ -118,6 +118,67 @@
 		<property name="currency" value="Euro" />
 	</bean>
 
+	<bean id="money7" class="domain.Money">
+		<property name="amount" value="9.30" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money8" class="domain.Money">
+		<property name="amount" value="10.2" />
+		<property name="currency" value="Euro" />
+	</bean>
+	
+	<bean id="money9" class="domain.Money">
+		<property name="amount" value="108.17" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money10" class="domain.Money">
+		<property name="amount" value="42.18" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money11" class="domain.Money">
+		<property name="amount" value="54.25" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money12" class="domain.Money">
+		<property name="amount" value="23.23" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money13" class="domain.Money">
+		<property name="amount" value="97.48" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money14" class="domain.Money">
+		<property name="amount" value="24.72" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money15" class="domain.Money">
+		<property name="amount" value="20.9" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money16" class="domain.Money">
+		<property name="amount" value="37.33" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money17" class="domain.Money">
+		<property name="amount" value="11.77" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+	<bean id="money18" class="domain.Money">
+		<property name="amount" value="101.24" />
+		<property name="currency" value="Euro" />
+	</bean>
+
+
 	<!-- Treatment -->
 
 	<bean id="treatment1" class="domain.Treatment">
@@ -864,6 +925,226 @@
 		<property name="clinic" ref="clinic2" />
 		<property name="isDeleted" value="false" />
 
+	</bean>
+
+	<!-- CreditCard -->
+
+	<bean id="creditcard1" class="domain.CreditCard">
+		<property name="brand" value="Brand1" />
+		<property name="cvv" value="555" />
+		<property name="expirationMonth" value="12" />
+		<property name="expirationYear" value="2016" />
+		<property name="name" value="customer1" />
+		<property name="number" value="4916260201340341" />
+	</bean>
+
+	<bean id="creditcard2" class="domain.CreditCard">
+		<property name="brand" value="Brand2" />
+		<property name="cvv" value="666" />
+		<property name="expirationMonth" value="8" />
+		<property name="expirationYear" value="2017" />
+		<property name="name" value="customer2" />
+		<property name="number" value="5207537760582875" />
+	</bean>
+
+	<bean id="creditcard3" class="domain.CreditCard">
+		<property name="brand" value="Brand3" />
+		<property name="cvv" value="222" />
+		<property name="expirationMonth" value="3" />
+		<property name="expirationYear" value="2018" />
+		<property name="name" value="customer3" />
+		<property name="number" value="346101211311104" />
+	</bean>
+
+	<bean id="creditcard4" class="domain.CreditCard">
+		<property name="brand" value="Brand4" />
+		<property name="cvv" value="444" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="2016" />
+		<property name="name" value="customer4" />
+		<property name="number" value="346451211312104" />
+	</bean>
+
+	<!-- Order -->
+
+	<bean id="order1" class="domain.Order">
+		<property name="ticker" value="111111-AAAA" />
+		<property name="moment" value="5/20/2016 11:11" />
+		<property name="isCanceled" value="false" />
+		<property name="fullName" value="fullNamecustomer1" />
+		<property name="address" value="addresscustomer1" />
+		<property name="totalPrice" ref="money1" />
+		<property name="creditCard" ref="creditcard1" />
+		<property name="comment" value="orderComment1" />
+		<property name="customer" ref="customer1" />
+	</bean>
+
+	<bean id="order2" class="domain.Order">
+		<property name="ticker" value="111222-AAAA" />
+		<property name="moment" value="12/11/2011 11:11" />
+		<property name="isCanceled" value="false" />
+		<property name="fullName" value="fullNamecustomer1" />
+		<property name="address" value="addresscustomer1" />
+		<property name="totalPrice" ref="money2" />
+		<property name="creditCard" ref="creditcard1" />
+		<property name="comment" value="orderComment2" />
+		<property name="customer" ref="customer1" />
+	</bean>
+
+	<bean id="order3" class="domain.Order">
+		<property name="ticker" value="111333-AAAA" />
+		<property name="moment" value="01/11/2012 11:11" />
+		<property name="isCanceled" value="false" />
+		<property name="fullName" value="fullNamecustomer1" />
+		<property name="address" value="addresscustomer1" />
+		<property name="totalPrice" ref="money3" />
+		<property name="creditCard" ref="creditcard2" />
+		<property name="comment" value="orderComment3" />
+		<property name="customer" ref="customer1" />
+	</bean>
+
+
+	<bean id="order4" class="domain.Order">
+		<property name="ticker" value="111333-ABBA" />
+		<property name="moment" value="02/11/2012 11:11" />
+		<property name="isCanceled" value="false" />
+		<property name="fullName" value="fullNamecustomer1" />
+		<property name="address" value="addresscustomer1" />
+		<property name="totalPrice" ref="money4" />
+		<property name="creditCard" ref="creditcard2" />
+		<property name="comment" value="orderComment4" />
+		<property name="customer" ref="customer1" />
+	</bean>
+
+
+	<bean id="order5" class="domain.Order">
+		<property name="ticker" value="111555-AAAA" />
+		<property name="moment" value="11/14/2014 11:11" />
+		<property name="isCanceled" value="false" />
+		<property name="fullName" value="fullNamecustomer2" />
+		<property name="address" value="addresscustomer2" />
+		<property name="totalPrice" ref="money5" />
+		<property name="creditCard" ref="creditcard3" />
+		<property name="comment" value="orderComment5" />
+		<property name="customer" ref="customer2" />
+	</bean>
+
+	<bean id="order6" class="domain.Order">
+		<property name="ticker" value="111666-AAAA" />
+		<property name="moment" value="01/01/2015 11:11" />
+		<property name="isCanceled" value="true" />
+		<property name="fullName" value="fullNamecustomer2" />
+		<property name="address" value="addresscustomer2" />
+		<property name="totalPrice" ref="money6" />
+		<property name="creditCard" ref="creditcard3" />
+		<property name="comment" value="orderComment6" />
+		<property name="customer" ref="customer2" />
+	</bean>
+
+	<bean id="order7" class="domain.Order">
+		<property name="ticker" value="111777-AAAA" />
+		<property name="moment" value="02/05/2015 11:11" />
+		<property name="isCanceled" value="false" />
+		<property name="fullName" value="fullNamecustomer2" />
+		<property name="address" value="addresscustomer2" />
+		<property name="totalPrice" ref="money7" />
+		<property name="creditCard" ref="creditcard4" />
+		<property name="comment" value="orderComment7" />
+		<property name="customer" ref="customer2" />
+	</bean>
+
+	<bean id="order8" class="domain.Order">
+		<property name="ticker" value="111888-AAAA" />
+		<property name="moment" value="10/30/2015 11:11" />
+		<property name="isCanceled" value="true" />
+		<property name="fullName" value="fullNamecustomer2" />
+		<property name="address" value="addresscustomer2" />
+		<property name="totalPrice" ref="money8" />
+		<property name="creditCard" ref="creditcard4" />
+		<property name="comment" value="orderComment8" />
+		<property name="customer" ref="customer2" />
+	</bean>
+
+	<!-- ItemOrder -->
+
+	<bean id="itemOrder1" class="domain.ItemOrder">
+		<property name="name" value="Item1Name" />
+		<property name="sku" value="01-ABCD" />
+		<property name="price" ref="money9" />
+		<property name="quantity" value="10" />
+		<property name="order" ref="order1" />
+	</bean>
+
+	<bean id="itemOrder2" class="domain.ItemOrder">
+		<property name="name" value="Item2Name" />
+		<property name="sku" value="02-EFGH" />
+		<property name="price" ref="money10" />
+		<property name="quantity" value="5" />
+		<property name="order" ref="order1" />
+	</bean>
+
+	<bean id="itemOrder3" class="domain.ItemOrder">
+		<property name="name" value="Item1Name" />
+		<property name="sku" value="01-ABCD" />
+		<property name="price" ref="money11" />
+		<property name="quantity" value="10" />
+		<property name="order" ref="order2" />
+	</bean>
+
+	<bean id="itemOrder4" class="domain.ItemOrder">
+		<property name="name" value="Item2Name" />
+		<property name="sku" value="02-EFGH" />
+		<property name="price" ref="money12" />
+		<property name="quantity" value="10" />
+		<property name="order" ref="order2" />
+	</bean>
+
+	<bean id="itemOrder5" class="domain.ItemOrder">
+		<property name="name" value="Item4Name" />
+		<property name="sku" value="04-MNOP" />
+		<property name="price" ref="money13" />
+		<property name="quantity" value="5" />
+		<property name="order" ref="order3" />
+	</bean>
+
+	<bean id="itemOrder6" class="domain.ItemOrder">
+		<property name="name" value="Item3Name" />
+		<property name="sku" value="03-IJKL" />
+		<property name="price" ref="money14" />
+		<property name="quantity" value="3" />
+		<property name="order" ref="order4" />
+	</bean>
+
+	<bean id="itemOrder7" class="domain.ItemOrder">
+		<property name="name" value="Item5Name" />
+		<property name="sku" value="05-QRST" />
+		<property name="price" ref="money15" />
+		<property name="quantity" value="20" />
+		<property name="order" ref="order5" />
+	</bean>
+
+	<bean id="itemOrder8" class="domain.ItemOrder">
+		<property name="name" value="Item6Name"/>
+		<property name="sku" value="06-UVWX" />
+		<property name="price" ref="money16" />
+		<property name="quantity" value="7" />
+		<property name="order" ref="order6" />
+	</bean>
+
+	<bean id="itemOrder9" class="domain.ItemOrder">
+		<property name="name" value="Item2Name" />
+		<property name="sku" value="02-EFGH" />
+		<property name="price" ref="money17" />
+		<property name="quantity" value="10" />
+		<property name="order" ref="order7" />
+	</bean>
+
+	<bean id="itemOrder10" class="domain.ItemOrder">
+		<property name="name" value="Item4Name" />
+		<property name="sku" value="04-MNOP" />
+		<property name="price" ref="money18" />
+		<property name="quantity" value="5" />
+		<property name="order" ref="order8" />
 	</bean>
 
 </beans>
