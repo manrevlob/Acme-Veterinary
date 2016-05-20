@@ -30,12 +30,13 @@
 
 
 	<spring:message code="order.moment" var="momentHeader" />
-	<display:column title="${momentHeader}">
+	<display:column title="${momentHeader}" sortable="true">
 		<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${row.moment}" />
 	</display:column>
 
 	<spring:message code="order.isCanceled" var="canceledHeader" />
-	<display:column property="isCanceled" title="${canceledHeader}" />
+	<display:column property="isCanceled" title="${canceledHeader}"
+		sortable="true" />
 
 	<security:authorize access="hasRole('CUSTOMER')">
 
