@@ -46,4 +46,13 @@
 		</display:column>
 	</security:authorize>
 
+	<security:authorize access="hasRole('ADMIN')">
+
+		<display:column>
+			<a href="order/administrator/details.do?orderId=${row.id}"> <spring:message
+					code="order.details" />
+			</a>
+		</display:column>
+	</security:authorize>
+
 </display:table>

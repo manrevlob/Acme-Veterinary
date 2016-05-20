@@ -82,7 +82,8 @@ public class ItemOrderService {
 	// Other business methods -------------------------------------------------
 
 	public Collection<ItemOrder> findByOrder(int orderId) {
-		Assert.isTrue(actorService.isCustomer());
+		Assert.isTrue(actorService.isCustomer()
+				|| actorService.isAdministrator());
 		Collection<ItemOrder> result;
 		result = itemOrderRepository.findByOrder(orderId);
 		return result;

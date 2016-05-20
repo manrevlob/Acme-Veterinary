@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CustomerService;
 import services.ItemOrderService;
 import services.OrderService;
 import services.ShoppingCartService;
@@ -30,6 +31,8 @@ public class OrderCustomerController extends AbstractController {
 	private ShoppingCartService shoppingCartService;
 	@Autowired
 	private ItemOrderService itemOrderService;
+	@Autowired
+	private CustomerService customerService;
 
 	// Constructors -----------------------------------------------------------
 	public OrderCustomerController() {
@@ -127,18 +130,21 @@ public class OrderCustomerController extends AbstractController {
 		Collection<ItemOrder> itemOrders;
 
 		order = orderService.findOne(orderId);
-		itemOrders = itemOrderService.findByOrder(orderId);
+		if (customerService.findByPrincipal().getOrders().contains(order)) {
+			itemOrders = itemOrderService.findByOrder(orderId);
 
-		result = new ModelAndView("order/details");
-		result.addObject("order", order);
-		result.addObject("itemOrders", itemOrders);
-		result.addObject("requestURI", "order/customer/details.do?orderId="
-				+ order.getId());
-
+			result = new ModelAndView("order/details");
+			result.addObject("order", order);
+			result.addObject("itemOrders", itemOrders);
+			result.addObject("requestURI", "order/customer/details.do?orderId="
+					+ order.getId());
+		} else {
+			result = new ModelAndView("misc/403");
+		}
 		return result;
 	}
 
-	// Edition -----------------------------------------------------------
+	// Cancel -----------------------------------------------------------
 	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
 	public ModelAndView cancelOrder(@Valid int orderId) {
 		ModelAndView result;
@@ -149,7 +155,7 @@ public class OrderCustomerController extends AbstractController {
 
 		try {
 			if (orderService.canBeCanceled(order)) {
-				orderService.cancelOrder(order);
+				orderService.cancelOrderCustomer(order);
 				result = new ModelAndView("redirect:/order/customer/list.do");
 			} else {
 				result = new ModelAndView("order/details");
