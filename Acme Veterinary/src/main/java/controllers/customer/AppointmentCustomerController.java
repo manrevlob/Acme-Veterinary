@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AppointmentService;
@@ -37,7 +38,7 @@ public class AppointmentCustomerController extends AbstractController {
 
 	
 	@RequestMapping("/list")
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required = false) String message) {
 		ModelAndView result;
 
 		Collection<Appointment> appointments = appointmentService.findByPrincipalNoExpired();
@@ -45,6 +46,7 @@ public class AppointmentCustomerController extends AbstractController {
 		result = new ModelAndView("appointment/list");
 		result.addObject("requestURI", "appointment/customer/list.do");
 		result.addObject("appointments", appointments);
+		result.addObject("message", message);
 
 		return result;
 	}
@@ -94,7 +96,7 @@ public class AppointmentCustomerController extends AbstractController {
 			appointmentService.cancelAppointment(appointmentId);
 			result = new ModelAndView("redirect:/appointment/customer/list.do");
 		} catch (Exception e) {
-			result = new ModelAndView("redirect:/appointment/customer/list.do");
+			result = new ModelAndView("redirect:/appointment/customer/list.do?message=appointment.error");
 		}
 		
 		

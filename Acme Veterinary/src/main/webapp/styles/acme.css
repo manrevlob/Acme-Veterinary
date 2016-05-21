@@ -1,0 +1,57 @@
+/* acme.css
+ *
+ * Copyright (C) 2014 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ * 
+ */
+
+ .navbar-default {
+  background-image: -webkit-linear-gradient(top, #004191 0%, #004191 100%);
+  background-image:      -o-linear-gradient(top, #004191 0%, #004191 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#004191), to(#004191));
+  background-image:         linear-gradient(to bottom, #004191 0%, #004191 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background-repeat: repeat-x;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);  
+}
+
+.dropdown-menu>li>a,
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-nav>li>a:hover{
+	color: #ffffff;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .active > a {
+  background-image: -webkit-linear-gradient(top, #006BF0 0%, #006BF0 100%);
+  background-image:      -o-linear-gradient(top, #006BF0 0%, #006BF0 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#006BF0), to(#006BF0));
+  background-image:         linear-gradient(to bottom, #006BF0 0%, #006BF0 100%);  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdbdbdb', endColorstr='#ffe2e2e2', GradientType=0);
+  background-repeat: repeat-x;
+  -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 3px 9px rgba(0, 0, 0, .075);
+  color: #ffffff;
+}
+.dropdown-menu{
+	background-color: #006BF0;
+}
+.dropdown-menu>li>a:hover{
+	color: #ffffff;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background-color: #004191;
+  background-image: -webkit-linear-gradient(top, #004191 0%, #004191 100%);
+  background-image:      -o-linear-gradient(top, #004191 0%, #004191 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#004191), to(#004191));
+  background-image:         linear-gradient(to bottom, #004191 0%, #004191 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff2e6da4', GradientType=0);
+  background-repeat: repeat-x;
+}
+	

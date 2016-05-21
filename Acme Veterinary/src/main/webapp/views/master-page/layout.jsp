@@ -31,22 +31,22 @@
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
 
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
 <link rel="stylesheet" href="styles/common.css" type="text/css">
 <link rel="stylesheet" href="styles/jmenu.css" media="screen"
 	type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
 <link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="styles/bootstrap-theme.min.css" type="text/css">
+<link rel="stylesheet" href="styles/acme.css" type="text/css">
 
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#jMenu").jMenu();
-	});
-
 	function askSubmission(msg, form) {
 		if (confirm(msg))
 			form.submit();
