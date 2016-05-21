@@ -23,6 +23,7 @@ public class CustomerServiceTest extends AbstractTest {
 
 	@Autowired
 	private CustomerService customerService;
+
 	
 
 	// Tests -------------------------------------------------
@@ -33,16 +34,19 @@ public class CustomerServiceTest extends AbstractTest {
 		
 		Customer customer;
 		customer = customerService.create();
-	
 		customer.setName("TEST");
 		customer.setSurname("TEST");
 		customer.setPhone("123456789");
 		customer.setEmail("email@email.com");
 		customerService.save(customer);
 		
-		Assert.notNull(customerService.findOne(72));
+		Assert.notNull(customerService.findOne(customer.getId()));
 		
 	}
+	
+	
+
+	
 
 
 
