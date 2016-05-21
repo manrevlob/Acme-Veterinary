@@ -13,6 +13,7 @@ import repositories.VeterinaryRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.MessageFolder;
 import domain.Veterinary;
 import forms.VeterinaryForm;
 
@@ -27,6 +28,11 @@ public class VeterinaryService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private MessageFolderService messageFolderService;
+	@Autowired
+	private ActorService actorService;
+
 	// Constructors -----------------------------------------------------------
 
 	public VeterinaryService() {
@@ -36,8 +42,51 @@ public class VeterinaryService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Veterinary create() {
+		Assert.isTrue(actorService.isAdministrator());
 		Veterinary result;
+		UserAccount userAccount;
+		Authority authority;
+		Collection<Authority> authorities;
+		MessageFolder inbox;
+		MessageFolder outbox;
+		MessageFolder trashbox;
+		MessageFolder spambox;
+		Collection<MessageFolder> messageFolders;
+
+		userAccount = new UserAccount();
 		result = new Veterinary();
+		authority = new Authority();
+		authority.setAuthority(Authority.VETERINARY);
+		authorities = new ArrayList<Authority>();
+		messageFolders = new ArrayList<MessageFolder>();
+
+		inbox = messageFolderService.create();
+		outbox = messageFolderService.create();
+		trashbox = messageFolderService.create();
+		spambox = messageFolderService.create();
+
+		inbox.setSystem(true);
+		outbox.setSystem(true);
+		trashbox.setSystem(true);
+		spambox.setSystem(true);
+
+		authorities.add(authority);
+		userAccount.setAuthorities(authorities);
+		result.setUserAccount(userAccount);
+
+		inbox.setName("In box");
+		outbox.setName("Out box");
+		trashbox.setName("Trash box");
+		spambox.setName("Spam box");
+
+		messageFolders.add(inbox);
+		messageFolders.add(outbox);
+		messageFolders.add(trashbox);
+		messageFolders.add(spambox);
+
+		messageFolders = messageFolderService.saveAll(messageFolders);
+		result.setMessageFolders(messageFolders);
+
 		return result;
 	}
 
@@ -70,6 +119,7 @@ public class VeterinaryService {
 	}
 
 	public void save(VeterinaryForm veterinaryForm) {
+		Assert.isTrue(actorService.isAdministrator());
 		Assert.notNull(veterinaryForm);
 		Assert.isTrue(
 				veterinaryForm.getPassword().equals(
@@ -102,7 +152,7 @@ public class VeterinaryService {
 
 		save(veterinary);
 	}
-	
+
 	// Devuelve lista de veterinarios asignados a una clinica
 	public Collection<Veterinary> findByClinic(int clinicId) {
 		Collection<Veterinary> result;

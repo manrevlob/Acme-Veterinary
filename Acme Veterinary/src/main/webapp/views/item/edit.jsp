@@ -42,7 +42,7 @@
 	
 	<input type="button" name="cancel"
 		value="<spring:message code="item.cancel" />"
-		onclick="javascript: relativeRedir('item/administrator/list.do');" />
+		onclick="javascript: window.location.replace('item/administrator/list.do')" />
 	<br />
 	<jstl:if test="${item.id != 0}">
 		<acme:submit name="delete" code="item.delete"/>

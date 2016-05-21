@@ -59,14 +59,11 @@ public class ItemAdministratorController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		Item item;
-		Collection<Category> categories;
-		
-		item = itemService.create();
-		categories = categoryService.findAll();
 
-		result = new ModelAndView("item/create");
-		result.addObject("item", item);
-		result.addObject("categories", categories);
+		item = itemService.create();
+
+		result = createModelAndView(item);
+
 		return result;
 	}
 
@@ -76,31 +73,25 @@ public class ItemAdministratorController extends AbstractController {
 	public ModelAndView edit(@Valid int itemId) {
 		ModelAndView result;
 		Item item;
-		Collection<Category> categories;
 
 		item = itemService.findOne(itemId);
-		categories = categoryService.findAll();
 
-		result = new ModelAndView("item/edit");
-		result.addObject("item", item);
-		result.addObject("categories", categories);
+		result = editModelAndView(item);
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Item item, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = new ModelAndView("item/edit");
+			result = editModelAndView(item);
 		} else {
 			try {
 				itemService.save(item);
 				result = new ModelAndView("redirect:/item/list.do");
 			} catch (Throwable oops) {
-				result = new ModelAndView("item/edit");
-				result.addObject("item", item);
-				result.addObject("message", "item.commit.error");
+				result = editModelAndView(item, "item.commit.error");
 			}
 		}
 		return result;
@@ -114,11 +105,53 @@ public class ItemAdministratorController extends AbstractController {
 			itemService.delete(item);
 			result = new ModelAndView("redirect:/item/list.do");
 		} catch (Throwable oops) {
-			result = new ModelAndView("item/edit");
-			result.addObject("item", item);
-			result.addObject("message", "item.commit.error");
+			result = editModelAndView(item, "item.commit.error");
 		}
 
+		return result;
+	}
+
+	// Ancillary methods ------------------------------------------------------
+
+	protected ModelAndView createModelAndView(Item item) {
+		ModelAndView result;
+
+		result = createModelAndView(item, null);
+
+		return result;
+	}
+
+	protected ModelAndView createModelAndView(Item item, String message) {
+		ModelAndView result;
+		Collection<Category> categories;
+
+		categories = categoryService.findAll();
+
+		result = new ModelAndView("item/create");
+		result.addObject("item", item);
+		result.addObject("categories", categories);
+		result.addObject("message", message);
+		return result;
+	}
+
+	protected ModelAndView editModelAndView(Item item) {
+		ModelAndView result;
+
+		result = editModelAndView(item, null);
+
+		return result;
+	}
+
+	protected ModelAndView editModelAndView(Item item, String message) {
+		ModelAndView result;
+		Collection<Category> categories;
+
+		categories = categoryService.findAll();
+
+		result = new ModelAndView("item/edit");
+		result.addObject("item", item);
+		result.addObject("categories", categories);
+		result.addObject("message", message);
 		return result;
 	}
 

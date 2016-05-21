@@ -160,9 +160,15 @@ public class ShoppingCartCustomerController extends AbstractController {
 			result = new ModelAndView("shoppingCart/addComment");
 		} else {
 			try {
-				shoppingCartService.save(shoppingCart);
-				result = new ModelAndView(
-						"redirect:/shoppingCart/customer/show.do");
+				if(!shoppingCart.getComment().isEmpty()){
+					shoppingCartService.save(shoppingCart);
+					result = new ModelAndView(
+							"redirect:/shoppingCart/customer/show.do");
+				}else{
+					result = new ModelAndView("shoppingCart/addComment");
+					result.addObject("shoppingCart", shoppingCart);
+					result.addObject("message", "shoppingCart.commit.errorComment");
+				}
 			} catch (Throwable oops) {
 				result = new ModelAndView("shoppingCart/addComment");
 				result.addObject("shoppingCart", shoppingCart);

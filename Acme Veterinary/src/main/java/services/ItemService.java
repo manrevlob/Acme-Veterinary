@@ -24,6 +24,8 @@ public class ItemService {
 
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private ShoppingCartLineService shoppingCartLineService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -74,6 +76,7 @@ public class ItemService {
 		Assert.isTrue(actorService.isAdministrator());
 		item.setIsDeleted(true);
 		item = save(item);
+		shoppingCartLineService.checkShoppingCart(item);
 	}
 
 	public Collection<Item> findAll() {
