@@ -37,14 +37,8 @@
 
 				<spring:message code="shoppingCartLine.price" var="priceHeader" />
 				<display:column title="${priceHeader}" sortable="true">
-					<fmt:formatNumber type="number" value="${row.price.amount}"
-						maxFractionDigits="2" />
-				</display:column>
-
-				<spring:message code="shoppingCartLine.currency"
-					var="currencyHeader" />
-				<display:column title="${currencyHeader}">
-					<jstl:out value="${coin}" />
+					<fmt:formatNumber type="number" value="${row.price.amount * row.quantity}"
+						maxFractionDigits="2" /> <jstl:out value="Euro" />
 				</display:column>
 
 				<display:column>

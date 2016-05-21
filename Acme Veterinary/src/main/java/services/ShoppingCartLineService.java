@@ -112,4 +112,14 @@ public class ShoppingCartLineService {
 		result = shoppingCartLineRepository.findByShoppingCart(shoppingCart);
 		return result;
 	}
+
+	// Metodo que elimina un item de un shoppingCart si el administrador elimina un item de la tienda
+	public void checkShoppingCart(Item item) {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<ShoppingCartLine> lines;
+		lines = shoppingCartLineRepository.findAllByItem(item);
+		for(ShoppingCartLine s: lines){
+			delete(s);
+		}
+	}
 }

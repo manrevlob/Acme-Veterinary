@@ -50,7 +50,7 @@ public class RegisterController extends AbstractController {
 		Collection<Clinic> clinics;
 
 		VeterinaryForm veterinaryForm = new VeterinaryForm();
-		clinics = clinicService.findAll();
+		clinics = clinicService.findAllNotDeleted();
 
 		result = new ModelAndView("register/registerAsVeterinary");
 		result.addObject("veterinaryForm", veterinaryForm);
@@ -97,7 +97,7 @@ public class RegisterController extends AbstractController {
 		ModelAndView result = null;
 		Boolean contraseña;
 		Collection<Clinic> clinics;
-		clinics = clinicService.findAll();
+		clinics = clinicService.findAllNotDeleted();
 
 		contraseña = veterinaryForm.getSecondPassword().equals(
 				veterinaryForm.getPassword());

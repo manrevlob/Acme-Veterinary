@@ -19,5 +19,8 @@ public interface ShoppingCartLineRepository extends
 	
 	@Query("select scl from ShoppingCartLine scl where scl.shoppingCart = ?1 and scl.item = ?2")
 	ShoppingCartLine findByShoppingCartAndItem(ShoppingCart shoppingCart, Item item);
+
+	@Query("select scl from ShoppingCartLine scl where scl.item = ?1")
+	Collection<ShoppingCartLine> findAllByItem(Item item);
 	
 }
