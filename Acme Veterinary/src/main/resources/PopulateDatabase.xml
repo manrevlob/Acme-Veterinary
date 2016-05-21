@@ -836,7 +836,7 @@
 		<property name="veterinary" ref="veterinary1" />
 		<property name="pet" ref="pet1" />
 		<property name="history" ref="history1" />
-		<property name="day" value="09/16/2016" />
+		<property name="day" value="03/16/2016" />
 		<property name="startTime" value="9" />
 		<property name="endTime" value="10" />
 	</bean>
@@ -874,6 +874,16 @@
 		<property name="startTime" value="15" />
 		<property name="endTime" value="16" />
 
+	</bean>
+	
+	<bean id="appointment5" class="domain.Appointment">
+		<property name="moment" value="05/03/2016 10:00" />
+		<property name="reason" value="Appointment5Reason" />
+		<property name="veterinary" ref="veterinary1" />
+		<property name="pet" ref="pet1" />
+		<property name="day" value="09/16/2016" />
+		<property name="startTime" value="9" />
+		<property name="endTime" value="10" />
 	</bean>
 
 	<!-- Histories -->
