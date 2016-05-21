@@ -61,6 +61,7 @@ public class ClinicService {
 
 	public Clinic save(Clinic clinic) {
 		Assert.notNull(clinic);
+		clinic.setIsDeleted(false);
 		return clinicRepository.save(clinic);
 	}
 	
