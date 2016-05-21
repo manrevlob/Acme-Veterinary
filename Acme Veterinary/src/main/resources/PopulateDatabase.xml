@@ -836,7 +836,7 @@
 		<property name="veterinary" ref="veterinary1" />
 		<property name="pet" ref="pet1" />
 		<property name="history" ref="history1" />
-		<property name="day" value="05/16/2016" />
+		<property name="day" value="09/16/2016" />
 		<property name="startTime" value="9" />
 		<property name="endTime" value="10" />
 	</bean>
