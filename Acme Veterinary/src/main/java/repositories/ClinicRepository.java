@@ -11,7 +11,7 @@ import domain.Clinic;
 @Repository
 public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
 	
-	@Query("select c from Clinic c where  c.isDeleted = false")
+	@Query("select c from Clinic c where  c.isDeleted != true ")
 	Collection<Clinic> findAllNotDeleted();
 
 }
