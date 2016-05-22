@@ -17,7 +17,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.png" alt="Acme-Veterinary Co., Inc." />
+	<img class="hidden-xs" src="images/logo.png" alt="Acme-Veterinary Co., Inc." />
+	<img class="visible-xs" src="images/logoMovil.png" alt="Acme-Veterinary Co., Inc."> 
 </div>
 
 <nav class="navbar navbar-default" role="navigation">
