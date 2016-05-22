@@ -41,7 +41,7 @@
 	<br />
 	<acme:submit name="save" code="customer.save" />
 
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="customer.cancel" />"
 		onclick="javascript: window.location.replace('welcome/index.do')" />
 

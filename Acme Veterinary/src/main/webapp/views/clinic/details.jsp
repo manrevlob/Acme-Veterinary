@@ -49,7 +49,7 @@
 
 <br />
 
-<input type="button" name="cancel"
+<input class="btn" type="button" name="cancel"
 	value="<spring:message code="clinic.cancel" />"
 	onclick="javascript: window.location.replace('clinic/list.do')" />
 <br />

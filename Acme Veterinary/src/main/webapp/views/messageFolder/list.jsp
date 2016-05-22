@@ -21,7 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <div>
-	<a href="message/actor/sendMsg.do"> <spring:message
+	<a class="btn btn-primary" href="message/actor/sendMsg.do"> <spring:message
 			code="message.sendAMessage" />
 	</a>
 </div>
@@ -57,7 +57,7 @@
 </display:table>
 
 <div>
-	<a href="messageFolder/actor/create.do"> <spring:message
+	<a class="btn btn-primary" href="messageFolder/actor/create.do"> <spring:message
 			code="messageFolder.create" />
 	</a>
 </div>

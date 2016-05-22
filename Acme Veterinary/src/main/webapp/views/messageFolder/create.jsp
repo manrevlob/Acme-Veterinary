@@ -19,6 +19,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="${requestURI}" modelAttribute="messageFolder">
 
@@ -26,23 +27,17 @@
 	<form:hidden path="version" />
 	<form:hidden path="system" />
 
-	<form:label path="name">
-		<spring:message code="messageFolder.name" />:
-	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
-	<br />
+	<acme:textbox code="messageFolder.name" path="name"/>
 
-	<input type="submit" name="save"
-		value="<spring:message code="messageFolder.save" />" />&nbsp;
+	<acme:submit name="save" code="messageFolder.save"/>
 		
-		<jstl:if test="${messageFolder.system == false && edit == true }">
+	<jstl:if test="${messageFolder.system == false && edit == true }">
 		<input type="submit" name="delete"
 			value="<spring:message code="messageFolder.delete" />"
-			onclick="return confirm('<spring:message code="messageFolder.deletePermanently" />')" />&nbsp;
+			onclick="return confirm('<spring:message code="messageFolder.deletePermanently" />')" />&nbsp;			
 	</jstl:if>
 
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="messageFolder.cancel" />"
 		onclick="history.back();" />
 	<br />

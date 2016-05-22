@@ -39,8 +39,9 @@
 <br />
 
 <div>
-	<a href="profile/actor/edit.do"><spring:message
-			code="profile.edit" /></a> <a
+	<a class="btn btn-primary" href="profile/actor/edit.do"><spring:message
+			code="profile.edit" /></a> 
+	<a class="btn btn-warning"
 		href="profile/actor/changePassword.do?actorId=${actor.id}"><spring:message
 			code="profile.changePassword" /></a>
 </div>

@@ -40,7 +40,7 @@
 
 	<acme:submit name="save" code="history.save" />
 
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="history.cancel" />"
 		onclick="javascript: window.location.replace('appointment/veterinary/list.do')" />
 

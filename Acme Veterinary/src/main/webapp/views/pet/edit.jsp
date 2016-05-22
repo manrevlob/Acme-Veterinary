@@ -35,7 +35,7 @@
 
 	<acme:submit name="save" code="pet.save" />
 
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="pet.cancel" />"
 		onclick="javascript: window.location.replace('pet/customer/list.do')" />
 

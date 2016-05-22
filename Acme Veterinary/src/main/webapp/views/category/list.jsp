@@ -39,7 +39,7 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-	<a href="category/administrator/create.do"> <spring:message
+	<a class="btn btn-primary" href="category/administrator/create.do"> <spring:message
 			code="category.create" />
 	</a>
 

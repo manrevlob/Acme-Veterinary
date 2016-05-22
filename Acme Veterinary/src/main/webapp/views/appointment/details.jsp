@@ -64,7 +64,7 @@
 <br />
 <security:authorize access="hasRole('VETERINARY')">
 	<jstl:if test="${appointment.history == null}">
-		<a href="history/veterinary/create.do?appointmentId=${appointment.id}">
+		<a class="btn btn-primary" href="history/veterinary/create.do?appointmentId=${appointment.id}">
 			<spring:message code="appointment.history.create" />
 		</a>
 	&nbsp;
@@ -72,7 +72,7 @@
 </jstl:if>
 
 	<jstl:if test="${appointment.payment == null}">
-		<a href="payment/veterinary/create.do?appointmentId=${appointment.id}">
+		<a class="btn btn-warning" href="payment/veterinary/create.do?appointmentId=${appointment.id}">
 			<spring:message code="appointment.payment.create" />
 		</a>
 	</jstl:if>
