@@ -58,6 +58,6 @@
 
 </display:table>
 
-<a href="pet/customer/create.do"> <spring:message code="pet.create" />
+<a class="btn btn-primary" href="pet/customer/create.do"> <spring:message code="pet.create" />
 </a>
 

@@ -38,9 +38,9 @@
 
 	</display:table>
 
-
+<br />
 <security:authorize access="hasRole('ADMIN')">
-<a href="spamword/administrator/create.do"> <spring:message
+<a class="btn btn-primary" href="spamword/administrator/create.do"> <spring:message
 			code="spamWord.create" />
 	</a>
 </security:authorize>

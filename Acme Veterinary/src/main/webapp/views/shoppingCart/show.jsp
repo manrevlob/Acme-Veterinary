@@ -83,13 +83,13 @@
 						<jstl:out value="${shoppingCart.comment}" />
 						<br />
 
-						<a href="shoppingCart/customer/addComment.do"> <spring:message
+						<a class="btn btn-warning" href="shoppingCart/customer/addComment.do"> <spring:message
 								code="shoppingCart.modifyComment" />
 						</a>
 
 					</jstl:if>
 				<p>
-					<a href="order/customer/create.do"> <spring:message
+					<a class="btn btn-primary" href="order/customer/create.do"> <spring:message
 							code="shoppingCart.buy" />
 					</a>
 			</div>

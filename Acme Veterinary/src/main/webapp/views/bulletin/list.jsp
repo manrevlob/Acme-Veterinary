@@ -72,7 +72,7 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 
-		<a href="bulletin/administrator/create.do?clinicId=${clinicId}"> <spring:message
+		<a class="btn btn-primary" href="bulletin/administrator/create.do?clinicId=${clinicId}"> <spring:message
 				code="bulletin.create" />
 		</a>
 	</security:authorize>

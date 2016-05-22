@@ -33,7 +33,7 @@
 
 	<acme:submit name="save" code="bulletin.save" />
 
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="bulletin.cancel" />"
 		onclick="javascript: window.location.replace('bulletin/list.do')" />
 

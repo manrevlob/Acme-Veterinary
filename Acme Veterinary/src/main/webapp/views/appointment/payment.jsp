@@ -57,7 +57,7 @@
 
 	<acme:submit name="save" code="payment.save" />
 
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="payment.cancel" />"
 		onclick="javascript: window.location.replace('appointment/veterinary/list.do')" />
 

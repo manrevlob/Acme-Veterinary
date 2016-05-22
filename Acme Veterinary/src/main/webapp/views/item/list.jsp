@@ -88,7 +88,7 @@
 </display:table>
 
 <security:authorize access="hasRole('ADMIN')">
-	<a href="item/administrator/create.do"> <spring:message
+	<a class="btn btn-primary" href="item/administrator/create.do"> <spring:message
 			code="item.create" />
 	</a>
 </security:authorize>

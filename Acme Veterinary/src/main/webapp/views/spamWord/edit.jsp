@@ -17,6 +17,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="spamword/administrator/edit.do"
 	modelAttribute="spamWord">
@@ -24,22 +25,15 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
-	<form:label path="keyWord">
-		<spring:message code="spamWord.keyWord" />:
-	</form:label>
-	<form:input path="keyWord" />
-	<form:errors cssClass="error" path="keyWord" />
-	<br />
-	<br />
+	<acme:textbox code="spamWord.keyWord" path="keyWord"/>
 
-	<input type="submit" name="save"
-		value="<spring:message code="spamWord.save" />" />&nbsp; 
+	<acme:submit name="save" code="spamWord.save"/>
 	<jstl:if test="${spamWord.id != 0}">
-		<input type="submit" name="delete"
+		<input class="btn btn-danger" type="submit" name="delete"
 			value="<spring:message code="spamWord.delete" />"
 			onclick="return confirm('<spring:message code="spamWord.delete.confirm" />')" />&nbsp;
 		</jstl:if>
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="spamWord.cancel" />"
 		onclick="javascript: window.location.replace('spamword/administrator/list.do')" />
 	<br />

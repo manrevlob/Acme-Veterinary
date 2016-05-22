@@ -40,7 +40,7 @@
 	
 	<acme:submit name="save" code="item.save"/>&nbsp; 
 	
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="item.cancel" />"
 		onclick="javascript: window.location.replace('item/administrator/list.do')" />
 	<br />

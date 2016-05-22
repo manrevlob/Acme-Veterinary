@@ -31,11 +31,11 @@
 
 	<acme:submit name="save" code="category.save"/>
 		
-	<input type="button" name="cancel"
+	<input class="btn" type="button" name="cancel"
 		value="<spring:message code="category.cancel" />"
 		onclick="javascript:history.back()" />&nbsp; 
 	<jstl:if test="${category.id != 0}">
-		<input type="submit" name="delete"
+		<input class="btn btn-danger" type="submit" name="delete"
 			value="<spring:message code="category.delete" />"
 			onclick="return confirm('<spring:message code="category.confirm.delete" />')" />
 	</jstl:if>
