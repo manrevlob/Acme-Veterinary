@@ -150,7 +150,7 @@ public class PetCustomerController extends AbstractController {
 		ModelAndView result;
 		Pet pet = petService.findOne(petId);
 
-		String rootPath = System.getProperty("catalina.base");
+//		String rootPath = System.getProperty("catalina.base");
 		StringBuffer ruta = httpServletRequest.getRequestURL();
 		String rutaf = StringUtils.replace(ruta.toString(),
 				"pet/customer/details.do", "");
@@ -181,7 +181,7 @@ public class PetCustomerController extends AbstractController {
 
 	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST, params = "upload")
 	public @ResponseBody
-	String uploadFileHandler(@RequestParam("petId") int petId,
+	ModelAndView uploadFileHandler(@RequestParam("petId") int petId,
 			@RequestParam("file") MultipartFile file,
 			HttpServletRequest httpServletRequest) {
 
@@ -191,10 +191,10 @@ public class PetCustomerController extends AbstractController {
 
 				// Creating the directory to store file
 				String rootPath = System.getProperty("catalina.base");
-				StringBuffer ruta = httpServletRequest.getRequestURL();
-				String rutaf = StringUtils.replace(ruta.toString(),
-						"pet/customer/details.do", "");
-				File dir = new File(rutaf + "images" + "/pets");
+//				StringBuffer ruta = httpServletRequest.getRequestURL();
+				//String rutaf = StringUtils.replace(ruta.toString(),
+				//		"pet/customer/details.do", "");
+				File dir = new File(rootPath+"/../../../../Acme-Veterinary/src/main/webapp/images/pets");
 				if (!dir.exists())
 					dir.mkdirs();
 
@@ -209,13 +209,13 @@ public class PetCustomerController extends AbstractController {
 				logger.info("Server File Location="
 						+ serverFile.getAbsolutePath());
 
-				return "You successfully uploaded file";
+				return new ModelAndView("redirect:/pet/customer/details.do?petId="+petId);
 
 			} catch (Exception e) {
-				return "You failed to upload => " + e.getMessage();
+				return new ModelAndView("redirect:/pet/customer/details.do?petId="+petId);
 			}
 		} else {
-			return "The file is empty";
+			return new ModelAndView("redirect:/pet/customer/details.do?petId="+petId);
 		}
 	}
 }

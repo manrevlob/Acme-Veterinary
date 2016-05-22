@@ -31,8 +31,8 @@
 <b><spring:message code="pet.petType" />:</b>
 <jstl:out value="${pet.petType.name}" />
 <br />
-<jstl:out value="${image}" />
-<img src="${image}" alt="${pet.name}" style="width: 50px; height: 50px;" />
+
+<img src="${image}" alt="${pet.name}" style="width: 300px; height: 300px;" />
 
 <a href="pet/customer/uploadImage.do?petId=${pet.id}"> <spring:message
 		code="pet.uploadImage" />
