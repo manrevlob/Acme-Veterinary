@@ -21,7 +21,9 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('VETERINARY')">
-	<h2><spring:message code="appointment.infoVet"/></h2>
+	<h2>
+		<spring:message code="appointment.infoVet" />
+	</h2>
 </security:authorize>
 
 <display:table name="appointments" pagesize="10" class="displaytag"
@@ -40,46 +42,51 @@
 	<spring:message code="appointment.startTime" var="startTimeHeader" />
 	<display:column property="startTime" title="${startTimeHeader}"
 		sortable="true" />
-	
+
 	<spring:message code="appointment.endTime" var="endTimeHeader" />
 	<display:column property="endTime" title="${endTimeHeader}"
-		sortable="true" />	
-		
+		sortable="true" />
+
 
 	<spring:message code="appointment.reason" var="reasonHeader" />
 	<display:column property="reason" title="${reasonHeader}"
 		sortable="true" />
 
-	<display:column title="${detailsHeader}">
-		<a href="appointment/veterinary/details.do?appointmentId=${row.id}">
-			<spring:message code="appointment.details" />
-		</a>
-	</display:column>
-	
 	<security:authorize access="isAuthenticated()">
 		<security:authorize access="hasRole('CUSTOMER')">
-		<display:column title="${cancelHeader}">
-				<a 
-				onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
-				href="appointment/customer/cancel.do?appointmentId=${row.id}">
+			<display:column title="${detailsHeader}">
+				<a href="appointment/customer/details.do?appointmentId=${row.id}">
+					<spring:message code="appointment.details" />
+				</a>
+			</display:column>
+			<display:column title="${cancelHeader}">
+				<a
+					onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
+					href="appointment/customer/cancel.do?appointmentId=${row.id}">
 					<spring:message code="appointment.cancel" />
 				</a>
 			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('VETERINARY')">
+
+			<display:column title="${detailsHeader}">
+				<a href="appointment/veterinary/details.do?appointmentId=${row.id}">
+					<spring:message code="appointment.details" />
+				</a>
+			</display:column>
 			<display:column title="${cancelHeader}">
-				<a 
-				onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
-				href="appointment/veterinary/cancel.do?appointmentId=${row.id}">
+				<a
+					onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
+					href="appointment/veterinary/cancel.do?appointmentId=${row.id}">
 					<spring:message code="appointment.cancel" />
 				</a>
 			</display:column>
 		</security:authorize>
 		<security:authorize access="hasRole('ADMIN')">
 			<display:column title="${cancelHeader}">
-				<a 
-				onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
-				href="appointment/administrator/cancel.do?appointmentId=${row.id}">
+				<a
+					onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
+					href="appointment/administrator/cancel.do?appointmentId=${row.id}">
 					<spring:message code="appointment.cancel" />
 				</a>
 			</display:column>

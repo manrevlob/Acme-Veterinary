@@ -62,17 +62,18 @@
 </jstl:if>
 
 <br />
-
-<jstl:if test="${appointment.history == null}">
-	<a href="history/veterinary/create.do?appointmentId=${appointment.id}">
-		<spring:message code="appointment.history.create" />
-	</a>
+<security:authorize access="hasRole('VETERINARY')">
+	<jstl:if test="${appointment.history == null}">
+		<a href="history/veterinary/create.do?appointmentId=${appointment.id}">
+			<spring:message code="appointment.history.create" />
+		</a>
 	&nbsp;
 &nbsp;
 </jstl:if>
 
-<jstl:if test="${appointment.payment == null}">
-	<a href="payment/veterinary/create.do?appointmentId=${appointment.id}">
-		<spring:message code="appointment.payment.create" />
-	</a>
-</jstl:if>
+	<jstl:if test="${appointment.payment == null}">
+		<a href="payment/veterinary/create.do?appointmentId=${appointment.id}">
+			<spring:message code="appointment.payment.create" />
+		</a>
+	</jstl:if>
+</security:authorize>
