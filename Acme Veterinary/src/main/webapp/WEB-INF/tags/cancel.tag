@@ -27,7 +27,7 @@
 
 <%-- Definition --%>
 
-<button type="button" onclick="javascript: window.location.replace('${url}')" >
+<button class="btn" type="button" onclick="javascript: window.location.replace('${url}')" >
 	<spring:message code="${code}" />
 </button>
 
