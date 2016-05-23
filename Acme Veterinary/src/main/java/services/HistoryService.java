@@ -40,6 +40,7 @@ public class HistoryService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public History create() {
+		Assert.isTrue(actorService.isVeterinary());
 		History result;
 		result = new History();
 		result.setMoment(new Date(System.currentTimeMillis() - 1000));
@@ -59,6 +60,7 @@ public class HistoryService {
 	}
 
 	public History save(History history) {
+		Assert.isTrue(actorService.isVeterinary());
 		Assert.notNull(history);
 		return historyRepository.save(history);
 	}
