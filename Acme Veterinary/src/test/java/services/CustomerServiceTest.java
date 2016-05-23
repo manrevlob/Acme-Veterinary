@@ -38,7 +38,7 @@ public class CustomerServiceTest extends AbstractTest {
 		customer.setSurname("TEST");
 		customer.setPhone("123456789");
 		customer.setEmail("email@email.com");
-		customerService.save(customer);
+		customer = customerService.save(customer);
 
 		Assert.notNull(customerService.findOne(customer.getId()));
 

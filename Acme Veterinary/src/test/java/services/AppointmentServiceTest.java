@@ -1,7 +1,6 @@
 package services;
 
 import java.sql.Date;
-import java.util.Collection;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,9 +45,6 @@ public class AppointmentServiceTest extends AbstractTest {
 		// Nos logueamos como customer1
 		authenticate("customer1");
 
-		Collection<Appointment> appointments;
-		appointments = appointmentService.findByPrincipalNoExpired();
-
 		Veterinary veterinary;
 		Pet pet = petService.findOne(57);
 		veterinary = veterinaryService.findOne(49);
@@ -59,10 +55,9 @@ public class AppointmentServiceTest extends AbstractTest {
 		appointment.setPet(pet);
 		appointment.setReason("TEST");
 		appointment.setStartTime("20:00:00");
-		appointmentService.save(appointment);
+		appointment = appointmentService.save(appointment);
 
-		Assert.isTrue(appointments.contains(appointment));
-
+		Assert.isTrue(appointment.getId() != 0);
 		unauthenticate();
 
 	}
@@ -81,10 +76,9 @@ public class AppointmentServiceTest extends AbstractTest {
 
 	// Test Negativos ----------------------------------------
 
-	// Comprobamos que un usuario no puede cancelar una sita que no es suya
+	// Comprobamos que un usuario no puede cancelar una cita que no es suya
 	
-	//TODO pasa el test y no debería, ERROR
-	@Test()
+	@Test(expected=IllegalArgumentException.class)
 	@Rollback(true)
 	public void testCancelAppointmentNegative() {
 
