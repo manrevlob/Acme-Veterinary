@@ -1,5 +1,6 @@
 package services;
 
+import java.sql.Date;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -13,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Appointment;
 import domain.History;
 import domain.Pet;
+import domain.Treatment;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/datasource.xml",
@@ -25,9 +28,12 @@ public class HistoryServiceTest extends AbstractTest {
 
 	// Service Supported ------------------------------------
 
-
+	@Autowired
+	private HistoryService historyService;
 	@Autowired
 	private PetService petService;
+	@Autowired
+	private AppointmentService appointmentService;
 
 	// Tests -------------------------------------------------
 
@@ -71,4 +77,30 @@ public class HistoryServiceTest extends AbstractTest {
 	}
 
 	//TODO añadir uno más
+	
+	// Comprobamos que un usuario que no es veterinario no puede ver crear un historial médico de un animal.
+
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(true)
+	public void testCreateHistoryPetNegative() {
+
+		authenticate("customer1");
+		Appointment appointment;
+		History history;
+		appointment = appointmentService.findOne(67);
+		history = historyService.create();
+		history.setAppointment(appointment);
+		history.setDiagnosis("TEST");
+		Treatment treatment = new Treatment();
+		treatment.setDescription("TEST");
+		treatment.setEndMoment(new Date(07/13/2016));
+		treatment.setStartMoment(new Date(07/30/2016));
+		history.setTreatment(treatment);
+		
+		historyService.save(history);
+
+		unauthenticate();
+
+	}
+	
 }

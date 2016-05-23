@@ -54,8 +54,9 @@ public class PetServiceTest extends AbstractTest {
 	
 	// Test Negativos ----------------------------------------
 
-	// Comprobamos que un usuario no puede añadir una mascota sin rellenar los
+	//TODO Comprobamos que un usuario no puede añadir una mascota sin rellenar los
 	// campos requeridos
+	
 
 	// TODO pasa el test y no debería, ERROR : le dejo el campo nombre y
 	// cumpleaños sin poner y me pasa el test
