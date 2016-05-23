@@ -171,8 +171,11 @@ public class AppointmentService {
 	
 	//Borra una cita
 	public void cancelAppointment(int appointmentId) {
-		Assert.isTrue(actorService.isCustomer() || actorService.isAdministrator() || actorService.isVeterinary());
+		Assert.isTrue(actorService.isCustomer() || actorService.isAdministrator() || actorService.isVeterinary());		
 		Appointment appointment = findOne(appointmentId);
+		if (actorService.isCustomer())
+			Assert.isTrue(appointment.getPet().getCustomer().equals(actorService.findByPrincipal()));
+					
 		delete(appointment);
 	}
 
