@@ -52,6 +52,8 @@
 									code="master.page.administrator.category" /></a></li>
 						<li><a href="order/administrator/list.do"><spring:message
 									code="master.page.administrator.order" /></a></li>
+						<li><a href="voucher/administrator/list.do"><spring:message
+									code="master.page.administrator.voucher" /></a></li>
 					</ul></li>
 			</security:authorize>
 
