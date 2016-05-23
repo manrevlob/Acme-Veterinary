@@ -62,6 +62,7 @@
 		<security:intercept-url pattern="/appointment/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/bulletin/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/order/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/voucher/administrator/**" access="hasRole('ADMIN')" />
 
 		<security:intercept-url pattern="/pet/customer/**" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/history/customer/**" access="hasRole('CUSTOMER')" />

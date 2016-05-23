@@ -1156,5 +1156,16 @@
 		<property name="quantity" value="5" />
 		<property name="order" ref="order8" />
 	</bean>
+	
+	<!-- Voucher -->
+	
+	<bean id="voucher1" class="domain.Voucher">
+		<property name="code" value="SUMMER" />
+		<property name="value" value="10" />
+		<property name="validUntil" value="09/01/2016 00:00" />
+		<property name="minimumOrder" value="25" />
+	</bean>
+
+	
 
 </beans>
