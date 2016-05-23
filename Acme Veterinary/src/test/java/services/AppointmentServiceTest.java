@@ -100,6 +100,8 @@ public class AppointmentServiceTest extends AbstractTest {
 
 	}
 	
+	//TODO Comprobar que no se puede crear una cita con un veterinario que no existe.
+	
 	
 
 }
