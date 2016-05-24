@@ -40,16 +40,25 @@
 	</display:column>
 
 	<security:authorize access="hasRole('ADMIN')">
+		<jstl:if test="${requestURI == 'comment/listByItem.do'}">
+			<display:column>
+				<a
+					onclick="return confirm('<spring:message code="comment.confirm.delete" />')"
+					href="comment/administrator/deleteFromItem.do?commentId=${row.id}">
+					<spring:message code="comment.delete" />
+				</a>
+			</display:column>
+		</jstl:if>
 
-		<display:column>
-
-			<a
-				onclick="return confirm('<spring:message code="comment.confirm.delete" />')"
-				href="comment/administrator/delete.do?commentId=${row.id}&id=${id}&type=${type}">
-				<spring:message code="comment.delete" />
-			</a>
-		</display:column>
-
+		<jstl:if test="${requestURI == 'comment/listByVeterinary.do'}">
+			<display:column>
+				<a
+					onclick="return confirm('<spring:message code="comment.confirm.delete" />')"
+					href="comment/administrator/deleteFromVeterinary.do?commentId=${row.id}">
+					<spring:message code="comment.delete" />
+				</a>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
 
 </display:table>

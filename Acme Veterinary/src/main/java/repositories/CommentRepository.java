@@ -11,10 +11,10 @@ import domain.Comment;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
-	@Query("select i.comments from Item i where i.id = ?1 and i.isDeleted = false")
+	@Query("select c from Item i join i.comments c where i.id = ?1 and i.isDeleted= false and c.isDeleted = false group by c")
 	Collection<Comment> findAllByItem(int itemId);
 
-	@Query("select v.comments from Veterinary v where v.id = ?1")
+	@Query("select c from Veterinary v join v.comments c where v.id = ?1 and c.isDeleted = false group by c")
 	Collection<Comment> findAllByVeterinary(int veterinaryId);
 
 }

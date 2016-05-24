@@ -67,8 +67,11 @@ public class CommentService {
 		return commentRepository.save(comment);
 	}
 
-	public void delete(Comment comment) {
-		commentRepository.delete(comment);
+	public void delete(int commentId) {
+		Assert.isTrue(actorService.isAdministrator());
+		Comment comment = findOne(commentId);
+		comment.setIsDeleted(true);
+		commentRepository.save(comment);
 	}
 
 	// Other business methods -------------------------------------------------
