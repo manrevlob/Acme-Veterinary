@@ -66,6 +66,12 @@
 		<jstl:out value="${coin}" />
 	</display:column>
 
+	<display:column>
+		<a href="comment/listByItem.do?itemId=${row.id}"> <spring:message
+				code="item.comments" />
+		</a>
+	</display:column>
+
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column>
 			<a href="shoppingCart/customer/addItem.do?itemId=${row.id}"> <spring:message

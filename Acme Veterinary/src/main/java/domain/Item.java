@@ -111,7 +111,7 @@ public class Item extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "item")
+	@OneToMany()
 	public Collection<Comment> getComments() {
 		return comments;
 	}

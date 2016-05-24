@@ -51,7 +51,6 @@ public class Customer extends Actor {
 	private Collection<Voucher> vouchers;
 	private ShoppingCart shoppingCart;
 	private Collection<Pet> pets;
-	private Collection<Comment> comments;
 
 	@Valid
 	@OneToMany(mappedBy = "customer")
@@ -92,16 +91,6 @@ public class Customer extends Actor {
 
 	public void setPets(Collection<Pet> pets) {
 		this.pets = pets;
-	}
-
-	@Valid
-	@OneToMany(mappedBy = "customer")
-	public Collection<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Collection<Comment> comments) {
-		this.comments = comments;
 	}
 
 }

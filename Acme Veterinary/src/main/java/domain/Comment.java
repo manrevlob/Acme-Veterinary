@@ -1,17 +1,23 @@
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -25,10 +31,10 @@ public class Comment extends DomainEntity {
 
 	// Attributes -----------------------------------------------------------
 
-	private String name;
-	private String title;
-	private String text;
+	private String description;
 	private Integer rating;
+	private Date moment;
+	private boolean isDeleted;
 
 	@NotNull
 	@Min(1)
@@ -43,40 +49,37 @@ public class Comment extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getTitle() {
-		return title;
+	@Past
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	public Date getMoment() {
+		return moment;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setMoment(Date moment) {
+		this.moment = moment;
 	}
 
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getText() {
-		return text;
+	public boolean getIsDeleted() {
+		return isDeleted;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	// RelationsShips --------------------------------------------------------
 
 	private Customer customer;
-	private Item item;
-	private Veterinary veterinary;
-	private Bulletin bulletin;
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -87,35 +90,4 @@ public class Comment extends DomainEntity {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-	@Valid
-	@ManyToOne(optional = false)
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
-	}
-
-	@Valid
-	@ManyToOne(optional = false)
-	public Veterinary getVeterinary() {
-		return veterinary;
-	}
-
-	public void setVeterinary(Veterinary veterinary) {
-		this.veterinary = veterinary;
-	}
-
-	@Valid
-	@ManyToOne(optional = false)
-	public Bulletin getBulletin() {
-		return bulletin;
-	}
-
-	public void setBulletin(Bulletin bulletin) {
-		this.bulletin = bulletin;
-	}
-
 }

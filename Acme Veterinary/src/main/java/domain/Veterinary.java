@@ -49,7 +49,7 @@ public class Veterinary extends Actor {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "veterinary")
+	@OneToMany()
 	public Collection<Comment> getComments() {
 		return comments;
 	}
