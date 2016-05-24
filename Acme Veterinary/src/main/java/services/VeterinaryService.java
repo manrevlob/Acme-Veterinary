@@ -91,6 +91,7 @@ public class VeterinaryService {
 	}
 
 	public Veterinary findOne(int veterinaryId) {
+		Assert.notNull(actorService.findOne(veterinaryId));
 		Veterinary result;
 		result = veterinaryRepository.findOne(veterinaryId);
 		return result;
