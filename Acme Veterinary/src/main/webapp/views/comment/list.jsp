@@ -77,20 +77,20 @@
 <security:authorize access="hasRole('CUSTOMER')">
 
 	<jstl:if test="${requestURI == 'comment/listByItem.do'}">
-		<a href="comment/customer/createToItem.do?itemId=${itemId}"> <spring:message
+		<a class="btn btn-primary" href="comment/customer/createToItem.do?itemId=${itemId}"> <spring:message
 				code="comment.create" />
 		</a>
 	</jstl:if>
 
 	<jstl:if test="${requestURI == 'comment/listByVeterinary.do'}">
-		<a
+		<a class="btn btn-primary"
 			href="comment/customer/createToVeterinary.do?veterinaryId=${veterinaryId}">
 			<spring:message code="comment.create" />
 		</a>
 	</jstl:if>
 
 	<jstl:if test="${requestURI == 'comment/listByBulletin.do'}">
-		<a
+		<a class="btn btn-primary"
 			href="comment/customer/createToBulletin.do?bulletinId=${bulletinId}">
 			<spring:message code="comment.create" />
 		</a>

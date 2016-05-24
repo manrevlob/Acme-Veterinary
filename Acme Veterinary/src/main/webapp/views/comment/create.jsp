@@ -34,13 +34,9 @@
 
 		<acme:textbox code="comment.description" path="comment.description" />
 
-		<input type="submit" name="save"
-			value="<spring:message code="comment.save" />" />&nbsp; 
+		<acme:submit name="save" code="comment.save"/>
 		
-	<input type="button" name="cancel"
-			value="<spring:message code="comment.cancel" />"
-			onclick="javascript:history.back()" />&nbsp; 
-	
+		<acme:cancel url="comment/listByItem.do?itemId=${itemId}" code="comment.cancel"/>
 </form:form>
 </jstl:if>
 
@@ -58,13 +54,9 @@
 
 		<acme:textbox code="comment.description" path="comment.description" />
 
-		<input type="submit" name="save"
-			value="<spring:message code="comment.save" />" />&nbsp; 
+		<acme:submit name="save" code="comment.save"/>
 		
-	<input type="button" name="cancel"
-			value="<spring:message code="comment.cancel" />"
-			onclick="javascript:history.back()" />&nbsp; 
-	
+	<acme:cancel url="comment/listByVeterinary.do?veterinaryId=${veterinaryId}" code="comment.cancel"/>
 </form:form>
 </jstl:if>
 
@@ -81,12 +73,8 @@
 
 		<acme:textbox code="comment.description" path="comment.description" />
 
-		<input type="submit" name="save"
-			value="<spring:message code="comment.save" />" />&nbsp; 
-		
-	<input type="button" name="cancel"
-			value="<spring:message code="comment.cancel" />"
-			onclick="javascript:history.back()" />&nbsp; 
+		<acme:submit name="save" code="comment.save"/>
+		<acme:cancel url="comment/listByBulletin.do?bulletinId=${bulletinId}" code="comment.cancel"/>
 	
 </form:form>
 </jstl:if>

@@ -30,8 +30,6 @@ public class AppointmentCustomerController extends AbstractController {
 	private AppointmentService appointmentService;
 	@Autowired
 	private PetService petService;
-	@Autowired
-	private CustomerService customerService;
 
 	// Constructors -----------------------------------------------------------
 

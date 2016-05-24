@@ -40,6 +40,7 @@ public class CommentCustomerController extends AbstractController {
 		result = new ModelAndView("comment/create");
 		result.addObject("requestURI", "comment/customer/createToItem.do");
 		result.addObject("commentForm", commentForm);
+		result.addObject("itemId", itemId);
 
 		return result;
 	}
@@ -88,6 +89,7 @@ public class CommentCustomerController extends AbstractController {
 		result = new ModelAndView("comment/create");
 		result.addObject("requestURI", "comment/customer/createToVeterinary.do");
 		result.addObject("commentForm", commentForm);
+		result.addObject("veterinaryId", veterinaryId);
 
 		return result;
 	}
@@ -136,6 +138,7 @@ public class CommentCustomerController extends AbstractController {
 		result = new ModelAndView("comment/create");
 		result.addObject("requestURI", "comment/customer/createToBulletin.do");
 		result.addObject("commentForm", commentForm);
+		result.addObject("bulletinId", bulletinId);
 
 		return result;
 	}
