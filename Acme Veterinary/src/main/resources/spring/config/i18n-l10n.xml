@@ -37,6 +37,7 @@
 		<value>/views/shoppingCart/messages</value>
 		<value>/views/order/messages</value>
 		<value>/views/voucher/messages</value>
+		<value>/views/comment/messages</value>
 		</util:list>
 
 </beans>

@@ -69,7 +69,7 @@ public class Bulletin extends DomainEntity {
 	private Clinic clinic;
 
 	@Valid
-	@OneToMany(mappedBy = "bulletin")
+	@OneToMany()
 	public Collection<Comment> getComments() {
 		return comments;
 	}
