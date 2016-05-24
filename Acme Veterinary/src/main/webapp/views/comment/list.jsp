@@ -59,23 +59,41 @@
 				</a>
 			</display:column>
 		</jstl:if>
+
+		<jstl:if test="${requestURI == 'comment/listByBulletin.do'}">
+			<display:column>
+				<a
+					onclick="return confirm('<spring:message code="comment.confirm.delete" />')"
+					href="comment/administrator/deleteFromBulletin.do?commentId=${row.id}">
+					<spring:message code="comment.delete" />
+				</a>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
 
 </display:table>
 <br />
-<jstl:if test="${requestURI == 'comment/listByItem.do'}">
-	<security:authorize access="hasRole('CUSTOMER')">
+
+<security:authorize access="hasRole('CUSTOMER')">
+
+	<jstl:if test="${requestURI == 'comment/listByItem.do'}">
 		<a href="comment/customer/createToItem.do?itemId=${itemId}"> <spring:message
 				code="comment.create" />
 		</a>
-	</security:authorize>
-</jstl:if>
+	</jstl:if>
 
-<jstl:if test="${requestURI == 'comment/listByVeterinary.do'}">
-	<security:authorize access="hasRole('CUSTOMER')">
+	<jstl:if test="${requestURI == 'comment/listByVeterinary.do'}">
 		<a
 			href="comment/customer/createToVeterinary.do?veterinaryId=${veterinaryId}">
 			<spring:message code="comment.create" />
 		</a>
-	</security:authorize>
-</jstl:if>
+	</jstl:if>
+
+	<jstl:if test="${requestURI == 'comment/listByBulletin.do'}">
+		<a
+			href="comment/customer/createToBulletin.do?bulletinId=${bulletinId}">
+			<spring:message code="comment.create" />
+		</a>
+	</jstl:if>
+
+</security:authorize>

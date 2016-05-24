@@ -30,8 +30,7 @@ public class CommentCustomerController extends AbstractController {
 		super();
 	}
 
-	// create Comment from an item
-	// ----------------------------------------------------------------
+	// create Comment from item --------------------------------------------
 
 	@RequestMapping(value = "/createToItem", method = RequestMethod.GET)
 	public ModelAndView createToItem(int itemId) {
@@ -78,8 +77,8 @@ public class CommentCustomerController extends AbstractController {
 		return result;
 	}
 
-	// create Comment from an item
-	// ----------------------------------------------------------------
+	// create Comment from an veterinary
+	// ------------------------------------------
 
 	@RequestMapping(value = "/createToVeterinary", method = RequestMethod.GET)
 	public ModelAndView createToVeterinary(int veterinaryId) {
@@ -109,6 +108,54 @@ public class CommentCustomerController extends AbstractController {
 				commentService.saveToVeterinary(commentForm);
 				result = new ModelAndView(
 						"redirect:/comment/listByVeterinary.do?veterinaryId="
+								+ commentForm.getId());
+
+			} catch (Throwable oops) {
+
+				Collection<Comment> comments;
+
+				comments = commentService.findAllByItem(commentForm.getId());
+
+				result = new ModelAndView("comment/list");
+				result.addObject("comments", comments);
+				result.addObject("itemId", commentForm.getId());
+				result.addObject("message", "comment.commit.error");
+			}
+		}
+
+		return result;
+	}
+
+	// Create comment to a bulletin ----------------------
+
+	@RequestMapping(value = "/createToBulletin", method = RequestMethod.GET)
+	public ModelAndView createToBulletin(int bulletinId) {
+		ModelAndView result;
+
+		CommentForm commentForm = commentService.createForm(bulletinId);
+		result = new ModelAndView("comment/create");
+		result.addObject("requestURI", "comment/customer/createToBulletin.do");
+		result.addObject("commentForm", commentForm);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/createToBulletin", method = RequestMethod.POST, params = "save")
+	public ModelAndView createToBulletin(@Valid CommentForm commentForm,
+			BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			result = new ModelAndView("comment/create");
+			result.addObject("requestURI",
+					"comment/customer/createToBulletin.do");
+			result.addObject("commentForm", commentForm);
+
+		} else {
+			try {
+				commentService.saveToBullletin(commentForm);
+				result = new ModelAndView(
+						"redirect:/comment/listByBulletin.do?bulletinId="
 								+ commentForm.getId());
 
 			} catch (Throwable oops) {

@@ -38,6 +38,12 @@
 		<display:column value="${row[1].moment}" title="${momentHeader}"
 			sortable="true" />
 
+		<display:column>
+			<a href="comment/listByBulletin.do?bulletinId=${row[1].id}"> <spring:message
+					code="bulletin.comments" />
+			</a>
+		</display:column>
+
 	</display:table>
 </jstl:if>
 
@@ -53,6 +59,13 @@
 		<spring:message code="bulletin.moment" var="momentHeader" />
 		<display:column value="${row.moment}" title="${momentHeader}"
 			sortable="true" />
+
+		<display:column>
+			<a href="comment/listByBulletin.do?bulletinId=${row.id}"> <spring:message
+					code="bulletin.comments" />
+			</a>
+		</display:column>
+
 		<security:authorize access="hasRole('ADMIN')">
 			<display:column>
 				<a href="bulletin/administrator/edit.do?bulletinId=${row.id}"> <spring:message
@@ -72,12 +85,13 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 
-		<a class="btn btn-primary" href="bulletin/administrator/create.do?clinicId=${clinicId}"> <spring:message
+		<a class="btn btn-primary"
+			href="bulletin/administrator/create.do?clinicId=${clinicId}"> <spring:message
 				code="bulletin.create" />
 		</a>
 	</security:authorize>
 </jstl:if>
 <jstl:if test="${requestURI == 'bulletin/listByClinic.do'}">
 
-<acme:cancel url="clinic/list.do" code="bulletin.cancel"/>
+	<acme:cancel url="clinic/list.do" code="bulletin.cancel" />
 </jstl:if>

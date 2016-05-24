@@ -53,6 +53,7 @@
 		<security:intercept-url pattern="/bulletin/listByClinic.do" access="permitAll" /> 
 		<security:intercept-url pattern="/comment/listByItem.do" access="permitAll" />
 		<security:intercept-url pattern="/comment/listByVeterinary.do" access="permitAll" />
+		<security:intercept-url pattern="/comment/listByBulletin.do" access="permitAll" />
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
 		<security:intercept-url pattern="/register/createCustomer.do" access="permitAll" />  
