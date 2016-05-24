@@ -17,4 +17,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	@Query("select c from Veterinary v join v.comments c where v.id = ?1 and c.isDeleted = false group by c")
 	Collection<Comment> findAllByVeterinary(int veterinaryId);
 
+	@Query("select c from Bulletin b join b.comments c where b.id = ?1 and c.isDeleted = false and b.isDeleted= false group by c")
+	Collection<Comment> findAllByBulletin(int bulletinId);
+
 }

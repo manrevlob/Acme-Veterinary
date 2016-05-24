@@ -62,4 +62,20 @@ public class CommentController extends AbstractController {
 
 	}
 
+	@RequestMapping(value = "/listByBulletin", method = RequestMethod.GET)
+	public ModelAndView listBulletin(@Valid int bulletinId) {
+		ModelAndView result;
+		Collection<Comment> comments;
+
+		comments = commentService.findAllByBulletin(bulletinId);
+
+		result = new ModelAndView("comment/list");
+		result.addObject("comments", comments);
+		result.addObject("bulletinId", bulletinId);
+		result.addObject("requestURI", "comment/listByBulletin.do");
+
+		return result;
+
+	}
+
 }

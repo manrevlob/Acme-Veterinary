@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
+import domain.Bulletin;
 import domain.Comment;
 import domain.Item;
 import domain.Veterinary;
@@ -30,6 +31,8 @@ public class CommentService {
 	private ItemService itemService;
 	@Autowired
 	private VeterinaryService veterinaryService;
+	@Autowired
+	private BulletinService bulletinService;
 
 	// Supporting services ----------------------------------------------------
 
@@ -90,6 +93,12 @@ public class CommentService {
 
 	}
 
+	public Collection<Comment> findAllByBulletin(int bulletinId) {
+		Collection<Comment> result;
+		result = commentRepository.findAllByBulletin(bulletinId);
+		return result;
+	}
+
 	public CommentForm createForm(int id) {
 		Assert.isTrue(actorService.isCustomer());
 		CommentForm commentForm = new CommentForm();
@@ -114,4 +123,13 @@ public class CommentService {
 		Comment comment = save(commentForm.getComment());
 		comments.add(comment);
 	}
+
+	public void saveToBullletin(CommentForm commentForm) {
+		Assert.isTrue(actorService.isCustomer());
+		Bulletin bulletin = bulletinService.findOne(commentForm.getId());
+		Collection<Comment> comments = bulletin.getComments();
+		Comment comment = save(commentForm.getComment());
+		comments.add(comment);
+	}
+
 }

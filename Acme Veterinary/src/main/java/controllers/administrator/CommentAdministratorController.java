@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BulletinService;
 import services.ClinicService;
 import services.CommentService;
 import services.ItemService;
@@ -27,6 +28,8 @@ public class CommentAdministratorController extends AbstractController {
 	private ItemService itemService;
 	@Autowired
 	private ClinicService clinicService;
+	@Autowired
+	private BulletinService bulletinService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -82,6 +85,30 @@ public class CommentAdministratorController extends AbstractController {
 			result = new ModelAndView("clinic/list");
 			result.addObject("requestURI", "clinic/list.do");
 			result.addObject("clinics", clinics);
+			result.addObject("message", "comment.delete.error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/deleteFromBulletin", method = RequestMethod.GET)
+	public ModelAndView deleteFromBulletin(int commentId) {
+		ModelAndView result;
+	
+		try {
+
+			commentService.delete(commentId);
+
+			result = new ModelAndView("redirect:/bulletin/list.do");
+
+		} catch (Throwable oops) {
+
+			Collection<Object[]> bulletins;
+
+			bulletins = bulletinService.findAll();
+
+			result = new ModelAndView("bulletin/list");
+			result.addObject("requestURI", "bulletin/list.do");
+			result.addObject("bulletins", bulletins);
 			result.addObject("message", "comment.delete.error");
 		}
 		return result;
