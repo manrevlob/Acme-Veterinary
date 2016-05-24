@@ -30,8 +30,7 @@
 	<display:column property="address" title="${addressHeader}" />
 
 	<spring:message code="clinic.zipCode" var="zipCodeHeader" />
-	<display:column property="zipCode" title="${zipCodeHeader}" 
-		sortable="true"/>
+	<display:column property="zipCode" title="${zipCodeHeader}" />
 
 	<spring:message code="clinic.pictures" var="picturesHeader" />
 	<display:column property="pictures" title="${picturesHeader}" />
