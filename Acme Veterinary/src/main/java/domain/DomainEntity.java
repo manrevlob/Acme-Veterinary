@@ -23,6 +23,7 @@ import javax.persistence.Version;
 @Entity
 @Access(AccessType.PROPERTY)
 @Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS
 public abstract class DomainEntity {
 
 	// Constructors -----------------------------------------------------------
