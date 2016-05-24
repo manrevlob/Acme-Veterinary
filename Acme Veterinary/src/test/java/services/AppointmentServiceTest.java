@@ -46,7 +46,9 @@ public class AppointmentServiceTest extends AbstractTest {
 		authenticate("customer1");
 
 		Veterinary veterinary;
+		//Usamos el id del pet1
 		Pet pet = petService.findOne(57);
+		//Usamos el id del veterinary1
 		veterinary = veterinaryService.findOne(49);
 		Appointment appointment = appointmentService.create();
 		appointment.setVeterinary(veterinary);
@@ -67,7 +69,7 @@ public class AppointmentServiceTest extends AbstractTest {
 	@Test
 	public void testCancelAppointment() {
 		authenticate("customer1");
-
+		//ID del appointment5
 		appointmentService.cancelAppointment(67);
 
 		unauthenticate();
@@ -85,7 +87,7 @@ public class AppointmentServiceTest extends AbstractTest {
 		authenticate("customer1");
 
 		Appointment appointment;
-		
+		// ID del appointment 4
 		appointment = appointmentService.findOne(65);
 
 		appointmentService.cancelAppointment(appointment.getId());
@@ -94,8 +96,31 @@ public class AppointmentServiceTest extends AbstractTest {
 
 	}
 	
-	//TODO Comprobar que no se puede crear una cita con un veterinario que no existe.
+	//TODO Comprobar que no se puede crear una cita con un veterinario que no existe. No funciona
 	
-	
+	@Test()
+	@Rollback(true)
+	public void testCreateAppointmentNegative() {
+
+		authenticate("customer1");
+
+		Veterinary veterinary;
+		//Usamos el id del pet1
+		Pet pet = petService.findOne(57);
+		//Usamos un id de un veterinario que no existe
+		veterinary = veterinaryService.findOne(850);
+		Appointment appointment = appointmentService.create();
+		appointment.setVeterinary(veterinary);
+		appointment.setDay(new Date(12 / 13 / 2016));
+		appointment.setEndTime("21:00:00");
+		appointment.setPet(pet);
+		appointment.setReason("TEST");
+		appointment.setStartTime("20:00:00");
+		appointment = appointmentService.save(appointment);
+
+
+		unauthenticate();
+
+	}
 
 }

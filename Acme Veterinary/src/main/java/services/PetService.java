@@ -57,6 +57,7 @@ public class PetService {
 
 	public Pet save(Pet pet) {
 		Assert.notNull(pet);
+		Assert.isTrue(isOwner(pet.getId()));
 		return petRepository.save(pet);
 	}
 

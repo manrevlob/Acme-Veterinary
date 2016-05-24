@@ -54,21 +54,16 @@ public class PetServiceTest extends AbstractTest {
 	
 	// Test Negativos ----------------------------------------
 
-	//TODO Comprobamos que un usuario no puede añadir una mascota sin rellenar los
-	// campos requeridos
-	
-
-	// TODO pasa el test y no debería, ERROR : le dejo el campo nombre y
-	// cumpleaños sin poner y me pasa el test
-	@Test()
+	//Comprobar que un usuario no puede editar una mascota que no es suya
+	@Test(expected = IllegalArgumentException.class)
 	@Rollback(true)
-	public void testCreatePetNegative() {
+	public void testEditPetNegative() {
 
 		authenticate("customer1");
 
 		Pet pet;
-		pet = petService.create();
-		pet.setCustomer(customerService.findByPrincipal());
+		pet = petService.findOne(59);
+		pet.setName("prueba");
 		petService.save(pet);
 
 		unauthenticate();
@@ -77,9 +72,7 @@ public class PetServiceTest extends AbstractTest {
 
 	// Comprobamos que un usuario no puede borrar una mascota que no es suya
 
-	// TODO pasa el test y no debería, ERROR : puedo eliminar mascotas que no
-	// son mías.
-	@Test()
+	@Test(expected = IllegalArgumentException.class)
 	@Rollback(true)
 	public void testDeletePetNegative() {
 
