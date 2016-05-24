@@ -55,8 +55,7 @@ public class AppointmentCustomerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "book")
-	public ModelAndView create(@Valid AppointmentForm appointmentForm,
-			BindingResult binding) {
+	public ModelAndView create(AppointmentForm appointmentForm) {
 		ModelAndView result;
 
 		Collection<Pet> pets = petService.findAllByPrincipal();
@@ -74,8 +73,10 @@ public class AppointmentCustomerController extends AbstractController {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
+			Collection<Pet> pets = petService.findAllByPrincipal();
 			result = new ModelAndView("appointment/create");
-			result.addObject("appointmentForm", "appointmentForm");
+			result.addObject("appointmentForm", appointmentForm);
+			result.addObject("pets", pets);
 		} else {
 			try {
 				Appointment appointment = appointmentService
@@ -85,8 +86,10 @@ public class AppointmentCustomerController extends AbstractController {
 						"redirect:/appointment/customer/list.do");
 
 			} catch (Throwable oops) {
+				Collection<Pet> pets = petService.findAllByPrincipal();
 				result = new ModelAndView("appointment/create");
-				result.addObject("appointmentForm", "appointmentForm");
+				result.addObject("pets", pets);
+				result.addObject("appointmentForm", appointmentForm);
 			}
 		}
 

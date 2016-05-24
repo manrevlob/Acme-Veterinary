@@ -33,6 +33,7 @@ public class AppointmentForm {
 	private Pet pet;
 
 	@Valid
+	@NotNull
 	public Pet getPet() {
 		return pet;
 	}
@@ -51,6 +52,8 @@ public class AppointmentForm {
 		this.veterinary = veterinary;
 	}
 
+	@SafeHtml
+	@NotBlank
 	public String getStartMoment() {
 		return startMoment;
 	}
