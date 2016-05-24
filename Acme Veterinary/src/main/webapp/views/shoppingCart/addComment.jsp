@@ -35,9 +35,7 @@
 			value="<spring:message code="shoppingCart.delete" />"
 			onclick="return confirm('<spring:message code="shoppingCart.confirm.delete" />')" />&nbsp;
 	</jstl:if>
-	<input type="button" name="cancel"
-		value="<spring:message code="shoppingCart.cancel" />"
-		onclick="javascript: window.history.back();" />
-	<br />
+		
+	<acme:cancel url="shoppingCart/customer/show.do" code="shoppingCart.cancel"/>
 
 </form:form>

@@ -27,16 +27,14 @@
 	<display:column property="name" title="${nameHeader}" sortable="true" />
 
 	<spring:message code="clinic.address" var="addressHeader" />
-	<display:column property="address" title="${addressHeader}"
-		sortable="true" />
+	<display:column property="address" title="${addressHeader}" />
 
 	<spring:message code="clinic.zipCode" var="zipCodeHeader" />
-	<display:column property="zipCode" title="${zipCodeHeader}"
-		sortable="true" />
+	<display:column property="zipCode" title="${zipCodeHeader}" 
+		sortable="true"/>
 
 	<spring:message code="clinic.pictures" var="picturesHeader" />
-	<display:column property="pictures" title="${picturesHeader}"
-		sortable="true" />
+	<display:column property="pictures" title="${picturesHeader}" />
 
 
 	<display:column title="${veterinariesHeader}">
