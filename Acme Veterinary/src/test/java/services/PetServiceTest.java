@@ -22,8 +22,6 @@ public class PetServiceTest extends AbstractTest {
 
 	// Service Supported ------------------------------------
 
-	@Autowired
-	private CustomerService customerService;
 
 	@Autowired
 	private PetService petService;
