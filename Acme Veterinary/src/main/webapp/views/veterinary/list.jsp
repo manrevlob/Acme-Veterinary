@@ -29,20 +29,19 @@
 	<spring:message code="veterinary.surname" var="surnameHeader" />
 	<display:column property="surname" title="${surnameHeader}"
 		sortable="true" />
-
-	<display:column>
+<display:column>
 		<a href="comment/listByVeterinary.do?veterinaryId=${row.id}"> <spring:message
 				code="veterinary.comments" />
 		</a>
 	</display:column>
 
-	<security:authorize access="hasRole('CUSTOMER')">
+
 		<display:column title="${appointmentHeader}">
 			<a href="appointment/list.do?veterinaryId=${row.id}"> <spring:message
 					code="veterinary.appointment" />
 			</a>
 		</display:column>
-	</security:authorize>
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column title="${appointmentHeader}">
 			<a href="appointment/administrator/list.do?veterinaryId=${row.id}">

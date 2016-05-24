@@ -119,3 +119,4 @@
 			</table>
 			</div>
 
+		<acme:cancel url="veterinary/list.do?clinicId=${clinicId}" code="appointment.cancel"/>

@@ -64,6 +64,7 @@ public class AppointmentController extends AbstractController {
 		result.addObject("appointmentService", appointmentService);
 		result.addObject("appointmentForm", appointmentForm);
 		result.addObject("veterinary", veterinary);
+		result.addObject("clinicId", veterinary.getClinic().getId());
 		result.addObject("days", days);
 		result.addObject("daySelected", day);
 
