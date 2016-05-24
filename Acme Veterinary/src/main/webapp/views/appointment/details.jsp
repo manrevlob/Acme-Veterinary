@@ -19,7 +19,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
 <b><spring:message code="appointment.customer" />:</b>
@@ -77,3 +77,5 @@
 		</a>
 	</jstl:if>
 </security:authorize>
+
+<acme:cancel url="appointment/customer/list.do" code="appointment.cancel"/>

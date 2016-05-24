@@ -51,4 +51,6 @@
 	</security:authorize>
 
 </display:table>
+<br>
 
+<acme:cancel url="pet/customer/list.do" code="history.cancel"/>
