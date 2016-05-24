@@ -97,4 +97,4 @@
 		</a>
 	</jstl:if>
 </security:authorize>
-
+<acme:cancel url="order/customer/list.do" code="order.goBack"/>

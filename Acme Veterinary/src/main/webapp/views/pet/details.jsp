@@ -37,4 +37,6 @@
 <a href="pet/customer/uploadImage.do?petId=${pet.id}"> <spring:message
 		code="pet.uploadImage" />
 </a>
-
+<br>
+<br>
+<acme:cancel url="pet/customer/list.do" code="pet.cancel"/>

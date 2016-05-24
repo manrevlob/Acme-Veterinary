@@ -128,7 +128,7 @@ public class AppointmentService {
 		Date dt = c.getTime();
 		DateFormat ndf = new SimpleDateFormat("dd/MM/yyyy");
 
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 15; i++) {
 			day = ndf.format(dt);
 			days.put(day, day);
 			c.add(Calendar.DAY_OF_MONTH, 1);
