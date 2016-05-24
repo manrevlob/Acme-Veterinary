@@ -42,8 +42,10 @@
 <br />
 
 <b><spring:message code="order.price.amount" />:</b>
-<jstl:out value="${order.totalPrice.amount}" />
-
+<jstl:out value="${order.totalPrice.amount}" /> 
+<jstl:if test="${order.voucher != null}">
+	<b><spring:message code="order.voucher.with" /></b> <jstl:out value="${order.voucher.value}" /> Euros -> <jstl:out value="${order.voucher.code}" />   
+</jstl:if>
 <br>
 
 

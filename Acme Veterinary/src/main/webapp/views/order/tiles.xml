@@ -21,7 +21,7 @@
 	</definition>
 	
 		<definition name="order/edit" extends="master.page">	
-		<put-attribute name="title" value="Order Create" />
+		<put-attribute name="title" value="Buy order" />
 		<put-attribute name="body" value="/views/order/create.jsp" />
 	</definition>
 

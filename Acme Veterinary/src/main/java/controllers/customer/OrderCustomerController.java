@@ -19,6 +19,7 @@ import utilities.Utiles;
 import controllers.AbstractController;
 import domain.ItemOrder;
 import domain.Order;
+import forms.VoucherForm;
 
 @Controller
 @RequestMapping("/order/customer")
@@ -59,9 +60,13 @@ public class OrderCustomerController extends AbstractController {
 		ModelAndView result;
 		Order order;
 		order = orderService.create();
+		
+
+		VoucherForm voucherForm = orderService.orderToVoucherForm(order);
 
 		result = new ModelAndView("order/edit");
 		result.addObject("order", order);
+		result.addObject("voucherForm", voucherForm);
 		return result;
 	}
 
@@ -70,8 +75,10 @@ public class OrderCustomerController extends AbstractController {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
+			VoucherForm voucherForm = orderService.orderToVoucherForm(order);
 			result = new ModelAndView("order/edit");
 			result.addObject("order", order);
+			result.addObject("voucherForm", voucherForm);
 			result.addObject("message", "order.commit.error");
 		} else {
 			try {
@@ -83,6 +90,8 @@ public class OrderCustomerController extends AbstractController {
 				} else {
 					result = new ModelAndView("order/edit");
 					result.addObject("order", order);
+					VoucherForm voucherForm = orderService.orderToVoucherForm(order);
+					result.addObject("voucherForm", voucherForm);
 					result.addObject("message", "order.commit.CCerror");
 				}
 

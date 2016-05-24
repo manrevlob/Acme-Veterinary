@@ -71,6 +71,9 @@
 
 		<bean class="converters.OrderToStringConverter" />
 		<bean class="converters.StringToOrderConverter" />
+		
+		<bean class="converters.VoucherToStringConverter" />
+		<bean class="converters.StringToVoucherConverter" />
 	</util:list>
 
 </beans>

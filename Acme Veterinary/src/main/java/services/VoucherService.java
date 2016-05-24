@@ -9,7 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.VoucherRepository;
+import domain.Customer;
+import domain.Money;
+import domain.Order;
 import domain.Voucher;
+import forms.VoucherForm;
 
 @Service
 @Transactional
@@ -25,6 +29,10 @@ public class VoucherService {
 
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private CustomerService customerService;
+	@Autowired
+	private OrderService orderService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -74,6 +82,54 @@ public class VoucherService {
 			res = true;
 		}
 		return res;
+	}
+
+	
+	//Metodo que aplica el descuento sobre una order
+	public VoucherForm applyVoucher(VoucherForm voucherForm) {
+		Voucher voucher = findByCode(voucherForm.getCode());
+		if (voucherForm.getVoucher() == null ){
+			if (voucher != null){
+				Integer voucherIsUsed = getVoucherIsUsedByPrincipal(voucher);
+				if (voucherIsUsed == 0){
+					Order order = orderService.voucherFormToOrder(voucherForm);
+					if(order.getTotalPrice().getAmount() >= voucher.getMinimumOrder()){
+						Money discount = new Money();
+						discount.setAmount(order.getTotalPrice().getAmount() - voucher.getValue());
+						discount.setCurrency("Euro");
+						order.setTotalPrice(discount);
+						voucherForm = orderService.orderToVoucherForm(order);
+						voucherForm.setVoucher(voucher);
+					}else{
+						//El precio de la order es menor q el del minimo del cupon
+						voucherForm.setMessage("error.voucher.noMinimumPrice");
+					}
+				}else{
+					//el cliente ya lo ha usado
+					voucherForm.setMessage("error.voucher.customerUsed");
+				}
+			}else{
+				//no existe cupon
+				voucherForm.setMessage("error.voucher.noExist");
+			}
+		}else{
+			//ya ha usado un cupon
+			voucherForm.setMessage("error.voucher.discountApplied");
+		}
+		return voucherForm;
+	}
+
+	private Integer getVoucherIsUsedByPrincipal(Voucher voucher) {
+		Customer principal = customerService.findByPrincipal();
+		Integer res;
+		res = voucherRepository.getVoucherIsUsedByPrincipal(principal, voucher);
+		return res;
+	}
+
+	private Voucher findByCode(String code) {
+		Voucher result;
+		result = voucherRepository.findByCode(code);
+		return result;
 	}
 	
 	// Other business methods -------------------------------------------------

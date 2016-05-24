@@ -16,6 +16,7 @@ import utilities.Utiles;
 import domain.Customer;
 import domain.Order;
 import domain.ShoppingCart;
+import forms.VoucherForm;
 
 @Service
 @Transactional
@@ -142,7 +143,6 @@ public class OrderService {
 		ShoppingCart shoppingCart = shoppingCartService
 				.findByCustomerPrincipal();
 
-		order.setTotalPrice(shoppingCartService.calculateTotalPrice());
 		order = save(order);
 		Customer customer = customerService.findByPrincipal();
 		Collection<Order> orders = customer.getOrders();
@@ -177,5 +177,28 @@ public class OrderService {
 		}
 
 		return result;
+	}
+
+	//Rellena el VoucherForm con la order
+	public VoucherForm orderToVoucherForm(Order order) {
+		VoucherForm voucherForm = new VoucherForm();
+		voucherForm.setCanceled(order.getIsCanceled());
+		voucherForm.setCustomer(order.getCustomer());
+		voucherForm.setMoment(order.getMoment());
+		voucherForm.setTicker(order.getTicker());
+		voucherForm.setTotalPrice(order.getTotalPrice());
+		voucherForm.setVoucher(order.getVoucher());
+		return voucherForm;
+	}
+	//Rellena la order con el VoucherForm
+	public Order voucherFormToOrder(VoucherForm voucherForm){
+		Order order = new Order();
+		order.setIsCanceled(voucherForm.getIsCanceled());
+		order.setCustomer(voucherForm.getCustomer());
+		order.setMoment(voucherForm.getMoment());
+		order.setTicker(voucherForm.getTicker());
+		order.setTotalPrice(voucherForm.getTotalPrice());
+		order.setVoucher(voucherForm.getVoucher());
+		return order;
 	}
 }

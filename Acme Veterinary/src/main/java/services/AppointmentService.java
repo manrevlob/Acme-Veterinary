@@ -51,6 +51,7 @@ public class AppointmentService {
 	public Appointment create() {
 		Appointment result;
 		result = new Appointment();
+		result.setMoment((new Date(System.currentTimeMillis() - 1000)));
 		return result;
 	}
 
@@ -147,14 +148,13 @@ public class AppointmentService {
 	
 	public Appointment reconstruct(AppointmentForm appointmentForm) throws ParseException {
 		Assert.isTrue(actorService.isCustomer());
-		Appointment appointment= new Appointment();
+		Appointment appointment= create();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date day = dateFormat.parse(appointmentForm.getStartMoment());
 		appointment.setDay(day);
 		appointment.setStartTime(appointmentForm.getStartTime());
 		appointment.setEndTime(appointmentForm.getEndTime());
-		appointment.setVeterinary(appointmentForm.getVeterinary());
-		appointment.setMoment((new Date(System.currentTimeMillis() - 1000)));
+		appointment.setVeterinary(appointmentForm.getVeterinary());		
 		appointment.setPet(appointmentForm.getPet());
 		appointment.setReason(appointmentForm.getReason());
 		return appointment;

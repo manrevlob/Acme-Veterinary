@@ -18,6 +18,27 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
+<div style="font-size: x-large;">
+	<spring:message code="order.totalPrice"/>: <jstl:out value="${order.totalPrice.amount}" /> Euros
+</div>
+<form:form action="voucher/customer/apply.do" modelAttribute="voucherForm">
+	<form:hidden path="message" />
+	<form:hidden path="customer" />
+	<form:hidden path="ticker" />
+	<form:hidden path="moment" />
+	<form:hidden path="totalPrice.amount" />
+	<form:hidden path="totalPrice.currency" />
+	<form:hidden path="isCanceled" />
+	<form:hidden path="voucher" />
+
+	<acme:textbox code="order.voucher.code" path="code"/>
+	<acme:submit name="apply" code="order.voucher.apply"/>
+</form:form>
+<jstl:if test="${voucherForm.message != null && voucherForm.message != ''}">
+	<span style="color: red;"><spring:message code="${voucherForm.message}"/></span>
+</jstl:if>
 
 <form:form action="order/customer/create.do" modelAttribute="order">
 	<form:hidden path="id" />
@@ -29,6 +50,7 @@
 	<form:hidden path="totalPrice.amount" />
 	<form:hidden path="totalPrice.currency" />
 	<form:hidden path="isCanceled" />
+	<form:hidden path="voucher" />
 
 	<form:label path="fullName">
 		<spring:message code="order.fullName" />:
@@ -86,10 +108,6 @@
 	<form:errors cssClass="error" path="creditCard.cvv" />
 	<br />
 
-	<input type="submit" name="save"
-		value="<spring:message code="order.save" />" />&nbsp; 
-	<input type="button" name="cancel"
-		value="<spring:message code="order.cancel" />"
-		onclick="javascript:history.back();" />
-	<br />
+	<acme:submit name="save" code="order.save"/>
+	<acme:cancel url="shoppingCart/customer/show.do" code="order.cancel"/>
 </form:form>

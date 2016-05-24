@@ -17,8 +17,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <!--Código HTML de la política de cookies -->
 <div class="cookiesms" id="cookie1">
- <spring:message code="welcome.cookieText" /><a href="legal/cookies.do"><spring:message code="welcome.cookieTextHref" /></a>
-<button onclick="controlcookies()"><spring:message code="welcome.cookieTextAccept" /></button>
+ <spring:message code="welcome.cookieText" /><a style="color: #CA8073;" href="legal/cookies.do"><spring:message code="welcome.cookieTextHref" /></a>
+<button style="color: #000;" onclick="controlcookies()"><spring:message code="welcome.cookieTextAccept" /></button>
 <div  class="cookies2" onmouseover="document.getElementById('cookie1').style.bottom = '0px';">Política de cookies + </div>
 </div>
 <script type="text/javascript">
