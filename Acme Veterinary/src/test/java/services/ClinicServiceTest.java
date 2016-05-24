@@ -73,17 +73,18 @@ public class ClinicServiceTest extends AbstractTest {
 
 	}
 
-	// Comprobamos que un administrador no puede crear una clínica si deja algún campo sin rellenar
+	// Comprobamos que un administrador no puede editar una clínica que no existe
 
 	@Test(expected = IllegalArgumentException.class)
 	@Rollback(true)
-	public void testCreateClinicNegative() {
+	public void testEditClinicNegative() {
 
 		authenticate("admin");
 		Clinic clinic;
-		clinic = clinicService.create();
-		clinic.setName("TEST");
-		clinic.setZipCode("41006");
+		// ID de una clínica que no existe
+
+		clinic = clinicService.findOne(23);
+		clinic.setAddress("modifica");
 		clinicService.save(clinic);
 		unauthenticate();
 

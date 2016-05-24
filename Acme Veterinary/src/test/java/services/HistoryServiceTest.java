@@ -39,8 +39,7 @@ public class HistoryServiceTest extends AbstractTest {
 
 	// Comprobamos que un usuario puede ver el historial médico de sus mascotas.
 
-	@Test()
-	@Rollback(true)
+	@Test
 	public void testSeeHistoryPet() {
 
 		authenticate("customer1");
@@ -48,7 +47,8 @@ public class HistoryServiceTest extends AbstractTest {
 		Collection<History> histories;
 
 		Pet pet;
-		pet = petService.findOne(60);
+		//Usamos el id del pet1
+		pet = petService.findOne(57);
 		histories = pet.getHistories();
 
 		Assert.notNull(histories);
@@ -62,21 +62,21 @@ public class HistoryServiceTest extends AbstractTest {
 	// Comprobamos que un usuario no puede ver el historial médico de un animal
 	// que no es suyo.
 
-	@Test()
+	
+	@Test(expected = IllegalArgumentException.class)
 	@Rollback(true)
 	public void testSeeHistoryPetNegative() {
 
 		authenticate("customer1");
-
 		Pet pet;
+		//Usamos el id del pet3
 		pet = petService.findOne(59);
-		pet.getHistories();
+		historyService.findAllByPet(pet.getId());
 
 		unauthenticate();
 
 	}
 
-	//TODO añadir uno más
 	
 	// Comprobamos que un usuario que no es veterinario no puede ver crear un historial médico de un animal.
 
@@ -87,6 +87,7 @@ public class HistoryServiceTest extends AbstractTest {
 		authenticate("customer1");
 		Appointment appointment;
 		History history;
+		//Usamos el id del appointment 5
 		appointment = appointmentService.findOne(67);
 		history = historyService.create();
 		history.setAppointment(appointment);

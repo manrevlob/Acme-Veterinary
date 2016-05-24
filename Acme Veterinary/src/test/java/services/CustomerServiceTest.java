@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Customer;
+import forms.CustomerForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/datasource.xml",
@@ -68,8 +69,22 @@ public class CustomerServiceTest extends AbstractTest {
 
 	// Test Negativos ----------------------------------------
 
-//TODO añadir los tests negativos
-	// Comprobamos que no se puede crear un usuario rellenando el campo "Email" con un formato incorrecto
+	//Comprobamos que no se crea el usuario si las contraseñas no coinciden
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(true)
+	public void testCreateCustomerEmailNegative() {
+		CustomerForm customerForm;
+		customerForm = new CustomerForm();
+		customerForm.setEmail("email@test.com");
+		customerForm.setName("TEST");
+		customerForm.setPhone("123456789");
+		customerForm.setSurname("TEST");
+		customerForm.setPassword("prueba");
+		customerForm.setSecondPassword("nocoincide");
+		customerForm.setUsername("prueba");
+		customerService.save(customerForm);
+
+	}
 
 	// Comprobamos que un usuario no puede modificar su informacíón personal dejando campos vacíos 
 	 

@@ -48,8 +48,10 @@ public class HistoryService {
 	}
 
 	public History findOne(int historyId) {
+		Assert.isTrue(actorService.isVeterinary() || actorService.isCustomer());
 		History result;
 		result = historyRepository.findOne(historyId);
+		
 		return result;
 	}
 
@@ -74,7 +76,7 @@ public class HistoryService {
 	public Collection<History> findAllByPet(int petId) {
 		Assert.isTrue(actorService.isCustomer() || actorService.isVeterinary());
 		if(actorService.isCustomer()){
-			Assert.isTrue(customerService.findByPrincipal().equals(petService.findOne(petId).getCustomer()));
+			Assert.isTrue(customerService.findByPrincipal().equals(petService.findOne(petId).getCustomer()) && petService.isOwner(petId));
 		}
 		Collection<History> result;
 		result = historyRepository.findAllByPet(petId);
