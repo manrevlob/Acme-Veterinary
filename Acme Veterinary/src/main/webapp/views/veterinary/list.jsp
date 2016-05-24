@@ -45,4 +45,4 @@
 	</display:column>
 </security:authorize>
 </display:table>
-
+<acme:cancel url="clinic/list.do" code="veterinary.cancel"/>

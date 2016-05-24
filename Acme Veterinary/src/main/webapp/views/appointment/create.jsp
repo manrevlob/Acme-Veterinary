@@ -31,6 +31,5 @@
 	<acme:textarea code="appointment.reason" path="reason"/>
 	
 	<acme:submit name="save" code="appointment.save"/>
-	
 
 </form:form>

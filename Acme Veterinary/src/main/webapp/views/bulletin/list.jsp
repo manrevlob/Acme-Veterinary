@@ -77,5 +77,7 @@
 		</a>
 	</security:authorize>
 </jstl:if>
+<jstl:if test="${requestURI == 'bulletin/listByClinic.do'}">
 
-
+<acme:cancel url="clinic/list.do" code="bulletin.cancel"/>
+</jstl:if>
