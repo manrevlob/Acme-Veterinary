@@ -128,8 +128,13 @@ public class PetCustomerController extends AbstractController {
 		ModelAndView result;
 
 		try {
-			petService.delete(petId);
-			result = new ModelAndView("redirect:/pet/customer/list.do");
+			if (petService.isOwner(petId)) {
+				petService.delete(petId);
+				result = new ModelAndView("redirect:/pet/customer/list.do");
+			} else {
+				result = new ModelAndView("misc/403");
+			}
+
 		} catch (Throwable oops) {
 			Collection<Pet> pets;
 
@@ -150,7 +155,7 @@ public class PetCustomerController extends AbstractController {
 		ModelAndView result;
 		Pet pet = petService.findOne(petId);
 
-//		String rootPath = System.getProperty("catalina.base");
+		// String rootPath = System.getProperty("catalina.base");
 		StringBuffer ruta = httpServletRequest.getRequestURL();
 		String rutaf = StringUtils.replace(ruta.toString(),
 				"pet/customer/details.do", "");
@@ -191,10 +196,12 @@ public class PetCustomerController extends AbstractController {
 
 				// Creating the directory to store file
 				String rootPath = System.getProperty("catalina.base");
-//				StringBuffer ruta = httpServletRequest.getRequestURL();
-				//String rutaf = StringUtils.replace(ruta.toString(),
-				//		"pet/customer/details.do", "");
-				File dir = new File(rootPath+"/../../../../Acme-Veterinary/src/main/webapp/images/pets");
+				// StringBuffer ruta = httpServletRequest.getRequestURL();
+				// String rutaf = StringUtils.replace(ruta.toString(),
+				// "pet/customer/details.do", "");
+				File dir = new File(
+						rootPath
+								+ "/../../../../Acme-Veterinary/src/main/webapp/images/pets");
 				if (!dir.exists())
 					dir.mkdirs();
 
@@ -209,13 +216,16 @@ public class PetCustomerController extends AbstractController {
 				logger.info("Server File Location="
 						+ serverFile.getAbsolutePath());
 
-				return new ModelAndView("redirect:/pet/customer/details.do?petId="+petId);
+				return new ModelAndView(
+						"redirect:/pet/customer/details.do?petId=" + petId);
 
 			} catch (Exception e) {
-				return new ModelAndView("redirect:/pet/customer/details.do?petId="+petId);
+				return new ModelAndView(
+						"redirect:/pet/customer/details.do?petId=" + petId);
 			}
 		} else {
-			return new ModelAndView("redirect:/pet/customer/details.do?petId="+petId);
+			return new ModelAndView("redirect:/pet/customer/details.do?petId="
+					+ petId);
 		}
 	}
 }
