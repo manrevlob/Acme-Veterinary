@@ -14,14 +14,16 @@ table {
 	margin: 20px 0 20px 0 !important;
 }
 
+
 th,td {
 	padding: 2px 4px 2px 4px !important;
 	text-align: left;
 	vertical-align: top;
 }
-
+	
 thead tr {
-	background-color: #fc0;
+	background-color: #265A88;
+	color: white;
 }
 
 th.sorted {
@@ -29,12 +31,12 @@ th.sorted {
 }
 
 th a,th a:visited {
-	color: black;
+	color: white;
 }
 
 th a:hover {
 	text-decoration: underline;
-	color: black;
+	color: white;
 }
 
 th.sorted a,th.sortable a {
@@ -63,11 +65,11 @@ th.order2 a {
 }
 
 tr.odd {
-	background-color: #fff
+	background-color: #fff;
 }
 
 tr.tableRowEven,tr.even {
-	background-color: #fea
+	background-color: #B0DEFF;
 }
 
 div.exportlinks {
