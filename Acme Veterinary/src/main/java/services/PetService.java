@@ -62,6 +62,7 @@ public class PetService {
 
 	public void delete(int petId) {
 		Assert.isTrue(actorService.isCustomer());
+		Assert.isTrue(isOwner(petId));
 		Pet pet = findOne(petId);
 		pet.setIsDeleted(true);
 		petRepository.save(pet);
@@ -88,7 +89,13 @@ public class PetService {
 	}
 
 	public Collection<Pet> findAllByPrincipal() {
-		Customer principal = customerService.findByPrincipal();		
+		Customer principal = customerService.findByPrincipal();
 		return findAllByCustomer(principal.getId());
+	}
+
+	public boolean isOwner(int petId) {
+		Pet pet = findOne(petId);
+		Customer customer = customerService.findByPrincipal();
+		return customer.getPets().contains(pet);
 	}
 }
