@@ -79,6 +79,7 @@ public class Order extends DomainEntity {
 		this.address = address;
 	}
 
+	@Valid
 	@NotNull
 	public CreditCard getCreditCard() {
 		return creditCard;

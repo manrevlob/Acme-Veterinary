@@ -78,8 +78,5 @@ public class Payment extends DomainEntity {
 				+ ", totalCost=" + totalCost + ", appointment=" + appointment
 				+ "]";
 	}
-	
-	
-	
 
 }
