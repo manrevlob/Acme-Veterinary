@@ -63,7 +63,7 @@
 				<a
 					onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
 					href="appointment/customer/cancel.do?appointmentId=${row.id}">
-					<spring:message code="appointment.cancel" />
+					<spring:message code="appointment.cancelAppointment" />
 				</a>
 			</display:column>
 		</security:authorize>
@@ -78,7 +78,7 @@
 				<a
 					onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
 					href="appointment/veterinary/cancel.do?appointmentId=${row.id}">
-					<spring:message code="appointment.cancel" />
+					<spring:message code="appointment.cancelAppointment" />
 				</a>
 			</display:column>
 		</security:authorize>
@@ -87,7 +87,7 @@
 				<a
 					onclick="return confirm('<spring:message code="appointment.delete.confirm" />')"
 					href="appointment/administrator/cancel.do?appointmentId=${row.id}">
-					<spring:message code="appointment.cancel" />
+					<spring:message code="appointment.cancelAppointment" />
 				</a>
 			</display:column>
 		</security:authorize>

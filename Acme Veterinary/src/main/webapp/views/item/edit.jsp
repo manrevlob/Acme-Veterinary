@@ -32,7 +32,7 @@
 	
 	<acme:textarea code="item.description" path="description" />
 	
-	<acme:textbox code="item.amount" path="price.amount" />
+	<acme:number code="item.amount" path="price.amount" min="0" step="0.1"/>
 	
 	<acme:select items="${categories}" itemLabel="name" code="item.category" path="category"/>
 	

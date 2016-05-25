@@ -88,7 +88,7 @@ public class ItemAdministratorController extends AbstractController {
 	public ModelAndView save(@Valid Item item, BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors()) {
+		if (binding.hasErrors()) {			
 			result = editModelAndView(item);
 		} else {
 			try {

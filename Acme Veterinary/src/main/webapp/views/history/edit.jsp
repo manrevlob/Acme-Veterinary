@@ -33,9 +33,9 @@
 
 		<acme:textbox code="treatment.description" path="treatmentDescription" />
 
-		<acme:textbox code="treatment.startMoment" path="treatmentStartMoment" />
+		<acme:textbox code="treatment.startMoment" path="treatmentStartMoment" placeholder="dd/MM/yyyy"/>
 
-		<acme:textbox code="treatment.endMoment" path="treatmentEndMoment" />
+		<acme:textbox code="treatment.endMoment" path="treatmentEndMoment" placeholder="dd/MM/yyyy"/>
 	</fieldset>
 
 	<acme:submit name="save" code="history.save" />
