@@ -40,12 +40,12 @@ public class CommentAdministratorController extends AbstractController {
 	// Delete comment -------------------------------------------------------
 
 	@RequestMapping(value = "/deleteFromItem", method = RequestMethod.GET)
-	public ModelAndView deleteFromItem(int commentId) {
+	public ModelAndView deleteFromItem(int commentId, int itemId) {
 		ModelAndView result;
 		try {
 			commentService.delete(commentId);
 
-			result = new ModelAndView("redirect:/item/list.do");
+			result = new ModelAndView("redirect:/comment/listByItem.do?itemId="+itemId);
 
 		} catch (Throwable oops) {
 
@@ -68,18 +68,15 @@ public class CommentAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/deleteFromVeterinary", method = RequestMethod.GET)
-	public ModelAndView deleteFromVeterinary(int commentId) {
+	public ModelAndView deleteFromVeterinary(int commentId, int veterinaryId) {
 		ModelAndView result;
 		Collection<Clinic> clinics;
 		clinics = clinicService.findAllNotDeleted();
 		try {
 
 			commentService.delete(commentId);
-
-			result = new ModelAndView("clinic/list");
-			result.addObject("requestURI", "clinic/list.do");
-			result.addObject("clinics", clinics);
-
+			
+			result = new ModelAndView("redirect:/comment/listByVeterinary.do?veterinaryId="+veterinaryId);
 		} catch (Throwable oops) {
 
 			result = new ModelAndView("clinic/list");
@@ -91,14 +88,14 @@ public class CommentAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/deleteFromBulletin", method = RequestMethod.GET)
-	public ModelAndView deleteFromBulletin(int commentId) {
+	public ModelAndView deleteFromBulletin(int commentId, int bulletinId) {
 		ModelAndView result;
 	
 		try {
-
+			
 			commentService.delete(commentId);
 
-			result = new ModelAndView("redirect:/bulletin/list.do");
+			result = new ModelAndView("redirect:/comment/listByBulletin.do?bulletinId="+bulletinId);
 
 		} catch (Throwable oops) {
 

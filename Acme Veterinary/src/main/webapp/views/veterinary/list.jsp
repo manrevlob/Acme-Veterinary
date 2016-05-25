@@ -35,12 +35,13 @@
 		</a>
 	</display:column>
 
-
+	<security:authorize access="hasRole('CUSTOMER') || isAnonymous()">
 		<display:column title="${appointmentHeader}">
 			<a href="appointment/list.do?veterinaryId=${row.id}"> <spring:message
 					code="veterinary.appointment" />
 			</a>
 		</display:column>
+	</security:authorize>
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column title="${appointmentHeader}">
