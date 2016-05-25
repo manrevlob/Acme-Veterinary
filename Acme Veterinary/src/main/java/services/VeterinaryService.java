@@ -174,4 +174,27 @@ public class VeterinaryService {
 		result = veterinaryRepository.vetLessBusy();
 		return result;
 	}
+
+	// Dashboard
+	public Collection<Object[]> avgRatingPerVeterinary() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Object[]> result;
+		result = veterinaryRepository.avgRatingPerVeterinary();
+		return result;
+	}
+
+	public Collection<Veterinary> bestFiveVeterinary() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Veterinary> result = new ArrayList<Veterinary>();
+		Collection<Veterinary> vetOrdRating;
+		vetOrdRating = veterinaryRepository.findAllVeterinaryOrderByRating();
+		for (Veterinary v: vetOrdRating){
+			if (result.size() <= 5)
+				result.add(v);
+			else
+				break;
+		}
+		
+		return result;
+	}
 }

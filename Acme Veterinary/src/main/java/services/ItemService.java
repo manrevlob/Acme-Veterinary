@@ -149,4 +149,11 @@ public class ItemService {
 		return result;
 	}
 
+	public Collection<Item> itemBestRating() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Item> result;
+		result = itemRepository.itemBestRating();
+		return result;
+	}
+
 }

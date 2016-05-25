@@ -186,6 +186,28 @@ public class CustomerService {
 		result = customerRepository.customerMorePay();
 		return result;
 	}
+
+	// Dashboard
+	public Collection<Object[]> avgComentPerCustomer() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Object[]> result;
+		result = customerRepository.avgComentPerCustomer();
+		return result;
+	}
+
+	public Collection<Customer> customerMoreCommentDel() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Customer> result;
+		result = customerRepository.customerMoreCommentDel();
+		return result;
+	}
+
+	public Collection<Object[]> customerSaveVoucher() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Object[]> result;
+		result = customerRepository.customerSaveVoucher();
+		return result;
+	}
 	
 	
 	
