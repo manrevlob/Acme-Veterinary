@@ -51,14 +51,11 @@
 
 	</fieldset>
 	<br>
-	<acme:textbox code="payment.totalCost" path="totalCost.amount" />
+	<acme:number code="payment.totalCost" path="totalCost.amount" min="0.0" step="0.1" />
 
 	<br>
 
 	<acme:submit name="save" code="payment.save" />
-
-	<input class="btn" type="button" name="cancel"
-		value="<spring:message code="payment.cancel" />"
-		onclick="javascript: window.location.replace('appointment/veterinary/list.do')" />
+	<acme:cancel url="appointment/veterinary/list.do" code="payment.cancel"/>
 
 </form:form>
