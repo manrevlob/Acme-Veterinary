@@ -21,7 +21,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<jstl:if test="${requestURI == 'item/list.do'}">
+<jstl:if test="${requestURI == 'item/list.do' || requestURI == 'item/administrator/list.do' }">
 	<form:form action="item/search.do" modelAttribute="searchForm">
 
 		<acme:textbox code="item.search" path="keyword" />

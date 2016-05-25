@@ -41,9 +41,8 @@
 	<acme:submit name="save" code="item.save"/>&nbsp; 
 	
 	<acme:cancel url="item/administrator/list.do" code="item.cancel"/>&nbsp;
-	
 	<jstl:if test="${item.id != 0}">
-		<acme:submit name="delete" code="item.delete"/>
+		<acme:delete name="delete" code="item.delete"/>
 	</jstl:if>
 
 </form:form>

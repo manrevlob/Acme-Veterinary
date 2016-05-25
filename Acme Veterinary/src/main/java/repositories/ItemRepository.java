@@ -17,7 +17,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	@Query("select i from Item i where i.category.id = ?1")
 	Collection<Item> findByCategory(int categoryId);
 
-	@Query("select i from Item i where i.sku like %?1% or i.name like %?1% or i.description like %?1%")
+	@Query("select i from Item i where (i.sku like %?1% or i.name like %?1% or i.description like %?1%) and i.isDeleted is false")
 	Collection<Item> findByKeyword(String keyword);
 
 	@Query("select i from Item i where i.isDeleted is false")

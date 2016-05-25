@@ -32,10 +32,10 @@
 	<div id="menucete" class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav">
 			<!-- Do not forget the "fNiv" class for the first level links !! -->
-
-			<li><a href="item/list.do"><spring:message
-						code="master.page.item" /></a></li>
-
+			<security:authorize access="!hasRole('ADMIN')">
+				<li><a href="item/list.do"><spring:message
+							code="master.page.item" /></a></li>
+			</security:authorize>
 			<security:authorize access="hasRole('ADMIN')">
 				<li><a href="register/createVeterinary.do"> <spring:message
 							code="master.page.register.veterinary" /></a></li>
