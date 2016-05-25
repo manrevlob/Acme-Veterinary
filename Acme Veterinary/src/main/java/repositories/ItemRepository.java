@@ -29,4 +29,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	@Query("select i.sku from ItemOrder i group by i.sku having count(i.quantity) >= ALL(select count(i2.quantity) from ItemOrder i2 group by i2.sku)")
 	Collection<String> mostDemandedItem();
 
+	@Query("select i from Item i join i.comments c group by i having sum(c.rating) >= ALL(select sum(c2.rating) from Item i2 join i2.comments c2 group by i2)")
+	Collection<Item> itemBestRating();
+
 }

@@ -75,6 +75,26 @@
 
 </display:table>
 
+<h3>
+	<spring:message code="dashboard.customerSaveVoucher" />
+</h3>
+<display:table pagesize="10" class="displaytag" keepStatus="true"
+	name="customerSaveVoucher" requestURI="${requestURI}" uid="row">
+
+	<spring:message code="customer.name" var="nameHeader" />
+	<display:column value="${row[0].name}" title="${nameHeader}"
+		sortable="true" />
+
+	<spring:message code="customer.surname" var="surnameHeader" />
+	<display:column value="${row[0].surname}" title="${surnameHeader}"
+		sortable="true" />
+
+	<spring:message code="dashboard.save" var="countHeader" />
+	<display:column value="${row[1]}" title="${countHeader}"
+		sortable="true" />
+	
+</display:table>
+
 <h2>
 	<spring:message code="dashboard.allTime" />
 </h2>
@@ -84,21 +104,6 @@
 	:
 	<jstl:out value="${numberCustomers}" />
 </h3>
-
-<h3>
-	<spring:message code="dashboard.appointMoreUse" />
-</h3>
-<!--<display:table pagesize="10" class="displaytag" keepStatus="true"
-	name="appointMoreUse" requestURI="${requestURI}" uid="row">
-
-	<spring:message code="veterinary.name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}" sortable="true" />
-
-	<spring:message code="veterinary.surname" var="surnameHeader" />
-	<display:column property="surname" title="${surnameHeader}"
-		sortable="true" />
-
-</display:table>-->
 
 <h3>
 	<spring:message code="dashboard.clinicWithNumAppoint" />
@@ -126,8 +131,8 @@
 	<display:column property="name" title="${nameHeader}"
 		sortable="true" />
 
-	<spring:message code="item.description" var="nameHeader" />
-	<display:column property="description" title="${nameHeader}"
+	<spring:message code="item.description" var="descriptionHeader" />
+	<display:column property="description" title="${descriptionHeader}"
 		sortable="true" />
 	
 </display:table>
@@ -146,5 +151,93 @@
 	<display:column value="${row[1]}" title="${countHeader}"
 		sortable="true" />
 
+</display:table>
+
+<h3>
+	<spring:message code="dashboard.itemBestRating" />
+</h3>
+<display:table pagesize="10" class="displaytag" keepStatus="true"
+	name="itemBestRating" requestURI="${requestURI}" uid="row">
+
+	<spring:message code="item.name" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}"
+		sortable="true" />
+
+	<spring:message code="item.description" var="descriptionHeader" />
+	<display:column property="description" title="${descriptionHeader}"
+		sortable="true" />
+	
+</display:table>
+
+<h3>
+	<spring:message code="dashboard.avgComentPerCustomer" />
+</h3>
+<display:table pagesize="10" class="displaytag" keepStatus="true"
+	name="avgComentPerCustomer" requestURI="${requestURI}" uid="row">
+
+	<spring:message code="customer.name" var="nameHeader" />
+	<display:column value="${row[0].name}" title="${nameHeader}"
+		sortable="true" />
+
+	<spring:message code="customer.surname" var="surnameHeader" />
+	<display:column value="${row[0].surname}" title="${surnameHeader}"
+		sortable="true" />
+
+	<spring:message code="dashboard.avg" var="countHeader" />
+	<display:column value="${row[1]}" title="${countHeader}"
+		sortable="true" />
+	
+</display:table>
+
+<h3>
+	<spring:message code="dashboard.customerMoreCommentDel" />
+</h3>
+<display:table pagesize="10" class="displaytag" keepStatus="true"
+	name="customerMoreCommentDel" requestURI="${requestURI}" uid="row">
+
+	<spring:message code="customer.name" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}"
+		sortable="true" />
+
+	<spring:message code="customer.surname" var="surnameHeader" />
+	<display:column property="surname" title="${surnameHeader}"
+		sortable="true" />
+	
+</display:table>
+
+<h3>
+	<spring:message code="dashboard.avgRatingPerVeterinary" />
+</h3>
+<display:table pagesize="10" class="displaytag" keepStatus="true"
+	name="avgRatingPerVeterinary" requestURI="${requestURI}" uid="row">
+
+	<spring:message code="veterinary.name" var="nameHeader" />
+	<display:column value="${row[0].name}" title="${nameHeader}"
+		sortable="true" />
+
+	<spring:message code="veterinary.surname" var="surnameHeader" />
+	<display:column value="${row[0].surname}" title="${surnameHeader}"
+		sortable="true" />
+
+	<spring:message code="dashboard.avg" var="countHeader" />
+	<display:column value="${row[1]}" title="${countHeader}"
+		sortable="true" />
+	
+</display:table>
+
+<h3>
+	<spring:message code="dashboard.bestFiveVeterinary" />
+</h3>
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="bestFiveVeterinary" requestURI="${requestURI}" uid="row">
+
+	<spring:message code="veterinary.name" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}"
+		sortable="true" />
+
+	<spring:message code="veterinary.surname" var="surnameHeader" />
+	<display:column property="surname" title="${surnameHeader}"
+		sortable="true" />
+	
 </display:table>
 

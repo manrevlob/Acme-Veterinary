@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AppointmentService;
 import services.ClinicService;
 import services.CustomerService;
 import services.ItemService;
@@ -28,8 +27,6 @@ public class DashboardAdministratorController {
 	@Autowired
 	private VeterinaryService veterinaryService;
 	@Autowired
-	private AppointmentService appointmentService;
-	@Autowired
 	private ClinicService clinicService;
 	@Autowired
 	private ItemService itemService;
@@ -45,21 +42,34 @@ public class DashboardAdministratorController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		
+
 		// Nivel C
 		Integer numberNewCustomers = customerService.numberNewCustomers();
 		Collection<Veterinary> vetMoreBusy = veterinaryService.vetMoreBusy();
 		Collection<Veterinary> vetLessBusy = veterinaryService.vetLessBusy();
 		Integer numberCustomers = customerService.numberCustomers();
-		//Collection<Appointment> appointMoreUse = appointmentService.appointMoreUse();
-		Collection<Object[]> clinicWithNumAppoint = clinicService.clinicWithNumAppoint();
-		
+		Collection<Object[]> clinicWithNumAppoint = clinicService
+				.clinicWithNumAppoint();
+
 		// Nivel B
-		Collection<Customer> customerMorePay = customerService.customerMorePay(); 
+		Collection<Customer> customerMorePay = customerService
+				.customerMorePay();
 		Collection<Item> mostDemandedItem = itemService.mostDemandedItem();
-		Collection<Object[]> avgBulletinsByClinic = clinicService.avgBulletinsByClinic();
-		
+		Collection<Object[]> avgBulletinsByClinic = clinicService
+				.avgBulletinsByClinic();
+
 		// Nivel A
+		Collection<Item> itemBestRating = itemService.itemBestRating();
+		Collection<Object[]> avgComentPerCustomer = customerService
+				.avgComentPerCustomer();
+		Collection<Customer> customerMoreCommentDel = customerService
+				.customerMoreCommentDel();
+		Collection<Object[]> avgRatingPerVeterinary = veterinaryService
+				.avgRatingPerVeterinary();
+		Collection<Veterinary> bestFiveVeterinary = veterinaryService
+				.bestFiveVeterinary();
+		Collection<Object[]> customerSaveVoucher = customerService
+				.customerSaveVoucher();
 
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("requestURI", "dashboard/administrator/list.do");
@@ -68,15 +78,21 @@ public class DashboardAdministratorController {
 		result.addObject("vetMoreBusy", vetMoreBusy);
 		result.addObject("vetLessBusy", vetLessBusy);
 		result.addObject("numberCustomers", numberCustomers);
-		//result.addObject("appointMoreUse", appointMoreUse);
 		result.addObject("clinicWithNumAppoint", clinicWithNumAppoint);
-		
+
 		// Nivel B
 		result.addObject("customerMorePay", customerMorePay);
 		result.addObject("mostDemandedItem", mostDemandedItem);
 		result.addObject("avgBulletinsByClinic", avgBulletinsByClinic);
 
+		// Nivel A
+		result.addObject("itemBestRating", itemBestRating);
+		result.addObject("avgComentPerCustomer", avgComentPerCustomer);
+		result.addObject("customerMoreCommentDel", customerMoreCommentDel);
+		result.addObject("avgRatingPerVeterinary", avgRatingPerVeterinary);
+		result.addObject("bestFiveVeterinary", bestFiveVeterinary);
+		result.addObject("customerSaveVoucher", customerSaveVoucher);
+
 		return result;
 	}
 }
-

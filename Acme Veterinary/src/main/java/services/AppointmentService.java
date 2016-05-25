@@ -227,12 +227,4 @@ public class AppointmentService {
 		messageService.sendMessage(message);
 	}
 
-	// Dashboard
-	// public Collection<Appointment> appointMoreUse() {
-	// Assert.isTrue(actorService.isAdministrator());
-	// Collection<Appointment> result;
-	// result = appointmentRepository.appointMoreUse();
-	// return result;
-	// }
-
 }
