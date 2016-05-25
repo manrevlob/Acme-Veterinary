@@ -1,5 +1,7 @@
 package controllers.veterinary;
 
+import java.util.LinkedHashMap;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +47,13 @@ public class PaymentVeterinaryController extends AbstractController {
 
 		Payment payment = paymentService.create(appointment);
 
+		LinkedHashMap<String, Integer> months = Utiles.getMonth();
+		LinkedHashMap<String, Integer> years = Utiles.getYears();
+
 		result = new ModelAndView("appointment/payment");
 		result.addObject("payment", payment);
+		result.addObject("months", months);
+		result.addObject("years", years);
 
 		return result;
 	}
@@ -59,6 +66,10 @@ public class PaymentVeterinaryController extends AbstractController {
 
 		if (binding.hasErrors()) {
 			result = new ModelAndView("appointment/payment");
+			LinkedHashMap<String, Integer> months = Utiles.getMonth();
+			LinkedHashMap<String, Integer> years = Utiles.getYears();
+			result.addObject("months", months);
+			result.addObject("years", years);
 		} else {
 			try {
 				// Comprobamos que la tarjeta esta vacia o es valida
@@ -72,11 +83,19 @@ public class PaymentVeterinaryController extends AbstractController {
 					result = new ModelAndView("appointment/payment");
 					result.addObject("payment", payment);
 					result.addObject("message", "payment.creditcard.error");
+					LinkedHashMap<String, Integer> months = Utiles.getMonth();
+					LinkedHashMap<String, Integer> years = Utiles.getYears();
+					result.addObject("months", months);
+					result.addObject("years", years);
 				}
 			} catch (Throwable oops) {
 				result = new ModelAndView("appointment/payment");
 				result.addObject("payment", payment);
 				result.addObject("message", "payment.commit.error");
+				LinkedHashMap<String, Integer> months = Utiles.getMonth();
+				LinkedHashMap<String, Integer> years = Utiles.getYears();
+				result.addObject("months", months);
+				result.addObject("years", years);
 			}
 		}
 
