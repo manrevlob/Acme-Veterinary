@@ -23,7 +23,10 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	@Query("select i from Item i where i.isDeleted is false")
 	Collection<Item> findAllNotDeleted();
 
-	@Query("select i from Item i where i.sku like ?1")
+	@Query("select i from Item i where i.sku like %?1%")
 	Item findBySKU(String sku);
+
+	@Query("select i.sku from ItemOrder i group by i.sku having count(i.quantity) >= ALL(select count(i2.quantity) from ItemOrder i2 group by i2.sku)")
+	Collection<String> mostDemandedItem();
 
 }

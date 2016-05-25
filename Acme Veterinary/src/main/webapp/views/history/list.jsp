@@ -49,8 +49,21 @@
 			</a>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('VETERINARY')">
+		<display:column title="${detailsHeader}">
+			<a href="history/veterinary/details.do?historyId=${row.id}"> <spring:message
+					code="history.details" />
+			</a>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 <br>
+<jstl:if test="${requestURI == 'history/veterinary/list.do'}">
+	<acme:cancel url="customer/veterinary/list.do" code="history.cancel"/>
+</jstl:if>
+<jstl:if test="${requestURI == 'history/customer/list.do'}">
+	<acme:cancel url="pet/customer/list.do" code="history.cancel"/>
+</jstl:if>
 
-<acme:cancel url="pet/customer/list.do" code="history.cancel"/>

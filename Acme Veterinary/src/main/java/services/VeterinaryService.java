@@ -160,4 +160,18 @@ public class VeterinaryService {
 		result = veterinaryRepository.findByClinic(clinicId);
 		return result;
 	}
+
+	public Collection<Veterinary> vetMoreBusy() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Veterinary> result;
+		result = veterinaryRepository.vetMoreBusy();
+		return result;
+	}
+
+	public Collection<Veterinary> vetLessBusy() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Veterinary> result;
+		result = veterinaryRepository.vetLessBusy();
+		return result;
+	}
 }

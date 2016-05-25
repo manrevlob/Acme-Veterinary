@@ -164,4 +164,29 @@ public class CustomerService {
 		result = customerRepository.findByKeyword(keyword);
 		return result;
 	}
+
+	// Dashboard
+	public Integer numberNewCustomers() {
+		Assert.isTrue(actorService.isAdministrator());
+		Integer result = 0;
+		result = customerRepository.numberNewCustomers();
+		return result;
+	}
+
+	public Integer numberCustomers() {
+		Assert.isTrue(actorService.isAdministrator());
+		Integer result = 0;
+		result = findAll().size();
+		return result;
+	}
+
+	public Collection<Customer> customerMorePay() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Customer> result;
+		result = customerRepository.customerMorePay();
+		return result;
+	}
+	
+	
+	
 }

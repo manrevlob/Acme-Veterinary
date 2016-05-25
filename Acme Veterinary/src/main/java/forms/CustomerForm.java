@@ -3,6 +3,7 @@ package forms;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -75,6 +76,7 @@ public class CustomerForm {
 	}
 
 	@NotBlank
+	@Pattern(regexp = "^\\d{9}$")
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhone() {
 		return phone;

@@ -80,9 +80,6 @@ public class Clinic extends DomainEntity {
 	
 	// Relationships ---------------------------------------------------------
 
-
-
-
 	private Collection<Veterinary> veterinaries;
 	private Collection<Bulletin> bulletins;
 

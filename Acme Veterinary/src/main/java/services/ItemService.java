@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,12 @@ public class ItemService {
 	public Item save(Item item) {
 		Assert.isTrue(actorService.isAdministrator());
 		Assert.notNull(item);
+		Assert.notNull(item.getCategory());
 
-		// Checks
-		checkSku(item);
+		if(item.getId() == 0){
+			// Checks
+			checkSku(item);
+		}
 		checkPrice(item);
 
 		return itemRepository.save(item);
@@ -58,7 +62,7 @@ public class ItemService {
 
 	private void checkSku(Item item) {
 		for (Item i : findAll()) {
-			if (i.getSku() == item.getSku()) {
+			if (i.getSku().compareTo(item.getSku()) == 0) {
 				throw new DataIntegrityViolationException("sku duplicate");
 			}
 		}
@@ -74,6 +78,7 @@ public class ItemService {
 	public void delete(Item item) {
 		Assert.notNull(item);
 		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(!item.getIsDeleted());
 		item.setIsDeleted(true);
 		item = save(item);
 		shoppingCartLineService.checkShoppingCart(item);
@@ -126,6 +131,21 @@ public class ItemService {
 
 		result = itemRepository.findBySKU(sku);
 
+		return result;
+	}
+
+	// Dashboard
+	public Collection<Item> mostDemandedItem() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Item> result = new ArrayList<Item>();
+		Collection<String> skus;
+
+		skus = itemRepository.mostDemandedItem();
+
+		for (String s : skus) {
+			result.add(findBySKU(s));
+		}
+		
 		return result;
 	}
 

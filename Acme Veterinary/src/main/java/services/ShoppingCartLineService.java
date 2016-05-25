@@ -59,7 +59,6 @@ public class ShoppingCartLineService {
 		Money money = new Money();
 		money.setCurrency(item.getPrice().getCurrency());
 
-		// Price is (((tax / 100) * price) + price) * quantity
 		amount = price * quantity;
 		money.setAmount(amount);
 		result.setPrice(money);
@@ -73,6 +72,7 @@ public class ShoppingCartLineService {
 	}
 
 	public void delete(ShoppingCartLine shoppingCartLine) {
+		Assert.isTrue(actorService.isCustomer());
 		Assert.notNull(shoppingCartLine);
 		shoppingCartLineRepository.delete(shoppingCartLine);
 	}
