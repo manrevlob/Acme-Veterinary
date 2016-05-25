@@ -21,9 +21,13 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <div style="font-size: x-large;">
-	<spring:message code="order.totalPrice"/>: <jstl:out value="${order.totalPrice.amount}" /> Euros
+	<spring:message code="order.totalPrice" />
+	:
+	<jstl:out value="${order.totalPrice.amount}" />
+	Euros
 </div>
-<form:form action="voucher/customer/apply.do" modelAttribute="voucherForm">
+<form:form action="voucher/customer/apply.do"
+	modelAttribute="voucherForm">
 	<form:hidden path="message" />
 	<form:hidden path="customer" />
 	<form:hidden path="ticker" />
@@ -33,11 +37,13 @@
 	<form:hidden path="isCanceled" />
 	<form:hidden path="voucher" />
 
-	<acme:textbox code="order.voucher.code" path="code"/>
-	<acme:submit name="apply" code="order.voucher.apply"/>
+	<acme:textbox code="order.voucher.code" path="code" />
+	<acme:submit name="apply" code="order.voucher.apply" />
 </form:form>
-<jstl:if test="${voucherForm.message != null && voucherForm.message != ''}">
-	<span style="color: red;"><spring:message code="${voucherForm.message}"/></span>
+<jstl:if
+	test="${voucherForm.message != null && voucherForm.message != ''}">
+	<span style="color: red;"><spring:message
+			code="${voucherForm.message}" /></span>
 </jstl:if>
 
 <form:form action="order/customer/create.do" modelAttribute="order">
@@ -52,62 +58,40 @@
 	<form:hidden path="isCanceled" />
 	<form:hidden path="voucher" />
 
-	<form:label path="fullName">
-		<spring:message code="order.fullName" />:
-	</form:label>
-	<form:input path="fullName" />
-	<form:errors cssClass="error" path="fullName" />
-	<br />
 
-	<form:label path="address">
-		<spring:message code="order.address" />:
-	</form:label>
-	<form:input path="address" />
-	<form:errors cssClass="error" path="address" />
-	<br />
 
-	<form:label path="creditCard.name">
-		<spring:message code="order.ccName" />:
-	</form:label>
-	<form:input path="creditCard.name" />
-	<form:errors cssClass="error" path="creditCard.name" />
-	<br />
+	<acme:textbox code="order.fullName" path="fullName" />
 
-	<form:label path="creditCard.brand">
-		<spring:message code="order.ccBrand" />:
-	</form:label>
-	<form:input path="creditCard.brand" />
-	<form:errors cssClass="error" path="creditCard.brand" />
-	<br />
+	<acme:textbox code="order.address" path="address" />
 
-	<form:label path="creditCard.number">
-		<spring:message code="order.ccNumber" />:
-	</form:label>
-	<form:input path="creditCard.number" />
-	<form:errors cssClass="error" path="creditCard.number" />
-	<br />
+	<acme:textbox code="creditCard.name" path="creditCard.name" />
+
+	<acme:textbox code="creditCard.brand" path="creditCard.brand" />
+
+	<acme:number code="creditCard.number" path="creditCard.number" min="0"
+		step="1" />
 
 	<form:label path="creditCard.expirationMonth">
-		<spring:message code="order.ccExpirationMonth" />:
-	</form:label>
-	<form:input path="creditCard.expirationMonth" /> (mm)
-	<form:errors cssClass="error" path="creditCard.expirationMonth" />
-	<br />
+		<spring:message code="creditCard.expirationMonth" />:
+						</form:label>
+
+	<form:select path="creditCard.expirationMonth" class="form-control">
+		<form:option value="0" label="----" />
+		<form:options items="${months}" />
+	</form:select>
 
 	<form:label path="creditCard.expirationYear">
-		<spring:message code="order.ccExpirationYear" />:
-	</form:label>
-	<form:input path="creditCard.expirationYear" /> (YYYY)
-	<form:errors cssClass="error" path="creditCard.expirationYear" />
-	<br />
+		<spring:message code="creditCard.expirationYear" />:
+						</form:label>
 
-	<form:label path="creditCard.cvv">
-		<spring:message code="order.ccCvv" />:
-	</form:label>
-	<form:input path="creditCard.cvv" /> (100-999)
-	<form:errors cssClass="error" path="creditCard.cvv" />
-	<br />
+	<form:select path="creditCard.expirationYear" class="form-control">
+		<form:option value="0" label="----" />
+		<form:options items="${years}" />
+	</form:select>
 
-	<acme:submit name="save" code="order.save"/>
-	<acme:cancel url="shoppingCart/customer/show.do" code="order.cancel"/>
+	<acme:number code="creditCard.CVV" path="creditCard.cvv" min="0"
+		step="1" />
+
+	<acme:submit name="save" code="order.save" />
+	<acme:cancel url="shoppingCart/customer/show.do" code="order.cancel" />
 </form:form>
