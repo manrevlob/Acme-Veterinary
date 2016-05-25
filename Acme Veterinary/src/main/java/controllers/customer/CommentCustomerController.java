@@ -85,12 +85,16 @@ public class CommentCustomerController extends AbstractController {
 	public ModelAndView createToVeterinary(int veterinaryId) {
 		ModelAndView result;
 
-		CommentForm commentForm = commentService.createForm(veterinaryId);
-		result = new ModelAndView("comment/create");
-		result.addObject("requestURI", "comment/customer/createToVeterinary.do");
-		result.addObject("commentForm", commentForm);
-		result.addObject("veterinaryId", veterinaryId);
-
+		if (commentService.checkAppointments(veterinaryId)) {
+			CommentForm commentForm = commentService.createForm(veterinaryId);
+			result = new ModelAndView("comment/create");
+			result.addObject("requestURI",
+					"comment/customer/createToVeterinary.do");
+			result.addObject("commentForm", commentForm);
+			result.addObject("veterinaryId", veterinaryId);
+		} else {
+			result = new ModelAndView("misc/403");
+		}
 		return result;
 	}
 
@@ -107,11 +111,15 @@ public class CommentCustomerController extends AbstractController {
 
 		} else {
 			try {
-				commentService.saveToVeterinary(commentForm);
-				result = new ModelAndView(
-						"redirect:/comment/listByVeterinary.do?veterinaryId="
-								+ commentForm.getId());
+				if (commentService.checkAppointments(commentForm.getId())) {
+					commentService.saveToVeterinary(commentForm);
+					result = new ModelAndView(
+							"redirect:/comment/listByVeterinary.do?veterinaryId="
+									+ commentForm.getId());
 
+				} else {
+					result = new ModelAndView("misc/403");
+				}
 			} catch (Throwable oops) {
 
 				Collection<Comment> comments;
