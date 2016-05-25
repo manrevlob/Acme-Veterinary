@@ -17,15 +17,13 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="customer/veterinary/search.do"
 	modelAttribute="searchForm">
-	<form:label path="keyword">
-		<spring:message code="customer.search" />:
-		</form:label>
-	<form:input path="keyword" />
-	<input type="submit" name="search"
-		value="<spring:message code="customer.search2" />" />
+	<acme:textbox code="customer.search" path="keyword"/>
+	<acme:submit name="search" code="customer.search2"/>
+		
 </form:form>
 
 <display:table pagesize="10" class="displaytag" keepStatus="true"

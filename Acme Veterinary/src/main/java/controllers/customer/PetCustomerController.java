@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -86,15 +87,18 @@ public class PetCustomerController extends AbstractController {
 	public ModelAndView edit(int petId) {
 		ModelAndView result;
 
-		Collection<PetType> petTypes;
+		Collection<PetType> petTypes;	
 		Pet pet;
+		if (petService.isOwner(petId)){
+			petTypes = petTypeService.findAll();
+			pet = petService.findOne(petId);
+			result = new ModelAndView("pet/edit");
+			result.addObject("pet", pet);
+			result.addObject("petTypes", petTypes);			
+		}else{
+			result = new ModelAndView("misc/403");
+		}
 
-		petTypes = petTypeService.findAll();
-		pet = petService.findOne(petId);
-
-		result = new ModelAndView("pet/edit");
-		result.addObject("pet", pet);
-		result.addObject("petTypes", petTypes);
 
 		return result;
 	}

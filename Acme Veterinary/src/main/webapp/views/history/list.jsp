@@ -64,6 +64,6 @@
 	<acme:cancel url="customer/veterinary/list.do" code="history.cancel"/>
 </jstl:if>
 <jstl:if test="${requestURI == 'history/customer/list.do'}">
-	<acme:cancel url="pet/customer/list.do" code="history.cancel"/>
+	<acme:cancel url="customer/veterinary/listPet.do?customerId=${customerId}" code="history.cancel"/>
 </jstl:if>
 
