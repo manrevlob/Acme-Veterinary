@@ -42,9 +42,11 @@
 <br />
 
 <b><spring:message code="order.price.amount" />:</b>
-<jstl:out value="${order.totalPrice.amount}" /> 
+<jstl:out value="${order.totalPrice.amount}" />
 <jstl:if test="${order.voucher != null}">
-	<b><spring:message code="order.voucher.with" /></b> <jstl:out value="${order.voucher.value}" /> Euros -> <jstl:out value="${order.voucher.code}" />   
+	<b><spring:message code="order.voucher.with" /></b>
+	<jstl:out value="${order.voucher.value}" /> Euros -> <jstl:out
+		value="${order.voucher.code}" />
 </jstl:if>
 <br>
 
@@ -84,7 +86,8 @@
 
 <security:authorize access="hasRole('CUSTOMER')">
 	<jstl:if test="${order.isCanceled == false}">
-		<a class="btn btn-danger" href="order/customer/cancel.do?orderId=${order.id}"> <spring:message
+		<a class="btn btn-danger"
+			href="order/customer/cancel.do?orderId=${order.id}"> <spring:message
 				code="order.cancel" />
 		</a>
 	</jstl:if>
@@ -92,9 +95,15 @@
 
 <security:authorize access="hasRole('ADMIN')">
 	<jstl:if test="${order.isCanceled == false}">
-		<a class="btn btn-danger" href="order/administrator/cancel.do?orderId=${order.id}"> <spring:message
+		<a class="btn btn-danger"
+			href="order/administrator/cancel.do?orderId=${order.id}"> <spring:message
 				code="order.cancel" />
 		</a>
 	</jstl:if>
 </security:authorize>
-<acme:cancel url="order/customer/list.do" code="order.goBack"/>
+<security:authorize access="hasRole('CUSTOMER')">
+	<acme:cancel url="order/customer/list.do" code="order.goBack" />
+</security:authorize>
+<security:authorize access="hasRole('ADMIN')">
+	<acme:cancel url="order/administrator/list.do" code="order.goBack" />
+</security:authorize>
