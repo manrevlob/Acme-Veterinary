@@ -39,23 +39,38 @@
 
 		<acme:textbox code="creditCard.brand" path="creditCard.brand" />
 
-		<acme:textbox code="creditCard.number" path="creditCard.number" />
+		<acme:number code="creditCard.number" path="creditCard.number" min="0"
+			step="1" />
 
-		<acme:textbox code="creditCard.expirationMonth"
-			path="creditCard.expirationMonth" />
+		<form:label path="creditCard.expirationMonth">
+			<spring:message code="creditCard.expirationMonth" />:
+						</form:label>
 
-		<acme:textbox code="creditCard.expirationYear"
-			path="creditCard.expirationYear" />
+		<form:select path="creditCard.expirationMonth" class="form-control">
+			<form:option value="0" label="----" />
+			<form:options items="${months}" />
+		</form:select>
 
-		<acme:textbox code="creditCard.CVV" path="creditCard.cvv" />
+		<form:label path="creditCard.expirationYear">
+			<spring:message code="creditCard.expirationYear" />:
+						</form:label>
+
+		<form:select path="creditCard.expirationYear" class="form-control">
+			<form:option value="0" label="----" />
+			<form:options items="${years}" />
+		</form:select>
+
+		<acme:number code="creditCard.CVV" path="creditCard.cvv" min="0"
+			step="1" />
 
 	</fieldset>
 	<br>
-	<acme:number code="payment.totalCost" path="totalCost.amount" min="0.0" step="0.1" />
+	<acme:number code="payment.totalCost" path="totalCost.amount" min="0.0"
+		step="0.1" />
 
 	<br>
 
 	<acme:submit name="save" code="payment.save" />
-	<acme:cancel url="appointment/veterinary/list.do" code="payment.cancel"/>
+	<acme:cancel url="appointment/veterinary/list.do" code="payment.cancel" />
 
 </form:form>

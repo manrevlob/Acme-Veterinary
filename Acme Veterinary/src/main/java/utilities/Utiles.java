@@ -3,6 +3,7 @@ package utilities;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
@@ -21,8 +22,8 @@ public class Utiles {
 				&& StringUtils.isBlank(creditCard.getName())
 				&& StringUtils.isBlank(creditCard.getNumber())
 				&& creditCard.getCvv() == null
-				&& creditCard.getExpirationMonth() == null
-				&& creditCard.getExpirationYear() == null) {
+				&& creditCard.getExpirationMonth() == 0
+				&& creditCard.getExpirationYear() == 0) {
 			result = true;
 		}
 
@@ -70,7 +71,6 @@ public class Utiles {
 		return false;
 	}
 
-
 	// Split pictures from string
 	public static Collection<String> splitPictures(String pictures) {
 		Collection<String> result = new ArrayList<String>();
@@ -80,4 +80,25 @@ public class Utiles {
 		return result;
 	}
 
+	// Lista del 1-12 para
+
+	public static LinkedHashMap<String, Integer> getMonth() {
+		LinkedHashMap<String, Integer> months = new LinkedHashMap<String, Integer>();
+
+		for (Integer i = 1; i <= 12; i++) {
+			months.put(i.toString(), i);
+
+		}
+		return months;
+	}
+
+	public static LinkedHashMap<String, Integer> getYears() {
+		LinkedHashMap<String, Integer> years = new LinkedHashMap<String, Integer>();
+
+		for (Integer i = 2016; i <= 2025; i++) {
+			years.put(i.toString(), i);
+
+		}
+		return years;
+	}
 }
