@@ -19,6 +19,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <display:table name="clinics" pagesize="10" class="displaytag"
 	requestURI="${requestURI}" id="row">
@@ -33,7 +34,14 @@
 	<display:column property="zipCode" title="${zipCodeHeader}" />
 
 	<spring:message code="clinic.pictures" var="picturesHeader" />
-	<display:column property="pictures" title="${picturesHeader}" />
+	<display:column title="${picturesHeader}" >
+		<jstl:forTokens items="${row.pictures}" delims="," var="pic">
+   			<a href="${pic}"><spring:message code="clinic.picture" /></a>
+		</jstl:forTokens>
+	</display:column>
+	
+	
+	<input type="text" name="day" value="${dateParts[0]}" />
 
 
 	<display:column title="${veterinariesHeader}">

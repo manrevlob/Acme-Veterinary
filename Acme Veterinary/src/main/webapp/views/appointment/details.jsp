@@ -77,5 +77,9 @@
 		</a>
 	</jstl:if>
 </security:authorize>
-&nbsp;
-<acme:cancel url="appointment/customer/list.do" code="appointment.cancel"/>
+<security:authorize access="hasRole('CUSTOMER')">
+	<acme:cancel url="appointment/customer/list.do" code="appointment.cancel"/>
+</security:authorize>
+<security:authorize access="hasRole('VETERINARY')">
+	<acme:cancel url="appointment/veterinary/list.do" code="appointment.cancel"/>
+</security:authorize>

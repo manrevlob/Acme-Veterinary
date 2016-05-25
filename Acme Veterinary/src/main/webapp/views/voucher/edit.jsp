@@ -28,9 +28,9 @@
 	<form:hidden path="version" />
 	
 	<acme:textbox code="voucher.code" path="code"/>
-	<acme:textbox code="voucher.value" path="value"/>
+	<acme:number code="voucher.value" path="value" min="0" step="0.1"/>
 	<acme:textbox code="voucher.validUntil" path="validUntil" placeholder="dd/MM/yyyy HH:mm"/>
-	<acme:textbox code="voucher.minimumOrder" path="minimumOrder"/>
+	<acme:number code="voucher.minimumOrder" path="minimumOrder" min="0" step="0.1"/>
 
 	<acme:submit name="save" code="voucher.save"/>
 	<acme:cancel url="voucher/administrator/list.do" code="voucher.cancel"/>
