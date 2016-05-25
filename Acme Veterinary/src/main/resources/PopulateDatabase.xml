@@ -86,6 +86,45 @@
 
 	<!-- Other domain beans come here -->
 
+	<!-- Comments -->
+
+	<!-- Item1 customer1 -->
+	<bean id="comment1" class="domain.Comment">
+		<property name="description" value="comment1Description" />
+		<property name="rating" value="3" />
+		<property name="moment" value="10/30/2015 11:11" />
+	</bean>
+	<!-- Item2 customer1 -->
+	<bean id="comment2" class="domain.Comment">
+		<property name="description" value="comment2Description" />
+		<property name="rating" value="3" />
+		<property name="moment" value="10/30/2015 11:11" />
+	</bean>
+	<!-- Item1 customer2 -->
+	<bean id="comment3" class="domain.Comment">
+		<property name="description" value="comment3Description" />
+		<property name="rating" value="4" />
+		<property name="moment" value="10/30/2015 11:11" />
+	</bean>
+	<!-- Item2 customer2 -->
+	<bean id="comment4" class="domain.Comment">
+		<property name="description" value="comment4Description" />
+		<property name="rating" value="5" />
+		<property name="moment" value="10/30/2015 11:11" />
+	</bean>
+	<!-- Bulletin1 customer2 -->
+	<bean id="comment5" class="domain.Comment">
+		<property name="description" value="comment5Description" />
+		<property name="rating" value="5" />
+		<property name="moment" value="10/30/2015 11:11" />
+	</bean>
+	<!-- Veterinary1 customer1 -->
+	<bean id="comment6" class="domain.Comment">
+		<property name="description" value="comment6Description" />
+		<property name="rating" value="5" />
+		<property name="moment" value="10/30/2015 11:11" />
+	</bean>
+
 	<!-- Money -->
 
 	<bean id="money1" class="domain.Money">
@@ -127,7 +166,7 @@
 		<property name="amount" value="10.2" />
 		<property name="currency" value="Euro" />
 	</bean>
-	
+
 	<bean id="money9" class="domain.Money">
 		<property name="amount" value="108.17" />
 		<property name="currency" value="Euro" />
@@ -255,6 +294,12 @@
 			value="http://www.smashbros.com/wii/en_us/items/images/item15/item15_080305_06-l.jpg" />
 		<property name="isDeleted" value="false" />
 		<property name="category" ref="category1" />
+		<property name="comments">
+			<list>
+				<ref bean="comment1" />
+				<ref bean="comment3" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="item2" class="domain.Item">
@@ -264,6 +309,12 @@
 		<property name="price" ref="money2" />
 		<property name="isDeleted" value="false" />
 		<property name="category" ref="category2" />
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+				<ref bean="comment4" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="item3" class="domain.Item">
@@ -611,6 +662,13 @@
 				<ref bean="pet2" />
 			</list>
 		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment1" />
+				<ref bean="comment2" />
+				<ref bean="comment6" />
+			</list>
+		</property>
 		<property name="registerMoment" value="01/01/2016 10:00" />
 	</bean>
 
@@ -631,6 +689,13 @@
 		<property name="pets">
 			<list>
 				<ref bean="pet3" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment3" />
+				<ref bean="comment4" />
+				<ref bean="comment5" />
 			</list>
 		</property>
 		<property name="registerMoment" value="01/02/2016 10:00" />
@@ -660,6 +725,7 @@
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment6" />
 			</list>
 		</property>
 		<property name="appointments">
@@ -875,7 +941,7 @@
 		<property name="endTime" value="16" />
 
 	</bean>
-	
+
 	<bean id="appointment5" class="domain.Appointment">
 		<property name="moment" value="05/03/2016 10:00" />
 		<property name="reason" value="Appointment5Reason" />
@@ -922,7 +988,13 @@
 		<property name="description" value="bulletin1Description" />
 		<property name="clinic" ref="clinic1" />
 		<property name="isDeleted" value="false" />
+		<property name="comments">
+			<list>
+				<ref bean="comment5" />
+			</list>
+		</property>
 	</bean>
+
 	<bean id="bulletin2" class="domain.Bulletin">
 		<property name="moment" value="10/06/2015 11:00" />
 		<property name="description" value="bulletin3Description" />
@@ -1134,7 +1206,7 @@
 	</bean>
 
 	<bean id="itemOrder8" class="domain.ItemOrder">
-		<property name="name" value="Item6Name"/>
+		<property name="name" value="Item6Name" />
 		<property name="sku" value="06-UVWX" />
 		<property name="price" ref="money16" />
 		<property name="quantity" value="7" />
@@ -1156,9 +1228,9 @@
 		<property name="quantity" value="5" />
 		<property name="order" ref="order8" />
 	</bean>
-	
+
 	<!-- Voucher -->
-	
+
 	<bean id="voucher1" class="domain.Voucher">
 		<property name="code" value="SUMMER" />
 		<property name="value" value="10" />
@@ -1166,6 +1238,6 @@
 		<property name="minimumOrder" value="25" />
 	</bean>
 
-	
+
 
 </beans>

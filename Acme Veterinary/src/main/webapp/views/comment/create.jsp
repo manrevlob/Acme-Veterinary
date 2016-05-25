@@ -26,7 +26,6 @@
 		modelAttribute="commentForm">
 
 		<form:hidden path="id" />
-		<form:hidden path="comment.customer" />
 		<form:hidden path="comment.moment" />
 
 		<acme:textbox code="comment.rating" path="comment.rating"
@@ -34,10 +33,11 @@
 
 		<acme:textbox code="comment.description" path="comment.description" />
 
-		<acme:submit name="save" code="comment.save"/>
-		
-		<acme:cancel url="comment/listByItem.do?itemId=${itemId}" code="comment.cancel"/>
-</form:form>
+		<acme:submit name="save" code="comment.save" />
+
+		<acme:cancel url="comment/listByItem.do?itemId=${itemId}"
+			code="comment.cancel" />
+	</form:form>
 </jstl:if>
 
 <jstl:if
@@ -46,7 +46,6 @@
 		modelAttribute="commentForm">
 
 		<form:hidden path="id" />
-		<form:hidden path="comment.customer" />
 		<form:hidden path="comment.moment" />
 
 		<acme:textbox code="comment.rating" path="comment.rating"
@@ -54,10 +53,12 @@
 
 		<acme:textbox code="comment.description" path="comment.description" />
 
-		<acme:submit name="save" code="comment.save"/>
-		
-	<acme:cancel url="comment/listByVeterinary.do?veterinaryId=${veterinaryId}" code="comment.cancel"/>
-</form:form>
+		<acme:submit name="save" code="comment.save" />
+
+		<acme:cancel
+			url="comment/listByVeterinary.do?veterinaryId=${veterinaryId}"
+			code="comment.cancel" />
+	</form:form>
 </jstl:if>
 
 <jstl:if test="${requestURI == 'comment/customer/createToBulletin.do'}">
@@ -65,7 +66,6 @@
 		modelAttribute="commentForm">
 
 		<form:hidden path="id" />
-		<form:hidden path="comment.customer" />
 		<form:hidden path="comment.moment" />
 
 		<acme:textbox code="comment.rating" path="comment.rating"
@@ -73,8 +73,9 @@
 
 		<acme:textbox code="comment.description" path="comment.description" />
 
-		<acme:submit name="save" code="comment.save"/>
-		<acme:cancel url="comment/listByBulletin.do?bulletinId=${bulletinId}" code="comment.cancel"/>
-	
-</form:form>
+		<acme:submit name="save" code="comment.save" />
+		<acme:cancel url="comment/listByBulletin.do?bulletinId=${bulletinId}"
+			code="comment.cancel" />
+
+	</form:form>
 </jstl:if>
