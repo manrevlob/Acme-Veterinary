@@ -1,7 +1,7 @@
 <%--
- * action-2.jsp
+ * message.jsp
  *
- * Copyright (C) 2013 Universidad de Sevilla
+ * Copyright (C) 2014 Universidad de Sevilla
  * 
  * The use of this project is hereby constrained to the conditions of the 
  * TDG Licence, a copy of which you may download from 
@@ -10,8 +10,10 @@
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
@@ -19,17 +21,20 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="appointment/customer/save.do"
-	modelAttribute="appointmentForm">
+<b><spring:message code="item.name" />:</b>
+<jstl:out value="${item.name}" />
+<br />
 
-	<form:hidden path="startMoment" />
-	<form:hidden path="startTime" />
-	<form:hidden path="endTime" />
-	<form:hidden path="veterinary" />
+<b><spring:message code="item.sku" />:</b>
+<jstl:out value="${item.sku}" />
+<br />
 
-	<acme:select items="${pets }" itemLabel="name" code="appointment.pet" path="pet"/>
-	<acme:textarea code="appointment.reason" path="reason" text="appointment.reason" />
-	
-	<acme:submit name="save" code="appointment.save"/>
+<b><spring:message code="item.description" />:</b>
+<jstl:out value="${item.description}" />
+<br />
 
-</form:form>
+<b><spring:message code="item.amount" />:</b>
+<jstl:out value="${item.price.amount}" /> Euro
+<br />
+<br />
+<acme:cancel url="item/list.do" code="order.goBack"/>

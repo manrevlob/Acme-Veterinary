@@ -53,6 +53,23 @@ public class HistoryVeterinaryController extends AbstractController {
 		return result;
 	}
 
+	// Details --------------------------------------------------------------
+
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView details(@RequestParam int historyId) {
+		ModelAndView result;
+		History history;
+
+		history = historyService.findOne(historyId);
+
+		result = new ModelAndView("history/details");
+		result.addObject("requestURI", "history/veterinary/details.do");
+		result.addObject("history", history);
+
+		return result;
+
+	}
+
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -80,9 +97,15 @@ public class HistoryVeterinaryController extends AbstractController {
 			result = createAndEditModelAndView(historyForm);
 		} else {
 			try {
-				historyService.convertFormToHistory(historyForm);
-				result = new ModelAndView(
-						"redirect:/appointment/veterinary/list.do");
+
+				if (historyService.checkDates(historyForm)) {
+					historyService.convertFormToHistory(historyForm);
+					result = new ModelAndView(
+							"redirect:/appointment/veterinary/list.do");
+				} else {
+					result = createAndEditModelAndView(historyForm,
+							"history.commit.errorDates");
+				}
 			} catch (Throwable oops) {
 				result = createAndEditModelAndView(historyForm,
 						"history.commit.error");

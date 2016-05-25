@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -51,7 +52,6 @@ public class HistoryService {
 		Assert.isTrue(actorService.isVeterinary() || actorService.isCustomer());
 		History result;
 		result = historyRepository.findOne(historyId);
-		
 		return result;
 	}
 
@@ -85,6 +85,7 @@ public class HistoryService {
 
 	public void convertFormToHistory(HistoryForm historyForm) {
 		Assert.isTrue(actorService.isVeterinary());
+		Assert.isTrue(checkDates(historyForm));
 		History history;
 
 		history = create();
@@ -121,6 +122,21 @@ public class HistoryService {
 			result = false;
 		}
 
+		return result;
+	}
+	
+	public boolean checkDates(HistoryForm historyForm){
+		boolean result = false;
+		Calendar fechaActual = Calendar.getInstance();
+		Calendar startMoment = Calendar.getInstance(), endMoment = Calendar.getInstance();
+		startMoment.setTime(historyForm.getTreatmentStartMoment());
+		endMoment.setTime(historyForm.getTreatmentEndMoment());
+		if (fechaActual.before(startMoment)){
+			if (startMoment.before(endMoment)){
+				result = true;
+			}
+		}
+		
 		return result;
 	}
 }

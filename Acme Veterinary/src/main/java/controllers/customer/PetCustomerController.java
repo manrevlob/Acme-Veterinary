@@ -102,16 +102,16 @@ public class PetCustomerController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Pet pet, BindingResult binding) {
 		ModelAndView result;
-
+		Collection<PetType> petTypes = petTypeService.findAll();
 		if (binding.hasErrors()) {
 			result = new ModelAndView("pet/edit");
+			result.addObject("pet", pet);
+			result.addObject("petTypes", petTypes);
 		} else {
 			try {
 				petService.save(pet);
 				result = new ModelAndView("redirect:/pet/customer/list.do");
 			} catch (Throwable oops) {
-
-				Collection<PetType> petTypes = petTypeService.findAll();
 
 				result = new ModelAndView("pet/edit");
 				result.addObject("pet", pet);

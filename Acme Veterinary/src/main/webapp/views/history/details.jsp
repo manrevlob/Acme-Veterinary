@@ -50,7 +50,7 @@
 	<br />
 </jstl:if>
 
-<input type="button" name="cancel"
+<input class="btn" type="button" name="cancel"
 	value="<spring:message code="history.cancel" />"
 	onclick="javascript:history.back();" />
 <br />

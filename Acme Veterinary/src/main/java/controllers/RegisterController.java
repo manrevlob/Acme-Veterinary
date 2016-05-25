@@ -112,7 +112,7 @@ public class RegisterController extends AbstractController {
 		} else {
 			try {
 				veterinaryService.save(veterinaryForm);
-				result = new ModelAndView("redirect:../security/login.do");
+				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (Throwable oops) {
 				result = new ModelAndView("register/registerAsVeterinary");
 				result.addObject("veterinaryForm", veterinaryForm);

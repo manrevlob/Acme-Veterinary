@@ -49,21 +49,19 @@
 	<spring:message code="item.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" sortable="true" />
 
-	<spring:message code="item.description" var="descriptionHeader" />
-	<display:column property="description" title="${descriptionHeader}" />
-
 	<spring:message code="item.sku" var="skuHeader" />
 	<display:column property="sku" title="${skuHeader}" />
 
 	<spring:message code="item.amount" var="amountHeader" />
 	<display:column title="${amountHeader}" sortable="true">
 		<fmt:formatNumber type="number" value="${row.price.amount}"
-			maxFractionDigits="2" />
+			maxFractionDigits="2" /> <jstl:out value="Euro" />
 	</display:column>
-
-	<spring:message code="item.coin" var="coinHeader" />
-	<display:column title="${coinHeader}">
-		<jstl:out value="${coin}" />
+	
+	<display:column>
+		<a href="item/details.do?itemId=${row.id}"> <spring:message
+				code="item.details" />
+		</a>
 	</display:column>
 
 	<display:column>

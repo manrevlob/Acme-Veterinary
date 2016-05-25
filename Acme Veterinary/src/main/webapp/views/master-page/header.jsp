@@ -39,6 +39,8 @@
 			<security:authorize access="hasRole('ADMIN')">
 				<li><a href="register/createVeterinary.do"> <spring:message
 							code="master.page.register.veterinary" /></a></li>
+				<li><a href="dashboard/administrator/list.do"> <spring:message
+						code="master.page.administrator.dashboard" /></a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <spring:message
 							code="master.page.manage" /> <b class="caret"></b>

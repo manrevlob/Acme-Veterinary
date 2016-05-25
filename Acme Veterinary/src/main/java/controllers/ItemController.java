@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ItemService;
@@ -41,7 +42,7 @@ public class ItemController extends AbstractController {
 		items = itemService.findAllNoDeleted();
 		searchForm = new SearchForm();
 		coin = "Euro";
-		
+
 		result = new ModelAndView("item/list");
 		result.addObject("requestURI", "item/list.do");
 		result.addObject("searchForm", searchForm);
@@ -73,6 +74,21 @@ public class ItemController extends AbstractController {
 		result.addObject("items", items);
 		result.addObject("coin", coin);
 
+		return result;
+	}
+
+	// Details -----------------------------------------------------------
+
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView details(@RequestParam int itemId) {
+		ModelAndView result;
+		Item item;
+
+		item = itemService.findOne(itemId);
+
+		result = new ModelAndView("item/details");
+		result.addObject("item", item);
+		result.addObject("requestURI", "item/details.do?itemId=" + item.getId());
 		return result;
 	}
 

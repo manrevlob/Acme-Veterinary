@@ -63,6 +63,7 @@ public class ClinicService {
 	public Clinic save(Clinic clinic) {
 		Assert.isTrue(actorService.isAdministrator());
 		Assert.notNull(clinic);
+		Assert.isTrue(checkClinic(clinic));
 		clinic.setIsDeleted(false);
 		return clinicRepository.save(clinic);
 	}
@@ -103,7 +104,30 @@ public class ClinicService {
 			}
 			
 		}
-		
+
+	}
+	
+	public boolean checkClinic(Clinic clinic){
+		Boolean res = true;
+		if(clinic.getAddress() == null || clinic.getName() == null || clinic.getZipCode() == null
+				|| clinic.getAddress() == "" || clinic.getName() == "" || clinic.getZipCode() == ""){
+			res = false;
+		}
+		return res;
 	}
 
+	// Dashboard
+	public Collection<Object[]> clinicWithNumAppoint() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Object[]> result;
+		result = clinicRepository.clinicWithNumAppoint();
+		return result;
+	}
+
+	public Collection<Object[]> avgBulletinsByClinic() {
+		Assert.isTrue(actorService.isAdministrator());
+		Collection<Object[]> result;
+		result = clinicRepository.avgBulletinsByClinic();
+		return result;
+	}
 }
