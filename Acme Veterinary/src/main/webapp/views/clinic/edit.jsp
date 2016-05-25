@@ -49,7 +49,7 @@
 		<spring:message code="clinic.pictures" />:
 	</form:label>
 	<form:input path="pictures" />
-	<form:errors cssClass="error" path="pictures" />
+	<form:errors cssClass="error" path="pictures" /><spring:message code="clinic.addPictures" />
 	<br />
 
 	<input type="submit" name="save"

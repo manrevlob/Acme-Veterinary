@@ -40,10 +40,8 @@
 	
 	<acme:submit name="save" code="item.save"/>&nbsp; 
 	
-	<input class="btn" type="button" name="cancel"
-		value="<spring:message code="item.cancel" />"
-		onclick="javascript: window.location.replace('item/administrator/list.do')" />
-	<br />
+	<acme:cancel url="item/administrator/list.do" code="item.cancel"/>&nbsp;
+	
 	<jstl:if test="${item.id != 0}">
 		<acme:submit name="delete" code="item.delete"/>
 	</jstl:if>

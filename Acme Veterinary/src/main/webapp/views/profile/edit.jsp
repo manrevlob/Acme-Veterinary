@@ -32,8 +32,7 @@
 	<br />
 
 	<acme:submit name="save" code="profile.save" />
-	<input type="button" name="cancel"
-		value="<spring:message code="profile.cancel" />"
-		onclick="javascript:history.back();" />
+			
+	<acme:cancel url="profile/actor/list.do" code="profile.cancel"/>
 
 </form:form>

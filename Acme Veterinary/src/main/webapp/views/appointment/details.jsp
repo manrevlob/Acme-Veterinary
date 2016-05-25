@@ -68,7 +68,7 @@
 			<spring:message code="appointment.history.create" />
 		</a>
 	&nbsp;
-&nbsp;
+
 </jstl:if>
 
 	<jstl:if test="${appointment.payment == null}">
@@ -77,5 +77,5 @@
 		</a>
 	</jstl:if>
 </security:authorize>
-
+&nbsp;
 <acme:cancel url="appointment/customer/list.do" code="appointment.cancel"/>
