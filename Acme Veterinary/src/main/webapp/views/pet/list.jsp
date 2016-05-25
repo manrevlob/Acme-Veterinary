@@ -65,8 +65,8 @@
 	</security:authorize>
 
 </display:table>
-
-<a class="btn btn-primary" href="pet/customer/create.do"> <spring:message
-		code="pet.create" />
-</a>
-
+<security:authorize access="hasRole('CUSTOMER')">
+	<a class="btn btn-primary" href="pet/customer/create.do"> <spring:message
+			code="pet.create" />
+	</a>
+</security:authorize>

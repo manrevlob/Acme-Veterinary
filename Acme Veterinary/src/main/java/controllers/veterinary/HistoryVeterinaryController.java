@@ -14,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AppointmentService;
 import services.HistoryService;
+import services.PetService;
 import controllers.AbstractController;
 import domain.Appointment;
 import domain.History;
+import domain.Pet;
 import forms.HistoryForm;
 
 @Controller
@@ -29,7 +31,9 @@ public class HistoryVeterinaryController extends AbstractController {
 	private HistoryService historyService;
 	@Autowired
 	private AppointmentService appointmentService;
-
+	@Autowired
+	private PetService petService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public HistoryVeterinaryController() {
@@ -45,10 +49,12 @@ public class HistoryVeterinaryController extends AbstractController {
 		Collection<History> histories;
 
 		histories = historyService.findAllByPet(petId);
+		Pet pet = petService.findOne(petId);
 
 		result = new ModelAndView("history/list");
 		result.addObject("requestURI", "history/veterinary/list.do");
 		result.addObject("histories", histories);
+		result.addObject("customerId", pet.getCustomer().getId());
 
 		return result;
 	}

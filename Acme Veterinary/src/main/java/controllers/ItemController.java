@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,7 +56,8 @@ public class ItemController extends AbstractController {
 	// Search ------------------------------------------------------------
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST, params = "search")
-	public ModelAndView search(@Valid SearchForm searchForm) {
+	public ModelAndView search(@Valid SearchForm searchForm, BindingResult binding) {
+		
 		ModelAndView result;
 		Collection<Item> items;
 		SearchForm newSearchForm;
@@ -63,17 +65,19 @@ public class ItemController extends AbstractController {
 		String coin;
 
 		newSearchForm = new SearchForm();
-
-		keyword = searchForm.getKeyword();
-		items = itemService.findByKeyword(keyword);
-		coin = "Euro";
-
 		result = new ModelAndView("item/list");
+	
+		if (binding.hasErrors()){
+			items = itemService.findAllNoDeleted();
+		}else{	
+			keyword = searchForm.getKeyword();
+			items = itemService.findByKeyword(keyword);			
+		}
+		coin = "Euro";
+		result.addObject("items", items);
 		result.addObject("searchForm", newSearchForm);
 		result.addObject("requestURI", "item/list.do");
-		result.addObject("items", items);
 		result.addObject("coin", coin);
-
 		return result;
 	}
 

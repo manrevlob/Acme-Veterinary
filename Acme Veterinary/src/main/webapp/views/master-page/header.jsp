@@ -18,7 +18,9 @@
 
 <div>
 	<img class="hidden-xs" src="images/logo.png" alt="Acme-Veterinary Co., Inc." />
-	<img class="visible-xs" src="images/logoMovil.png" alt="Acme-Veterinary Co., Inc."> 
+	<div class="visible-xs"> 
+		<img class="visible-xs" style="margin: 0 auto;" src="images/logoMovil.png" alt="Acme-Veterinary Co., Inc." />
+	</div> 
 </div>
 
 <nav class="navbar navbar-default" role="navigation">

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,18 +74,21 @@ public class CustomerVeterinaryController extends AbstractController {
 	// Search ------------------------------------------------------------
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST, params = "search")
-	public ModelAndView search(@Valid SearchForm searchForm) {
+	public ModelAndView search(@Valid SearchForm searchForm, BindingResult bindingResult) {
 		ModelAndView result;
 		Collection<Customer> customers;
 		SearchForm newSearchForm;
 		String keyword;
 
 		newSearchForm = new SearchForm();
-
-		keyword = searchForm.getKeyword();
-		customers = customerService.findByKeyword(keyword);
-
 		result = new ModelAndView("customer/list");
+
+		if (bindingResult.hasErrors()){
+			customers = customerService.findAll();
+		}else{
+			keyword = searchForm.getKeyword();
+			customers = customerService.findByKeyword(keyword);
+		}
 		result.addObject("searchForm", newSearchForm);
 		result.addObject("requestURI", "customer/veterinary/listSearched.do");
 		result.addObject("customers", customers);
