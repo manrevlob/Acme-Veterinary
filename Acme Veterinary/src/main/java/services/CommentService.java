@@ -24,8 +24,6 @@ public class CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
 	@Autowired
-	private CustomerService customerService;
-	@Autowired
 	private ActorService actorService;
 	@Autowired
 	private ItemService itemService;
@@ -33,6 +31,8 @@ public class CommentService {
 	private VeterinaryService veterinaryService;
 	@Autowired
 	private BulletinService bulletinService;
+	@Autowired
+	private CustomerService customerService;
 
 	// Supporting services ----------------------------------------------------
 
@@ -48,7 +48,6 @@ public class CommentService {
 		Assert.isTrue(actorService.isCustomer());
 		Comment result;
 		result = new Comment();
-		result.setCustomer(customerService.findByPrincipal());
 		result.setMoment(new Date(System.currentTimeMillis() - 100));
 		return result;
 	}
@@ -111,25 +110,41 @@ public class CommentService {
 	public void saveToItem(CommentForm commentForm) {
 		Assert.isTrue(actorService.isCustomer());
 		Item item = itemService.findOne(commentForm.getId());
-		Collection<Comment> comments = item.getComments();
+
+		Collection<Comment> itemComments = item.getComments();
 		Comment comment = save(commentForm.getComment());
-		comments.add(comment);
+		itemComments.add(comment);
+
+		Collection<Comment> customerComments = customerService
+				.findByPrincipal().getComments();
+		customerComments.add(comment);
 	}
 
 	public void saveToVeterinary(CommentForm commentForm) {
 		Assert.isTrue(actorService.isCustomer());
 		Veterinary veterinary = veterinaryService.findOne(commentForm.getId());
+
 		Collection<Comment> comments = veterinary.getComments();
 		Comment comment = save(commentForm.getComment());
 		comments.add(comment);
+
+		Collection<Comment> customerComments = customerService
+				.findByPrincipal().getComments();
+		customerComments.add(comment);
+
 	}
 
 	public void saveToBullletin(CommentForm commentForm) {
 		Assert.isTrue(actorService.isCustomer());
 		Bulletin bulletin = bulletinService.findOne(commentForm.getId());
+
 		Collection<Comment> comments = bulletin.getComments();
 		Comment comment = save(commentForm.getComment());
 		comments.add(comment);
+
+		Collection<Comment> customerComments = customerService
+				.findByPrincipal().getComments();
+		customerComments.add(comment);
 	}
 
 }
