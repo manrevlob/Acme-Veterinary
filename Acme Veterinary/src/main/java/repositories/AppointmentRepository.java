@@ -26,6 +26,9 @@ public interface AppointmentRepository extends
 
 	@Query("select a from Appointment a where a.pet.customer = ?1 and a.day >= current_date() order by day, startTime")
 	Collection<Appointment> findByPrincipalNoExpired(Customer principal);
+	
+	@Query("select a from Appointment a where a.pet.customer = ?1 and a.day <= current_date() order by day, startTime")
+	Collection<Appointment> findByPrincipalExpired(Customer principal);
 
 //	@Query("")
 //	Collection<Appointment> appointMoreUse();

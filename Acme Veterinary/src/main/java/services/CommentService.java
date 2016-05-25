@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
+import domain.Appointment;
 import domain.Bulletin;
 import domain.Comment;
 import domain.Item;
@@ -33,6 +34,8 @@ public class CommentService {
 	private BulletinService bulletinService;
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private AppointmentService appointmentService;
 
 	// Supporting services ----------------------------------------------------
 
@@ -122,8 +125,9 @@ public class CommentService {
 
 	public void saveToVeterinary(CommentForm commentForm) {
 		Assert.isTrue(actorService.isCustomer());
-		Veterinary veterinary = veterinaryService.findOne(commentForm.getId());
+		Assert.isTrue(checkAppointments(commentForm.getId()));
 
+		Veterinary veterinary = veterinaryService.findOne(commentForm.getId());
 		Collection<Comment> comments = veterinary.getComments();
 		Comment comment = save(commentForm.getComment());
 		comments.add(comment);
@@ -132,6 +136,23 @@ public class CommentService {
 				.findByPrincipal().getComments();
 		customerComments.add(comment);
 
+	}
+
+	// Comprobar que se ha ido a una cita con el veterinario que se quiere
+	// comentar
+	public boolean checkAppointments(int veterinaryId) {
+		boolean result = false;
+		Veterinary veterinary = veterinaryService.findOne(veterinaryId);
+
+		Collection<Appointment> appointments = appointmentService
+				.findByPrincipaExpired();
+		for (Appointment a : appointments) {
+			if (a.getVeterinary().equals(veterinary)) {
+				result = true;
+				break;
+			}
+		}
+		return result;
 	}
 
 	public void saveToBullletin(CommentForm commentForm) {

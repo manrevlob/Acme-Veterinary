@@ -27,7 +27,7 @@ public class AppointmentService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private AppointmentRepository appointmentRepository;	
+	private AppointmentRepository appointmentRepository;
 
 	// Supporting services ----------------------------------------------------
 
@@ -39,7 +39,7 @@ public class AppointmentService {
 	private CustomerService customerService;
 	@Autowired
 	private MessageService messageService;
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public AppointmentService() {
@@ -71,13 +71,13 @@ public class AppointmentService {
 		Assert.notNull(appointment);
 		return appointmentRepository.save(appointment);
 	}
-	
+
 	public void delete(Appointment appointment) {
 		appointmentRepository.delete(appointment);
 	}
-	
+
 	// Other business methods -------------------------------------------------
-	//Devuelve todas las citas de veterinario principal
+	// Devuelve todas las citas de veterinario principal
 	public Collection<Appointment> findAllOwn() {
 		Assert.isTrue(actorService.isVeterinary());
 		Collection<Appointment> result;
@@ -86,7 +86,9 @@ public class AppointmentService {
 		result = appointmentRepository.findAllOwn(veterinary);
 		return result;
 	}
-	//Devuelve todas las citas de veterinario principal NO EXPIRADAS y ordenadas por el dia y la hora
+
+	// Devuelve todas las citas de veterinario principal NO EXPIRADAS y
+	// ordenadas por el dia y la hora
 	public Collection<Appointment> findAllOwnNoExpired() {
 		Assert.isTrue(actorService.isVeterinary());
 		Collection<Appointment> result;
@@ -95,32 +97,39 @@ public class AppointmentService {
 		result = appointmentRepository.findAllOwnNoExpired(veterinary);
 		return result;
 	}
-	//Devuelve todas las citas de veterinario principal NO EXPIRADAS y ordenadas por el dia y la hora
-		public Collection<Appointment> findAllOwnNoExpired(Veterinary veterinary) {
-			Assert.isTrue(actorService.isAdministrator());
-			Collection<Appointment> result;
-			result = appointmentRepository.findAllOwnNoExpired(veterinary);
-			return result;
-		}
-	
-	//Devuelve todas las citas de un veterinario NO EXPIRADAS y ordenadas por el dia y la hora
-	public Collection<Appointment> findAllByVeterinaryNoExpired(Veterinary veterinary) {
+
+	// Devuelve todas las citas de veterinario principal NO EXPIRADAS y
+	// ordenadas por el dia y la hora
+	public Collection<Appointment> findAllOwnNoExpired(Veterinary veterinary) {
+		Assert.isTrue(actorService.isAdministrator());
 		Collection<Appointment> result;
 		result = appointmentRepository.findAllOwnNoExpired(veterinary);
 		return result;
 	}
-	
-	//Este metodo se podrá utilizar sin estar logueado, por eso no lleva asserts
-	public boolean getVeterinaryisBooked(String day, String startTime,	String endTime, Veterinary veterinary) throws ParseException {
+
+	// Devuelve todas las citas de un veterinario NO EXPIRADAS y ordenadas por
+	// el dia y la hora
+	public Collection<Appointment> findAllByVeterinaryNoExpired(
+			Veterinary veterinary) {
+		Collection<Appointment> result;
+		result = appointmentRepository.findAllOwnNoExpired(veterinary);
+		return result;
+	}
+
+	// Este metodo se podrá utilizar sin estar logueado, por eso no lleva
+	// asserts
+	public boolean getVeterinaryisBooked(String day, String startTime,
+			String endTime, Veterinary veterinary) throws ParseException {
 		boolean res = false;
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dayDate = dateFormat.parse(day);
-		Collection<Appointment> appointments = appointmentRepository.getVeterinaryIsBooked(dayDate, startTime, endTime, veterinary);
+		Collection<Appointment> appointments = appointmentRepository
+				.getVeterinaryIsBooked(dayDate, startTime, endTime, veterinary);
 		if ((appointments != null) && (appointments.size() != 0))
 			res = true;
 		return res;
 	}
-	
+
 	public LinkedHashMap<String, String> getNextDays() {
 		LinkedHashMap<String, String> days = new LinkedHashMap<String, String>();
 		Calendar c = Calendar.getInstance();
@@ -136,7 +145,7 @@ public class AppointmentService {
 		}
 		return days;
 	}
-	
+
 	public String getDay() {
 		Calendar c = Calendar.getInstance();
 		String day;
@@ -145,66 +154,85 @@ public class AppointmentService {
 		day = ndf.format(dt);
 		return day;
 	}
-	
-	public Appointment reconstruct(AppointmentForm appointmentForm) throws ParseException {
+
+	public Appointment reconstruct(AppointmentForm appointmentForm)
+			throws ParseException {
 		Assert.isTrue(actorService.isCustomer());
-		Appointment appointment= create();
+		Appointment appointment = create();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date day = dateFormat.parse(appointmentForm.getStartMoment());
 		appointment.setDay(day);
 		appointment.setStartTime(appointmentForm.getStartTime());
 		appointment.setEndTime(appointmentForm.getEndTime());
-		appointment.setVeterinary(appointmentForm.getVeterinary());		
+		appointment.setVeterinary(appointmentForm.getVeterinary());
 		appointment.setPet(appointmentForm.getPet());
 		appointment.setReason(appointmentForm.getReason());
 		return appointment;
 	}
 
-	//Devuelve las citas del principal que la fecha sea superior a las de hoy
+	// Devuelve las citas del principal que la fecha sea superior a las de hoy
 	public Collection<Appointment> findByPrincipalNoExpired() {
 		Collection<Appointment> result;
 		Customer principal = customerService.findByPrincipal();
 		result = appointmentRepository.findByPrincipalNoExpired(principal);
 		return result;
-	}	
+	}
 
-	
-	//Borra una cita
+	// Devuelve las citas del principal que la fecha sea inferior a las de hoy,
+	// usado para comprobar si un customer ha tenido cita con un veterinario
+	// antes de comentar
+	public Collection<Appointment> findByPrincipaExpired() {
+		Collection<Appointment> result;
+		Customer principal = customerService.findByPrincipal();
+		result = appointmentRepository.findByPrincipalExpired(principal);
+		return result;
+	}
+
+	// Borra una cita
 	public void cancelAppointment(int appointmentId) {
-		Assert.isTrue(actorService.isCustomer() || actorService.isAdministrator() || actorService.isVeterinary());		
+		Assert.isTrue(actorService.isCustomer()
+				|| actorService.isAdministrator()
+				|| actorService.isVeterinary());
 		Appointment appointment = findOne(appointmentId);
 		if (actorService.isCustomer())
-			Assert.isTrue(appointment.getPet().getCustomer().equals(actorService.findByPrincipal()));
-					
+			Assert.isTrue(appointment.getPet().getCustomer()
+					.equals(actorService.findByPrincipal()));
+
 		delete(appointment);
 	}
 
-	//Borrar una cita siendo veterinario
+	// Borrar una cita siendo veterinario
 	public void cancelAppointmentVeterinary(int appointmentId) {
 		Veterinary veterinary = veterinaryService.findByPrincipal();
 		sendVeterinaryMessageCancel(appointmentId, veterinary);
 		cancelAppointment(appointmentId);
 	}
-	//Borrar una cita siendo administrador
+
+	// Borrar una cita siendo administrador
 	public void cancelAppointmentAdministrator(int appointmentId) {
 		Appointment appointment = findOne(appointmentId);
 		sendVeterinaryMessageCancel(appointmentId, appointment.getVeterinary());
 		cancelAppointment(appointmentId);
 	}
-	public void sendVeterinaryMessageCancel(int appointmentId, Veterinary veterinary){		
+
+	public void sendVeterinaryMessageCancel(int appointmentId,
+			Veterinary veterinary) {
 		Appointment appointment = findOne(appointmentId);
 		Customer customer = appointment.getPet().getCustomer();
 		DateFormat ndf = new SimpleDateFormat("dd/MM/yyyy");
-		Message message = messageService.create(veterinary,customer,"APPOINTMENT CANCEL", "Your appointment "+ndf.format(appointment.getDay())+" has been cancelled. Sorry about that.");
+		Message message = messageService.create(veterinary, customer,
+				"APPOINTMENT CANCEL",
+				"Your appointment " + ndf.format(appointment.getDay())
+						+ " has been cancelled. Sorry about that.");
 		messageService.sendMessage(message);
 	}
 
 	// Dashboard
-//	public Collection<Appointment> appointMoreUse() {
-//		Assert.isTrue(actorService.isAdministrator());
-//		Collection<Appointment> result;
-//		result = appointmentRepository.appointMoreUse();
-//		return result;
-//	}
+	// public Collection<Appointment> appointMoreUse() {
+	// Assert.isTrue(actorService.isAdministrator());
+	// Collection<Appointment> result;
+	// result = appointmentRepository.appointMoreUse();
+	// return result;
+	// }
 
 }
