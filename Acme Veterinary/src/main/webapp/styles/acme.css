@@ -9,10 +9,10 @@
  */
 
  .navbar-default {
-  background-image: -webkit-linear-gradient(top, #004191 0%, #004191 100%);
-  background-image:      -o-linear-gradient(top, #004191 0%, #004191 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#004191), to(#004191));
-  background-image:         linear-gradient(to bottom, #004191 0%, #004191 100%);
+  background-image: -webkit-linear-gradient(top, #265A88 0%, #265A88 100%);
+  background-image:      -o-linear-gradient(top, #265A88 0%, #265A88 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#265A88), to(#265A88));
+  background-image:         linear-gradient(to bottom, #265A88 0%, #265A88 100%);  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdbdbdb', endColorstr='#ffe2e2e2', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
