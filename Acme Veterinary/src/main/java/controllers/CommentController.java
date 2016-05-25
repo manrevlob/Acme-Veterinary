@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BulletinService;
 import services.CommentService;
+import services.VeterinaryService;
+import domain.Bulletin;
 import domain.Comment;
+import domain.Veterinary;
 
 @Controller
 @RequestMapping("/comment")
@@ -20,6 +24,10 @@ public class CommentController extends AbstractController {
 	// Services ---------------------------------------------------------------
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private VeterinaryService veterinaryService;
+	@Autowired
+	private BulletinService bulletinService;
 
 	// Constructors -----------------------------------------------------------
 	public CommentController() {
@@ -51,11 +59,13 @@ public class CommentController extends AbstractController {
 		ModelAndView result;
 		Collection<Comment> comments;
 
+		Veterinary veterinary = veterinaryService.findOne(veterinaryId);
 		comments = commentService.findAllByVeterinary(veterinaryId);
 
 		result = new ModelAndView("comment/list");
 		result.addObject("comments", comments);
 		result.addObject("veterinaryId", veterinaryId);
+		result.addObject("clinicId", veterinary.getClinic().getId());
 		result.addObject("requestURI", "comment/listByVeterinary.do");
 
 		return result;
@@ -66,12 +76,13 @@ public class CommentController extends AbstractController {
 	public ModelAndView listBulletin(@Valid int bulletinId) {
 		ModelAndView result;
 		Collection<Comment> comments;
-
+		Bulletin bulletin = bulletinService.findOne(bulletinId);
 		comments = commentService.findAllByBulletin(bulletinId);
 
 		result = new ModelAndView("comment/list");
 		result.addObject("comments", comments);
 		result.addObject("bulletinId", bulletinId);
+		result.addObject("clinicId", bulletin.getClinic().getId());
 		result.addObject("requestURI", "comment/listByBulletin.do");
 
 		return result;

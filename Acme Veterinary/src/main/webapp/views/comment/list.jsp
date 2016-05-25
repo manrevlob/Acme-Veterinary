@@ -18,6 +18,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
 <display:table pagesize="10" class="displaytag" keepStatus="true"
@@ -44,7 +45,7 @@
 			<display:column>
 				<a
 					onclick="return confirm('<spring:message code="comment.confirm.delete" />')"
-					href="comment/administrator/deleteFromItem.do?commentId=${row.id}">
+					href="comment/administrator/deleteFromItem.do?commentId=${row.id}&itemId=${itemId}">
 					<spring:message code="comment.delete" />
 				</a>
 			</display:column>
@@ -54,7 +55,7 @@
 			<display:column>
 				<a
 					onclick="return confirm('<spring:message code="comment.confirm.delete" />')"
-					href="comment/administrator/deleteFromVeterinary.do?commentId=${row.id}">
+					href="comment/administrator/deleteFromVeterinary.do?commentId=${row.id}&veterinaryId=${veterinaryId}">
 					<spring:message code="comment.delete" />
 				</a>
 			</display:column>
@@ -64,7 +65,7 @@
 			<display:column>
 				<a
 					onclick="return confirm('<spring:message code="comment.confirm.delete" />')"
-					href="comment/administrator/deleteFromBulletin.do?commentId=${row.id}">
+					href="comment/administrator/deleteFromBulletin.do?commentId=${row.id}&bulletinId=${bulletinId}">
 					<spring:message code="comment.delete" />
 				</a>
 			</display:column>
@@ -97,3 +98,15 @@
 	</jstl:if>
 
 </security:authorize>
+
+	<jstl:if test="${requestURI == 'comment/listByItem.do'}">	
+		<acme:cancel url="item/list.do" code="comment.cancel"/>
+	</jstl:if>
+
+	<jstl:if test="${requestURI == 'comment/listByVeterinary.do'}">
+		<acme:cancel url="veterinary/list.do?clinicId=${clinicId}" code="comment.cancel"/>
+	</jstl:if>
+
+	<jstl:if test="${requestURI == 'comment/listByBulletin.do'}">	
+		<acme:cancel url="bulletin/listByClinic.do?clinicId=${clinicId}" code="comment.cancel"/>
+	</jstl:if>
