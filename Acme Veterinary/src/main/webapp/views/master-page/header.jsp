@@ -100,8 +100,6 @@
 							code="master.page.bulletin" /></a></li>
 				<li><a href="register/createCustomer.do"> <spring:message
 							code="master.page.register" /></a></li>
-				<li><a class="fNiv" href="security/login.do"><spring:message
-							code="master.page.login" /></a></li>
 
 			</security:authorize>
 
@@ -110,17 +108,22 @@
 							code="master.page.clinic" /> </a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <spring:message
-							code="master.page.profile" /> (<security:authentication
-							property="principal.username" />) <b class="caret"></b>
+							code="master.page.profile" /> <b class="caret"></b>
 				</a>
 					<ul class="dropdown-menu">
 						<li><a href="profile/actor/list.do"><spring:message
 									code="master.page.profile.view" /></a></li>
 						<li><a href="messageFolder/actor/list.do"><spring:message
 									code="master.page.mail" /> </a></li>
-						<li><a href="j_spring_security_logout"><spring:message
-									code="master.page.logout" /> </a></li>
 					</ul></li>
+			</security:authorize>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<security:authorize access="isAnonymous()">
+				<li><a href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			</security:authorize>
+			<security:authorize access="isAuthenticated()">
+				<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> - (<security:authentication property="principal.username" />)</a></li>
 			</security:authorize>
 		</ul>
 	</div>
