@@ -113,7 +113,7 @@ public class ProfileActorController extends AbstractController {
 			} catch (Throwable oops) {
 				result = new ModelAndView("profile/changePassword");
 				result.addObject("passForm", passForm);
-				result.addObject("message", "actor.commit.error");
+				result.addObject("message", "actor.commit.errorPass");
 			}
 		}
 		return result;
