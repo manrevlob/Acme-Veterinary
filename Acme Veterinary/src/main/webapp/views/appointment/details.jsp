@@ -74,7 +74,7 @@
 	<jstl:if test="${appointment.payment == null}">
 		<a class="btn btn-warning" href="payment/veterinary/create.do?appointmentId=${appointment.id}">
 			<spring:message code="appointment.payment.create" />
-		</a>
+		</a>&nbsp;&nbsp;
 	</jstl:if>
 </security:authorize>
 <security:authorize access="hasRole('CUSTOMER')">
