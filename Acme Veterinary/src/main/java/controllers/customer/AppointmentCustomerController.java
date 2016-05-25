@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AppointmentService;
-import services.CustomerService;
 import services.PetService;
 import controllers.AbstractController;
 import domain.Appointment;
@@ -30,6 +29,7 @@ public class AppointmentCustomerController extends AbstractController {
 	private AppointmentService appointmentService;
 	@Autowired
 	private PetService petService;
+
 
 	// Constructors -----------------------------------------------------------
 
