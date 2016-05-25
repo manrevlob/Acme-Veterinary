@@ -72,7 +72,7 @@ public class ShoppingCartLineService {
 	}
 
 	public void delete(ShoppingCartLine shoppingCartLine) {
-		Assert.isTrue(actorService.isCustomer());
+		Assert.isTrue(actorService.isCustomer() || actorService.isAdministrator());
 		Assert.notNull(shoppingCartLine);
 		shoppingCartLineRepository.delete(shoppingCartLine);
 	}

@@ -79,9 +79,9 @@ public class ItemService {
 		Assert.notNull(item);
 		Assert.isTrue(actorService.isAdministrator());
 		Assert.isTrue(!item.getIsDeleted());
+		shoppingCartLineService.checkShoppingCart(item);
 		item.setIsDeleted(true);
 		item = save(item);
-		shoppingCartLineService.checkShoppingCart(item);
 	}
 
 	public Collection<Item> findAll() {

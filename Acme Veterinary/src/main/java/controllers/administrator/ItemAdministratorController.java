@@ -16,6 +16,7 @@ import services.ItemService;
 import controllers.AbstractController;
 import domain.Category;
 import domain.Item;
+import forms.SearchForm;
 
 @Controller
 @RequestMapping("/item/administrator")
@@ -41,14 +42,17 @@ public class ItemAdministratorController extends AbstractController {
 		ModelAndView result;
 		Collection<Item> items;
 		String coin;
+		SearchForm searchForm;
 
 		items = itemService.findAll();
 		coin = "Euro";
+		searchForm = new SearchForm();
 
 		result = new ModelAndView("item/list");
 		result.addObject("requestURI", "item/administrator/list.do");
 		result.addObject("items", items);
 		result.addObject("coin", coin);
+		result.addObject("searchForm", searchForm);
 		return result;
 
 	}
@@ -103,7 +107,7 @@ public class ItemAdministratorController extends AbstractController {
 
 		try {
 			itemService.delete(item);
-			result = new ModelAndView("redirect:/item/list.do");
+			result = new ModelAndView("redirect:/item/administrator/list.do");
 		} catch (Throwable oops) {
 			result = editModelAndView(item, "item.commit.error");
 		}
