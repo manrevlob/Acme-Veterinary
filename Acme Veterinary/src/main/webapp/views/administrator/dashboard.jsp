@@ -78,6 +78,7 @@
 <h3>
 	<spring:message code="dashboard.customerSaveVoucher" />
 </h3>
+<jstl:if test="${ customerSaveVoucher.size() != 0 }">
 <display:table pagesize="10" class="displaytag" keepStatus="true"
 	name="customerSaveVoucher" requestURI="${requestURI}" uid="row">
 
@@ -94,6 +95,7 @@
 		sortable="true" />
 	
 </display:table>
+</jstl:if>
 
 <h2>
 	<spring:message code="dashboard.allTime" />
@@ -108,6 +110,7 @@
 <h3>
 	<spring:message code="dashboard.clinicWithNumAppoint" />
 </h3>
+<jstl:if test="${ clinicWithNumAppoint.size() != 0 }">
 <display:table pagesize="10" class="displaytag" keepStatus="true"
 	name="clinicWithNumAppoint" requestURI="${requestURI}" uid="row">
 
@@ -120,6 +123,7 @@
 		sortable="true" />
 
 </display:table>
+</jstl:if>
 
 <h3>
 	<spring:message code="dashboard.mostDemandedItem" />
@@ -140,6 +144,7 @@
 <h3>
 	<spring:message code="dashboard.avgBulletinsByClinic" />
 </h3>
+<jstl:if test="${ avgBulletinsByClinic.size() != 0 }">
 <display:table pagesize="10" class="displaytag" keepStatus="true"
 	name="avgBulletinsByClinic" requestURI="${requestURI}" uid="row">
 
@@ -152,6 +157,7 @@
 		sortable="true" />
 
 </display:table>
+</jstl:if>
 
 <h3>
 	<spring:message code="dashboard.itemBestRating" />
@@ -172,6 +178,7 @@
 <h3>
 	<spring:message code="dashboard.avgComentPerCustomer" />
 </h3>
+<jstl:if test="${ avgComentPerCustomer.size() != 0 }">
 <display:table pagesize="10" class="displaytag" keepStatus="true"
 	name="avgComentPerCustomer" requestURI="${requestURI}" uid="row">
 
@@ -188,6 +195,7 @@
 		sortable="true" />
 	
 </display:table>
+</jstl:if>
 
 <h3>
 	<spring:message code="dashboard.customerMoreCommentDel" />
@@ -208,6 +216,7 @@
 <h3>
 	<spring:message code="dashboard.avgRatingPerVeterinary" />
 </h3>
+<jstl:if test="${ avgRatingPerVeterinary.size() != 0 }">
 <display:table pagesize="10" class="displaytag" keepStatus="true"
 	name="avgRatingPerVeterinary" requestURI="${requestURI}" uid="row">
 
@@ -224,6 +233,7 @@
 		sortable="true" />
 	
 </display:table>
+</jstl:if>
 
 <h3>
 	<spring:message code="dashboard.bestFiveVeterinary" />
