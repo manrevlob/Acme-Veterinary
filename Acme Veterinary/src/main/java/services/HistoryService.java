@@ -85,7 +85,6 @@ public class HistoryService {
 
 	public void convertFormToHistory(HistoryForm historyForm) {
 		Assert.isTrue(actorService.isVeterinary());
-		Assert.isTrue(checkDates(historyForm));
 		History history;
 
 		history = create();
@@ -96,6 +95,7 @@ public class HistoryService {
 		history.setVeterinary(historyForm.getAppointment().getVeterinary());
 		
 		if(checkTreatment(historyForm)){
+			Assert.isTrue(checkDates(historyForm));
 			Treatment treatment;
 			treatment = new Treatment();
 			

@@ -35,7 +35,7 @@
 <br />
 
 <b><spring:message code="appointment.moment" />:</b>
-<jstl:out value="${appointment.moment}" />
+<fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${appointment.moment}" />
 <br />
 
 <jstl:if test="${appointment.payment!=  null}">

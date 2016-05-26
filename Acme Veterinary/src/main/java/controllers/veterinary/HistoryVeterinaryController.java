@@ -104,7 +104,11 @@ public class HistoryVeterinaryController extends AbstractController {
 		} else {
 			try {
 
-				if (historyService.checkDates(historyForm)) {
+				if (!historyService.checkTreatment(historyForm)) {
+					historyService.convertFormToHistory(historyForm);
+					result = new ModelAndView(
+							"redirect:/appointment/veterinary/list.do");
+				} else if (historyService.checkTreatment(historyForm) && historyService.checkDates(historyForm)){
 					historyService.convertFormToHistory(historyForm);
 					result = new ModelAndView(
 							"redirect:/appointment/veterinary/list.do");
