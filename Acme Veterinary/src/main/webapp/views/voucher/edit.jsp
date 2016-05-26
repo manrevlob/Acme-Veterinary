@@ -26,6 +26,7 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="isDeleted" />
 	
 	<acme:textbox code="voucher.code" path="code"/>
 	<acme:number code="voucher.value" path="value" min="0" step="0.1"/>

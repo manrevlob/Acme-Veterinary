@@ -81,14 +81,8 @@
 			</security:authorize>
 
 			<security:authorize access="hasRole('VETERINARY')">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <spring:message
-							code="master.page.manage" /> <b class="caret"></b>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="appointment/veterinary/list.do"><spring:message
+				<li><a href="appointment/veterinary/list.do"><spring:message
 									code="master.page.veterinary.myAppointment" /></a></li>
-					</ul></li>
 				<li><a href="customer/veterinary/list.do"> <spring:message
 							code="master.page.customer.list" /></a></li>
 			</security:authorize>

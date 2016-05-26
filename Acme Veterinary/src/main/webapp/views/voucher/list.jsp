@@ -35,6 +35,9 @@
 	
 	<spring:message code="voucher.minimumOrder" var="minimumOrderHeader" />
 	<display:column property="minimumOrder" title="${minimumOrderHeader}" sortable="true" />
+	
+	<spring:message code="voucher.isDeleted" var="isDeletedHeader" />
+	<display:column property="isDeleted" title="${isDeletedHeader}" sortable="true" />
 
 	<display:column title="${veterinariesHeader}">
 		<a href="voucher/administrator/edit.do?voucherId=${row.id}"> <spring:message

@@ -10,7 +10,7 @@ import domain.Voucher;
 @Repository
 public interface VoucherRepository extends JpaRepository<Voucher, Integer> {
 
-	@Query("select v from Voucher v where v.code = ?1")
+	@Query("select v from Voucher v where v.code = ?1 and v.isDeleted = false and v.validUntil >= current_timestamp()")
 	Voucher findByCode(String code);
 
 	@Query("select count(o) from Order o where o.customer = ?1 and o.voucher = ?2")

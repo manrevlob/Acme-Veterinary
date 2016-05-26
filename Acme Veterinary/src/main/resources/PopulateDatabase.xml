@@ -1236,6 +1236,7 @@
 		<property name="value" value="10" />
 		<property name="validUntil" value="09/01/2016 00:00" />
 		<property name="minimumOrder" value="25" />
+		<property name="isDeleted" value="false" />
 	</bean>
 
 

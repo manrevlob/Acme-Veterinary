@@ -83,6 +83,10 @@ public class VoucherAdministratorController extends AbstractController {
 					voucher = voucherService.save(voucher);
 					result = new ModelAndView("redirect:/voucher/administrator/list.do");
 	
+				} catch (IllegalArgumentException ill){
+					result = new ModelAndView("voucher/edit");
+					result.addObject("voucher", voucher);
+					result.addObject("message", "voucher.commit.error.sameCode");
 				} catch (Throwable oops) {
 					result = new ModelAndView("voucher/edit");
 					result.addObject("voucher", voucher);
