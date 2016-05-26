@@ -23,7 +23,8 @@
 <div style="font-size: x-large;">
 	<spring:message code="order.totalPrice" />
 	:
-	<jstl:out value="${order.totalPrice.amount}" />
+	<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${order.totalPrice.amount}" />
+	
 	Euros
 </div>
 <form:form action="voucher/customer/apply.do"

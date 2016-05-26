@@ -46,6 +46,7 @@ public class VoucherService {
 		Assert.isTrue(actorService.isAdministrator());
 		Voucher result;
 		result = new Voucher();
+		result.setIsDeleted(false);
 		return result;
 	}
 
@@ -65,12 +66,25 @@ public class VoucherService {
 	public Voucher save(Voucher voucher) {
 		Assert.notNull(voucher);
 		Assert.isTrue(actorService.isAdministrator());
+		if (voucher.getId() == 0){
+			checkVoucher(voucher);
+		}
 		return voucherRepository.save(voucher);
 	}
 	
+	//Comprueba el Vocuher antes de crearlo
+	private void checkVoucher(Voucher voucher) {
+		//Comprobamos que el codigo no este ultilizado
+		Voucher exits = voucherRepository.findByCode(voucher.getCode());
+		if (exits != null){
+			throw new IllegalArgumentException();
+		}
+	}
+
 	public void delete(Voucher voucher) {
 		Assert.isTrue(actorService.isAdministrator());
-		voucherRepository.delete(voucher);
+		voucher.setIsDeleted(true);
+		voucherRepository.save(voucher);
 	}
 
 	//Comprobar que validUntil sea futuro

@@ -36,6 +36,8 @@ public class Voucher extends DomainEntity {
 	private Double value;
 	private Date validUntil;
 	private Double minimumOrder;
+	private Boolean isDeleted;
+	
 	
 	@NotBlank
 	public String getCode() {
@@ -75,6 +77,13 @@ public class Voucher extends DomainEntity {
 		this.minimumOrder = minimumOrder;
 	}
 
+	
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 	// Relationships ---------------------------------------------------------
 	
 	private Collection<Customer> customers;
