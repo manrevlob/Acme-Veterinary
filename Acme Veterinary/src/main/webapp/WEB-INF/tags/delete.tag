@@ -27,6 +27,6 @@
 
 <%-- Definition --%>
 
-<button type="submit" name="${name}" class="btn btn-danger">
+<button type="submit" name="${name}" class="btn btn-danger" onclick="return confirm('<spring:message code="delete.confirm" />')">
 	<spring:message code="${code}" />
 </button>
