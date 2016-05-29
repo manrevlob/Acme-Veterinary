@@ -40,6 +40,7 @@ public class PetService {
 		result = new Pet();
 		Customer customer = customerService.findByPrincipal();
 		result.setCustomer(customer);
+		result.setIsDeleted(false);
 		return result;
 	}
 
@@ -56,8 +57,10 @@ public class PetService {
 	}
 
 	public Pet save(Pet pet) {
-		Assert.notNull(pet);
-		Assert.isTrue(isOwner(pet.getId()));
+		Assert.notNull(pet.getId());
+		if (pet.getId() != 0){
+			Assert.isTrue(isOwner(pet.getId()));
+		}
 		return petRepository.save(pet);
 	}
 
