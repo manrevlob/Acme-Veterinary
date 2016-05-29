@@ -127,7 +127,7 @@ public class OrderService {
 	public void cancelOrderAdminstrator(Order order) {
 		Assert.isTrue(actorService.isAdministrator());
 		order.setIsCanceled(true);
-		orderRepository.save(order);
+		save(order);
 		messageService.sendCancelOrderMessage(order);
 	}
 

@@ -24,6 +24,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="customer" />
+	<form:hidden path="isDeleted" />
 
 	<acme:textbox code="pet.name" path="name" />
 
