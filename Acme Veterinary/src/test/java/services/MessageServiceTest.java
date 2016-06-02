@@ -153,6 +153,30 @@ public class MessageServiceTest extends AbstractTest {
 		messageService.sendMessage(message);
 
 		unauthenticate();
+	}
+		
+		// Tratamos de enviar un mensaje con un sender diferente al usuario logueado
+		@Test(expected = IllegalArgumentException.class)
+		@Rollback(true)
+		public void testSendMessageSenderNegative() {
+			Message message;
+			authenticate("admin");
+
+			message = messageService.create();
+			message.setSubject("Test");
+			message.setBody("Test");
+			// Id del customer2
+			message.setSender(actorService.findOne(54));
+
+			// ID del customer1, nosotros mismos, al que trataremos de enviar el
+			// mensaje
+
+			message.setRecipient(actorService.findOne(53));
+
+			messageService.sendMessage(message);
+
+			unauthenticate();
+
 
 	}
 

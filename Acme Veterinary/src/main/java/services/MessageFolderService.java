@@ -131,8 +131,10 @@ public class MessageFolderService {
 			actor = actorService.findByPrincipal();
 
 			messageFolders = actor.getMessageFolders();
-
-			if (messageFolders.contains(messageFolder)) {
+			//TODO Añadidos los && para probar que no se puedan eliminar las carpetas del sistema
+			if (messageFolders.contains(messageFolder) && messageFolder.getName()!="In box"
+					&& messageFolder.getName()!="Out box" && messageFolder.getName()!="Trash box"
+					&& messageFolder.getName()!="Spam box"){
 
 				messageFolder = findOne(messageFolder.getId());
 				deleteAllMessage(messageFolder.getMessages());

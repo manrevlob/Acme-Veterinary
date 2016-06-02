@@ -75,6 +75,7 @@ public class MessageService {
 
 	public Message save(Message message) {
 		Assert.isTrue(actorService.isAuthenticated());
+		Assert.isTrue(message.getSender() == actorService.findByPrincipal());
 		Assert.isTrue(message.getSender() != message.getRecipient());
 		Assert.notNull(message);
 		message.setMoment(new Date(System.currentTimeMillis() - 1000));
