@@ -1239,6 +1239,12 @@
 		<property name="isDeleted" value="false" />
 	</bean>
 
-
+	<bean id="voucher2" class="domain.Voucher">
+		<property name="code" value="WINTER" />
+		<property name="value" value="1" />
+		<property name="validUntil" value="12/12/2016 00:00" />
+		<property name="minimumOrder" value="0" />
+		<property name="isDeleted" value="false" />
+	</bean>
 
 </beans>
