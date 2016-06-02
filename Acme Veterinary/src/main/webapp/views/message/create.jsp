@@ -46,7 +46,6 @@
 		<spring:message code="message.recipient" />:
 	</form:label>
 	<form:select id="recipient" path="recipient">
-		<form:option value="0" label="----" />
 		<form:options items="${recipients}" itemValue="id"
 			itemLabel="userAccount.username" />
 	</form:select>

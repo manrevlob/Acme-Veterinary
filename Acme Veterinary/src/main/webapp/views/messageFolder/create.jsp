@@ -36,11 +36,8 @@
 			value="<spring:message code="messageFolder.delete" />"
 			onclick="return confirm('<spring:message code="messageFolder.deletePermanently" />')" />&nbsp;			
 	</jstl:if>
-
-	<input class="btn" type="button" name="cancel"
-		value="<spring:message code="messageFolder.cancel" />"
-		onclick="history.back();" />
-	<br />
+	<acme:cancel url="messageFolder/actor/list.do" code="messageFolder.cancel"/>
+	
 
 
 </form:form>

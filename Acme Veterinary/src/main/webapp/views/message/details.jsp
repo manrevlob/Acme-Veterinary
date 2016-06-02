@@ -64,11 +64,11 @@
 				onclick="return confirm('<spring:message code="message.deleteMessage" />')" />&nbsp;
 		</jstl:otherwise>
 	</jstl:choose>
-	
+	<jstl:if test="${msg.messageFolder.name != 'Spam box'}">
 		<input type="submit" name="spam"
 			value="<spring:message code="message.spam" />"
 			onclick="return confirm('<spring:message code="message.spam" />')" />&nbsp;
-	
+	</jstl:if>
 	
 	<input type="button" onclick="javascript:history.back();"
 		value="<spring:message code='message.cancel' />" />
