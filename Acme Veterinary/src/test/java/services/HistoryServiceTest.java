@@ -48,7 +48,7 @@ public class HistoryServiceTest extends AbstractTest {
 
 		Pet pet;
 		//Usamos el id del pet1
-		pet = petService.findOne(57);
+		pet = petService.findOne(63);
 		histories = pet.getHistories();
 
 		Assert.notNull(histories);
@@ -70,7 +70,7 @@ public class HistoryServiceTest extends AbstractTest {
 		authenticate("customer1");
 		Pet pet;
 		//Usamos el id del pet3
-		pet = petService.findOne(59);
+		pet = petService.findOne(65);
 		historyService.findAllByPet(pet.getId());
 
 		unauthenticate();

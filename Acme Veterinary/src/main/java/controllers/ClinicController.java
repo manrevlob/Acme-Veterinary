@@ -25,50 +25,50 @@ import domain.Clinic;
 @Controller
 @RequestMapping("/clinic")
 public class ClinicController extends AbstractController {
-	
+
 	// Services ---------------------------------------------------------------
 
-		@Autowired
-		private ClinicService clinicService;
+	@Autowired
+	private ClinicService clinicService;
 
-		// Constructors -----------------------------------------------------------
+	// Constructors -----------------------------------------------------------
 
-		public ClinicController() {
-			super();
-		}
-	
+	public ClinicController() {
+		super();
+	}
+
 	// Listing ----------------------------------------------------------------
 
-		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public ModelAndView list() {
-			ModelAndView result;
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
 
-			Collection<Clinic> clinics;
+		Collection<Clinic> clinics;
 
-			clinics = clinicService.findAllNotDeleted();
+		clinics = clinicService.findAllNotDeleted();
 
-			result = new ModelAndView("clinic/list");
-			result.addObject("requestURI", "clinic/list.do");
-			result.addObject("clinics", clinics);
+		result = new ModelAndView("clinic/list");
+		result.addObject("requestURI", "clinic/list.do");
+		result.addObject("clinics", clinics);
 
-			return result;
-		}
+		return result;
+	}
 
-		// Details --------------------------------------------------------------
+	// Details --------------------------------------------------------------
 
-		@RequestMapping(value = "/details", method = RequestMethod.GET)
-		public ModelAndView details(@RequestParam int clinicId) {
-			ModelAndView result;
-			Clinic clinic;
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView details(@RequestParam int clinicId) {
+		ModelAndView result;
+		Clinic clinic;
 
-			clinic = clinicService.findOne(clinicId);
+		clinic = clinicService.findOne(clinicId);
 
-			result = new ModelAndView("clinic/details");
-			result.addObject("requestURI", "clinic/details.do");
-			result.addObject("clinic", clinic);
-			
-			return result;
+		result = new ModelAndView("clinic/details");
+		result.addObject("requestURI", "clinic/details.do");
+		result.addObject("clinic", clinic);
 
-		}
-	
+		return result;
+
+	}
+
 }

@@ -72,10 +72,15 @@ public class SpamWordAdministratorController extends AbstractController {
 		} else {
 
 			try {
-
-				spamWordService.save(spamWord);
-				result = new ModelAndView(
-						"redirect:/spamword/administrator/list.do");
+				if (spamWordService.checkKey(spamWord)) {
+					spamWordService.save(spamWord);
+					result = new ModelAndView(
+							"redirect:/spamword/administrator/list.do");
+				} else {
+					result = new ModelAndView("spamword/edit");
+					result.addObject("spamWord", spamWord);
+					result.addObject("message", "spamWord.commit.error");
+				}
 			} catch (Throwable oops) {
 				result = new ModelAndView("spamword/edit");
 				result.addObject("spamWord", spamWord);

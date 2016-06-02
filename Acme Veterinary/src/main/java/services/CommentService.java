@@ -75,6 +75,7 @@ public class CommentService {
 	public void delete(int commentId) {
 		Assert.isTrue(actorService.isAdministrator());
 		Comment comment = findOne(commentId);
+		Assert.isTrue(!comment.getIsDeleted());
 		comment.setIsDeleted(true);
 		commentRepository.save(comment);
 	}
