@@ -41,9 +41,9 @@ public class MessageServiceTest extends AbstractTest {
 		MessageFolder messageFolder;
 		authenticate("admin");
 		// ID del outbox del admin
-		messageFolder = messageFolderService.findOne(8);
+		messageFolder = messageFolderService.findOne(27);
 		messagesInFolder = messageService.findAllByFolder(messageFolder);
-		Assert.isTrue(messagesInFolder.size() == 3);
+		Assert.isTrue(messagesInFolder.size() == 1);
 		unauthenticate();
 	}
 
@@ -64,7 +64,7 @@ public class MessageServiceTest extends AbstractTest {
 		message.setBody("Test");
 		message.setSender(actorService.findByPrincipal());
 		// ID del customer1, al que enviaremos el mensaje
-		message.setRecipient(actorService.findOne(47));
+		message.setRecipient(actorService.findOne(53));
 		messageService.sendMessage(message);
 
 		after = messageService.findAll();
@@ -86,7 +86,7 @@ public class MessageServiceTest extends AbstractTest {
 		authenticate("customer1");
 
 		// ID del mensaje 1
-		message = messageService.findOne(56);
+		message = messageService.findOne(61);
 
 		result = messageService.isRecipient(message,
 				actorService.findByPrincipal());
@@ -106,11 +106,11 @@ public class MessageServiceTest extends AbstractTest {
 		authenticate("admin");
 
 		// ID del mensaje 1
-		message = messageService.findOne(55);
+		message = messageService.findOne(61);
 		messageService.moveToTrashbox(message);
 		// ID del mensaje 1 y del trashbox del administrador respectivamente
-		Assert.isTrue(messageService.findOne(55).getMessageFolder() == messageFolderService
-				.findOne(22));
+		Assert.isTrue(messageService.findOne(61).getMessageFolder() == messageFolderService
+				.findOne(28));
 		unauthenticate();
 	}
 

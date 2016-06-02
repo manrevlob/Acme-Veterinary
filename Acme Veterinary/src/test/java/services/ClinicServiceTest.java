@@ -47,7 +47,8 @@ public class ClinicServiceTest extends AbstractTest {
 	public void testDeleteClinic() {
 		authenticate("admin");
 		Clinic clinic;
-		clinic = clinicService.findOne(45);
+		// Obtenemos la Id de la clinica1
+		clinic = clinicService.findOne(50);
 		clinicService.delete(clinic);
 		Assert.isTrue(clinic.getIsDeleted() == true);
 		unauthenticate();
@@ -75,7 +76,7 @@ public class ClinicServiceTest extends AbstractTest {
 
 	// Comprobamos que un administrador no puede editar una clínica que no existe
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	@Rollback(true)
 	public void testEditClinicNegative() {
 

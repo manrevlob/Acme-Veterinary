@@ -36,6 +36,7 @@ public class PaymentService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Payment create(Appointment appointment) {
+		Assert.isTrue(appointment.getPayment() == null);
 		Payment result;
 		result = new Payment();
 		result.setMoment(new Date(System.currentTimeMillis() - 1000));

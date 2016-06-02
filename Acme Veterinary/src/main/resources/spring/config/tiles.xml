@@ -38,6 +38,7 @@
 		<value>/views/order/tiles.xml</value>
 		<value>/views/voucher/tiles.xml</value>
 		<value>/views/comment/tiles.xml</value>
+		<value>/views/petType/tiles.xml</value>
 	</util:list>
 
 </beans>

@@ -83,7 +83,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 		before = shoppingCartLineService.findAll().size();
 
 		// Obtenemos el Id del Item6
-		item = itemService.findOne(19);
+		item = itemService.findOne(25);
 		quantity = 2;
 		shoppingCartService.addItem(item, quantity);
 
@@ -108,7 +108,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 		authenticate("customer1");
 
 		// Obtenemos el item 2 que el cliente1 tiene ya articulos en el carrito
-		item = itemService.findOne(15);
+		item = itemService.findOne(21);
 		quantity = 5;
 
 		shoppingCart = shoppingCartService.findByCustomerPrincipal();
@@ -138,7 +138,7 @@ public class ShoppingCartServiceTest extends AbstractTest {
 		before = shoppingCartLineService.findAll().size();
 
 		// Obtenemos el item 2 que el cliente1 tiene ya articulos en el carrito
-		item = itemService.findOne(15);
+		item = itemService.findOne(21);
 
 		shoppingCartService.deleteItem(item);
 

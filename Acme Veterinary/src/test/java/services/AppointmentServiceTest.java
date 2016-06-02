@@ -47,9 +47,9 @@ public class AppointmentServiceTest extends AbstractTest {
 
 		Veterinary veterinary;
 		//Usamos el id del pet1
-		Pet pet = petService.findOne(57);
+		Pet pet = petService.findOne(63);
 		//Usamos el id del veterinary1
-		veterinary = veterinaryService.findOne(49);
+		veterinary = veterinaryService.findOne(55);
 		Appointment appointment = appointmentService.create();
 		appointment.setVeterinary(veterinary);
 		appointment.setDay(new Date(12 / 13 / 2016));
@@ -70,7 +70,7 @@ public class AppointmentServiceTest extends AbstractTest {
 	public void testCancelAppointment() {
 		authenticate("customer1");
 		//ID del appointment5
-		appointmentService.cancelAppointment(67);
+		appointmentService.cancelAppointment(73);
 
 		unauthenticate();
 	}
@@ -88,7 +88,7 @@ public class AppointmentServiceTest extends AbstractTest {
 
 		Appointment appointment;
 		// ID del appointment 4
-		appointment = appointmentService.findOne(65);
+		appointment = appointmentService.findOne(71);
 
 		appointmentService.cancelAppointment(appointment.getId());
 

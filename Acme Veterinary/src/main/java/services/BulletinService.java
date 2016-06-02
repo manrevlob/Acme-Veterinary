@@ -59,8 +59,14 @@ public class BulletinService {
 
 	public void delete(Bulletin bulletin) {
 		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(!bulletin.getIsDeleted());
 		bulletin.setIsDeleted(true);
 		save(bulletin);
+	}
+	
+	public Collection<Bulletin> findAllTime(){
+		Assert.isTrue(actorService.isAdministrator());
+		return bulletinRepository.findAll();
 	}
 
 	// Other business methods -------------------------------------------------

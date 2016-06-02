@@ -55,7 +55,7 @@ public class ItemServiceTest extends AbstractTest {
 		item.setPrice(price);
 
 		// Obtenemos la Id de la categoria1
-		Category category = categoryService.findOne(10);
+		Category category = categoryService.findOne(16);
 		item.setCategory(category);
 
 		item.setIsDeleted(false);
@@ -82,7 +82,7 @@ public class ItemServiceTest extends AbstractTest {
 		authenticate("admin");
 
 		// Obtenemos el Id del item1
-		Item item = itemService.findOne(14);
+		Item item = itemService.findOne(20);
 		itemService.delete(item);
 
 		after = itemService.findAllNoDeleted();
@@ -123,7 +123,7 @@ public class ItemServiceTest extends AbstractTest {
 		item.setPrice(price);
 
 		// Obtenemos la Id de la categoria1
-		Category category = categoryService.findOne(10);
+		Category category = categoryService.findOne(16);
 		item.setCategory(category);
 
 		item.setIsDeleted(false);
@@ -150,7 +150,7 @@ public class ItemServiceTest extends AbstractTest {
 		item.setPrice(price);
 
 		// Obtenemos la Id de la categoria1
-		Category category = categoryService.findOne(10);
+		Category category = categoryService.findOne(16);
 		item.setCategory(category);
 
 		item.setIsDeleted(false);
@@ -223,7 +223,7 @@ public class ItemServiceTest extends AbstractTest {
 		item.setDescription("Item7Description");
 
 		// Obtenemos la Id de la categoria1
-		Category category = categoryService.findOne(10);
+		Category category = categoryService.findOne(16);
 		item.setCategory(category);
 
 		item.setIsDeleted(false);

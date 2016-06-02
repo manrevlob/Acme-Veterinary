@@ -36,7 +36,7 @@ public class PetServiceTest extends AbstractTest {
 
 		Pet pet;
 		// Seleccionamos la mascota
-		pet = petService.findOne(57);
+		pet = petService.findOne(63);
 		// Le modificamos el nombre
 		pet.setName("TEST");
 		petService.save(pet);
@@ -60,7 +60,7 @@ public class PetServiceTest extends AbstractTest {
 		authenticate("customer1");
 
 		Pet pet;
-		pet = petService.findOne(59);
+		pet = petService.findOne(65);
 		pet.setName("prueba");
 		petService.save(pet);
 
@@ -77,7 +77,7 @@ public class PetServiceTest extends AbstractTest {
 		authenticate("customer1");
 
 		Pet pet;
-		pet = petService.findOne(59);
+		pet = petService.findOne(65);
 		petService.delete(pet.getId());
 
 		unauthenticate();

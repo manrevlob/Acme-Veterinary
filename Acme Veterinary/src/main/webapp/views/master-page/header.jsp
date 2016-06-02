@@ -58,6 +58,8 @@
 									code="master.page.administrator.order" /></a></li>
 						<li><a href="voucher/administrator/list.do"><spring:message
 									code="master.page.administrator.voucher" /></a></li>
+						<li><a href="petType/administrator/list.do"><spring:message
+									code="master.page.administrator.petType" /></a></li>
 					</ul></li>
 			</security:authorize>
 

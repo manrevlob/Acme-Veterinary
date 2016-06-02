@@ -52,7 +52,7 @@ public class ShoppingCartLineServiceTest extends AbstractTest {
 		before = shoppingCartLineService.findAll().size();
 
 		// Obtenemos el Id del Item5
-		item = itemService.findOne(18);
+		item = itemService.findOne(24);
 		quantity = 2;
 		shoppingCart = shoppingCartService.findByCustomerPrincipal();
 

@@ -19,12 +19,11 @@ public class SpamWordService {
 	@Autowired
 	private SpamWordRepository spamWordRepository;
 
-	
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
 	private ActorService actorService;
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public SpamWordService() {
@@ -55,6 +54,7 @@ public class SpamWordService {
 		Assert.isTrue(actorService.isAdministrator());
 		Assert.notNull(spamWord);
 		spamWord.setKeyWord(spamWord.getKeyWord().toLowerCase());
+		Assert.isTrue(checkKey(spamWord));
 		return spamWordRepository.save(spamWord);
 	}
 
@@ -64,4 +64,18 @@ public class SpamWordService {
 	}
 
 	// Other business methods -------------------------------------------------
+
+	public boolean checkKey(SpamWord spamWord) {
+		Assert.notNull(spamWord);
+		boolean result = true;
+		Collection<SpamWord> spamWords;
+		spamWords = findAll();
+		for (SpamWord s : spamWords) {
+			if (s.getKeyWord().compareTo(spamWord.getKeyWord()) == 0) {
+				result = false;
+				break;
+			}
+		}
+		return result;
+	}
 }

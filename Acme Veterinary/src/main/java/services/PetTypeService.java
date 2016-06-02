@@ -21,6 +21,9 @@ public class PetTypeService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private ActorService actorService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public PetTypeService() {
@@ -30,6 +33,7 @@ public class PetTypeService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public PetType create() {
+		Assert.isTrue(actorService.isAdministrator());
 		PetType result;
 		result = new PetType();
 		return result;
@@ -48,13 +52,26 @@ public class PetTypeService {
 	}
 
 	public PetType save(PetType petType) {
+		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(checkName(petType));
 		Assert.notNull(petType);
 		return petTypeRepository.save(petType);
 	}
 	
-	public void delete(PetType petType) {
-		petTypeRepository.delete(petType);
-	}
-	
 	// Other business methods -------------------------------------------------
+	
+	public boolean checkName(PetType petType){
+		Assert.notNull(petType);
+		boolean result = true;
+		Collection<PetType> petTypes; 
+		petTypes = findAll();
+		for (PetType p: petTypes){
+			if (p.getName().compareTo(petType.getName()) == 0){
+				result = false;
+				break;
+			}
+		}
+		
+		return result;
+	}
 }

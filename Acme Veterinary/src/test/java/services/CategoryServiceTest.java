@@ -63,7 +63,7 @@ public class CategoryServiceTest extends AbstractTest {
 		Category category;
 		
 		// Obtenemos el Id de la categoria1
-		category = categoryService.findOne(10);
+		category = categoryService.findOne(16);
 		
 		Assert.isTrue(!categoryService.delete(category));
 
