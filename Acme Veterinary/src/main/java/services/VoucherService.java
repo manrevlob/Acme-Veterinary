@@ -145,6 +145,16 @@ public class VoucherService {
 		result = voucherRepository.findByCode(code);
 		return result;
 	}
+
+	//Comprueba que no sea nulo para el controlador
+	public boolean isNotNull(Voucher voucher) {
+		boolean result = false;
+		if (voucher == null)
+			result = true;
+		
+		return result;
+		
+	}
 	
 	// Other business methods -------------------------------------------------
 }

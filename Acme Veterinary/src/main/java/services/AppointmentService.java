@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.mchange.lang.IntegerUtils;
+
 import repositories.AppointmentRepository;
 import domain.Appointment;
 import domain.Customer;
@@ -69,8 +71,10 @@ public class AppointmentService {
 
 	public Appointment save(Appointment appointment) {
 		Assert.notNull(appointment);
+		Assert.isTrue(checkAppointment(appointment));
 		return appointmentRepository.save(appointment);
 	}
+
 
 	public void delete(Appointment appointment) {
 		appointmentRepository.delete(appointment);
@@ -226,5 +230,39 @@ public class AppointmentService {
 						+ " has been cancelled. Sorry about that.");
 		messageService.sendMessage(message);
 	}
-
+	//Comprobar que las citas sean validas para crearla
+	private boolean checkAppointment(Appointment appointment) {
+		boolean result = true;
+		// que no sean pasadas
+		Calendar c = Calendar.getInstance();
+		Calendar today = Calendar.getInstance();
+		today.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), 0, 0, 0);
+		today.set(Calendar.MILLISECOND, 0);
+		
+		if (appointment.getDay().before(today.getTime())){
+			result = false;
+		}else if (appointment.getDay().equals(today.getTime())){
+			if (IntegerUtils.parseInt(appointment.getStartTime(), 0) <= c.get(Calendar.HOUR)){
+				result = false;
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	public boolean checkDateInView(String day, String startTime) throws ParseException{
+		boolean result = true;
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar dayCalendar = Calendar.getInstance();
+		dayCalendar.setTime(dateFormat.parse(day));
+		dayCalendar.set(Calendar.HOUR_OF_DAY, IntegerUtils.parseInt(startTime, 0));
+		Calendar today = Calendar.getInstance();
+		if (dayCalendar.before(today.getTime())){
+			result = false;
+		}
+		
+		return result;
+	}
 }
