@@ -64,8 +64,12 @@ public class VoucherAdministratorController extends AbstractController {
 
 		Voucher voucher;
 		voucher = voucherService.findOne(voucherId);
-		result = new ModelAndView("voucher/edit");
-		result.addObject("voucher", voucher);
+		if (voucherService.isNotNull(voucher)){
+			result = new ModelAndView("misc/403");
+		}else{
+			result = new ModelAndView("voucher/edit");
+			result.addObject("voucher", voucher);
+		}
 		return result;
 	}
 	

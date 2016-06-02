@@ -49,16 +49,22 @@
 								<td style="background-color: lightPink;" class="center"> <spring:message code="appointment.booked"/></td>
 							</jstl:when>
 							<jstl:otherwise>
+								<jstl:choose>
+									<jstl:when	test="${appointmentService.checkDateInView(daySelected,i)}">
+										<td style="background-color: #d3e8a3;" class="center"><form:form
+											action="appointment/customer/create.do" modelAttribute="appointmentForm">
+											<form:hidden path="veterinary" />
+											<form:hidden path="startTime" value="${i}" />
+											<form:hidden path="endTime" value="${i+1}" />
+											<form:hidden path="startMoment" value="${daySelected }" />
 
-								<td style="background-color: #d3e8a3;" class="center"><form:form
-										action="appointment/customer/create.do" modelAttribute="appointmentForm">
-										<form:hidden path="veterinary" />
-										<form:hidden path="startTime" value="${i}" />
-										<form:hidden path="endTime" value="${i+1}" />
-										<form:hidden path="startMoment" value="${daySelected }" />
-
-										<acme:submit name="book" code="appointment.book" />
-									</form:form></td>
+											<acme:submit name="book" code="appointment.book" />
+										</form:form></td>
+									</jstl:when>
+									<jstl:otherwise>
+										<td style="background-color: grayk;" class="center"> </td>	
+									</jstl:otherwise>
+								</jstl:choose>
 							</jstl:otherwise>
 						</jstl:choose>
 					</jstl:forEach>
