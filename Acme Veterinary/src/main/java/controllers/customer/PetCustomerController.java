@@ -1,24 +1,15 @@
 package controllers.customer;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.PetService;
@@ -152,82 +143,17 @@ public class PetCustomerController extends AbstractController {
 	}
 
 	// Details --------------------------------------------------------------
+
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
 	public ModelAndView details(int petId, HttpServletRequest httpServletRequest) {
 		ModelAndView result;
 		Pet pet = petService.findOne(petId);
 
-		// String rootPath = System.getProperty("catalina.base");
-		StringBuffer ruta = httpServletRequest.getRequestURL();
-		String rutaf = StringUtils.replace(ruta.toString(),
-				"pet/customer/details.do", "");
-
-		String image = rutaf + "images" + "/pets/" + petId + ".png";
-
 		result = new ModelAndView("pet/details");
 		result.addObject("pet", pet);
-		result.addObject("image", image);
-
 		return result;
 	}
 
-	// Upload a image -------------------------------------------------------
 
-	@RequestMapping(value = "/uploadImage", method = RequestMethod.GET)
-	public ModelAndView uploadImage(int petId) {
-		ModelAndView result;
-
-		result = new ModelAndView("pet/uploadImage");
-		result.addObject("petId", petId);
-
-		return result;
-	}
-
-	private static final Logger logger = LoggerFactory
-			.getLogger(PetCustomerController.class);
-
-	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST, params = "upload")
-	public @ResponseBody
-	ModelAndView uploadFileHandler(@RequestParam("petId") int petId,
-			@RequestParam("file") MultipartFile file,
-			HttpServletRequest httpServletRequest) {
-
-		if (!file.isEmpty()) {
-			try {
-				byte[] bytes = file.getBytes();
-
-				// Creating the directory to store file
-				String rootPath = System.getProperty("catalina.base");
-				// StringBuffer ruta = httpServletRequest.getRequestURL();
-				// String rutaf = StringUtils.replace(ruta.toString(),
-				// "pet/customer/details.do", "");
-				File dir = new File(
-						rootPath
-								+ "/../../../../Acme-Veterinary/src/main/webapp/images/pets");
-				if (!dir.exists())
-					dir.mkdirs();
-
-				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + petId + ".png");
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-
-				logger.info("Server File Location="
-						+ serverFile.getAbsolutePath());
-
-				return new ModelAndView(
-						"redirect:/pet/customer/details.do?petId=" + petId);
-
-			} catch (Exception e) {
-				return new ModelAndView(
-						"redirect:/pet/customer/details.do?petId=" + petId);
-			}
-		} else {
-			return new ModelAndView("redirect:/pet/customer/details.do?petId="
-					+ petId);
-		}
-	}
+	
 }
