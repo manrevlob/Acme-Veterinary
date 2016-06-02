@@ -101,6 +101,7 @@ public class VoucherService {
 	
 	//Metodo que aplica el descuento sobre una order
 	public VoucherForm applyVoucher(VoucherForm voucherForm) {
+		Assert.isTrue(actorService.isCustomer());
 		Voucher voucher = findByCode(voucherForm.getCode());
 		if (voucherForm.getVoucher() == null ){
 			if (voucher != null){
