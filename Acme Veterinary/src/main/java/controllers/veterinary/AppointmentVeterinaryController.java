@@ -34,13 +34,16 @@ public class AppointmentVeterinaryController extends AbstractController {
 	public ModelAndView list(@RequestParam(required = false) String message) {
 		ModelAndView result;
 
-		Collection<Appointment> appointments;
+		Collection<Appointment> appointmentsNoExpired;
+		Collection<Appointment> appointmentsExpired;
 
-		appointments = appointmentService.findAllOwnNoExpired();
+		appointmentsNoExpired = appointmentService.findAllOwnNoExpired();
+		appointmentsExpired = appointmentService.findAllOwnExpired();
 
 		result = new ModelAndView("appointment/list");
 		result.addObject("requestURI", "appointment/veterinary/list.do");
-		result.addObject("appointments", appointments);
+		result.addObject("appointmentsNoExpired", appointmentsNoExpired);
+		result.addObject("appointmentsExpired", appointmentsExpired);
 		result.addObject("message", message);
 
 		return result;
@@ -58,6 +61,7 @@ public class AppointmentVeterinaryController extends AbstractController {
 		result = new ModelAndView("appointment/details");
 		result.addObject("requestURI", "appointment/veterinary/details.do");
 		result.addObject("appointment", appointment);
+		result.addObject("appointmentService", appointmentService);
 
 		return result;
 	}

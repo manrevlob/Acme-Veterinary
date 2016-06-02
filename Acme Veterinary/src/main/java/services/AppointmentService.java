@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -101,11 +102,22 @@ public class AppointmentService {
 		result = appointmentRepository.findAllOwnNoExpired(veterinary);
 		return result;
 	}
+	
+	// Devuelve todas las citas de veterinario principal EXPIRADAS y
+		// ordenadas por el dia y la hora
+		public Collection<Appointment> findAllOwnExpired() {
+			Assert.isTrue(actorService.isVeterinary());
+			Collection<Appointment> result;
+			Veterinary veterinary;
+			veterinary = veterinaryService.findByPrincipal();
+			result = appointmentRepository.findAllOwnExpired(veterinary);
+			return result;
+		}
 
 	// Devuelve todas las citas de veterinario principal NO EXPIRADAS y
 	// ordenadas por el dia y la hora
 	public Collection<Appointment> findAllOwnNoExpired(Veterinary veterinary) {
-		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(actorService.isAdministrator() || actorService.isVeterinary());
 		Collection<Appointment> result;
 		result = appointmentRepository.findAllOwnNoExpired(veterinary);
 		return result;
@@ -113,8 +125,8 @@ public class AppointmentService {
 
 	// Devuelve todas las citas de un veterinario NO EXPIRADAS y ordenadas por
 	// el dia y la hora
-	public Collection<Appointment> findAllByVeterinaryNoExpired(
-			Veterinary veterinary) {
+	public Collection<Appointment> findAllByVeterinaryNoExpired(Veterinary veterinary) {
+		Assert.isTrue(actorService.isAdministrator() || actorService.isVeterinary());
 		Collection<Appointment> result;
 		result = appointmentRepository.findAllOwnNoExpired(veterinary);
 		return result;
@@ -260,6 +272,22 @@ public class AppointmentService {
 		dayCalendar.set(Calendar.HOUR_OF_DAY, IntegerUtils.parseInt(startTime, 0));
 		Calendar today = Calendar.getInstance();
 		if (dayCalendar.before(today.getTime())){
+			result = false;
+		}
+		
+		return result;
+	}
+	
+	public boolean checkDateInViewDetails(String day, String startTime) throws ParseException{
+		boolean result = true;
+		
+		day = StringUtils.replace(day, " 00:00:00.0", "");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar dayCalendar = Calendar.getInstance();
+		dayCalendar.setTime(dateFormat.parse(day));
+		dayCalendar.set(Calendar.HOUR_OF_DAY, IntegerUtils.parseInt(startTime, 0));
+		Calendar today = Calendar.getInstance();
+		if (dayCalendar.after(today)){
 			result = false;
 		}
 		

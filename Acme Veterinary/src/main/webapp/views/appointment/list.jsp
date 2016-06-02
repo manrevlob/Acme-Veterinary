@@ -26,7 +26,7 @@
 	</h2>
 </security:authorize>
 
-<display:table name="appointments" pagesize="10" class="displaytag"
+<display:table name="appointmentsNoExpired" pagesize="10" class="displaytag"
 	requestURI="${requestURI}" id="row">
 
 	<spring:message code="appointment.moment" var="momentHeader" />
@@ -96,3 +96,51 @@
 
 </display:table>
 
+<security:authorize access="hasRole('VETERINARY')">
+	<h2>
+		<spring:message code="appointment.infoVet2" />
+	</h2>
+
+
+
+<display:table name="appointmentsExpired" pagesize="10" class="displaytag"
+	requestURI="${requestURI}" id="row">
+
+	<spring:message code="appointment.moment" var="momentHeader" />
+	<display:column title="${momentHeader}">
+		<fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${row.moment}" />
+	</display:column>
+
+	<spring:message code="appointment.day" var="dayHeader" />
+	<display:column title="${dayHeader}" sortable="true">
+		<fmt:formatDate pattern="dd-MM-yyyy" value="${row.day}" />
+	</display:column>
+
+	<spring:message code="appointment.startTime" var="startTimeHeader" />
+	<display:column property="startTime" title="${startTimeHeader}"
+		sortable="true" />
+
+	<spring:message code="appointment.endTime" var="endTimeHeader" />
+	<display:column property="endTime" title="${endTimeHeader}"
+		sortable="true" />
+
+
+	<spring:message code="appointment.reason" var="reasonHeader" />
+	<display:column property="reason" title="${reasonHeader}"
+		sortable="true" />
+
+	
+		
+
+			<display:column title="${detailsHeader}">
+				<a href="appointment/veterinary/details.do?appointmentId=${row.id}">
+					<spring:message code="appointment.details" />
+				</a>
+			</display:column>
+			
+		
+
+
+</display:table>
+
+</security:authorize>
