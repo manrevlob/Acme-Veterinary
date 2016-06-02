@@ -102,6 +102,7 @@ public class Pet extends DomainEntity {
 	}
 
 	@Valid
+	@NotNull
 	@ManyToOne(optional = false)
 	public PetType getPetType() {
 		return petType;

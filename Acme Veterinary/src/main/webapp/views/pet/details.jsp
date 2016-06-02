@@ -30,13 +30,6 @@
 <br />
 <b><spring:message code="pet.petType" />:</b>
 <jstl:out value="${pet.petType.name}" />
-<br />
-
-<img src="${image}" alt="${pet.name}" style="width: 300px; height: 300px;" />
-
-<a href="pet/customer/uploadImage.do?petId=${pet.id}"> <spring:message
-		code="pet.uploadImage" />
-</a>
 <br>
 <br>
 <acme:cancel url="pet/customer/list.do" code="pet.cancel"/>
