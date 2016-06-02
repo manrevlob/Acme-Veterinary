@@ -35,7 +35,7 @@
 
 		<acme:submit name="save" code="comment.save" />
 
-		<acme:cancel url="comment/listByItem.do?itemId=${itemId}"
+		<acme:cancel url="comment/listByItem.do?itemId=${commentForm.id}"
 			code="comment.cancel" />
 	</form:form>
 </jstl:if>
@@ -56,7 +56,7 @@
 		<acme:submit name="save" code="comment.save" />
 
 		<acme:cancel
-			url="comment/listByVeterinary.do?veterinaryId=${veterinaryId}"
+			url="comment/listByVeterinary.do?veterinaryId=${commentForm.id}"
 			code="comment.cancel" />
 	</form:form>
 </jstl:if>
@@ -74,7 +74,7 @@
 		<acme:textbox code="comment.description" path="comment.description" />
 
 		<acme:submit name="save" code="comment.save" />
-		<acme:cancel url="comment/listByBulletin.do?bulletinId=${bulletinId}"
+		<acme:cancel url="comment/listByBulletin.do?bulletinId=${commentForm.id}"
 			code="comment.cancel" />
 
 	</form:form>
