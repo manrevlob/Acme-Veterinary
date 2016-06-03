@@ -39,6 +39,7 @@ public class AppointmentServiceTest extends AbstractTest {
 
 	// Comprobamos que un usuario puede pedir cita para un veterinario
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreateAppointment() {
 
@@ -52,11 +53,11 @@ public class AppointmentServiceTest extends AbstractTest {
 		veterinary = veterinaryService.findOne(55);
 		Appointment appointment = appointmentService.create();
 		appointment.setVeterinary(veterinary);
-		appointment.setDay(new Date(12 / 13 / 2016));
-		appointment.setEndTime("21:00:00");
+		appointment.setDay(new Date(2016, 12, 12));
+		appointment.setEndTime("21");
 		appointment.setPet(pet);
 		appointment.setReason("TEST");
-		appointment.setStartTime("20:00:00");
+		appointment.setStartTime("20");
 		appointment = appointmentService.save(appointment);
 
 		Assert.isTrue(appointment.getId() != 0);
