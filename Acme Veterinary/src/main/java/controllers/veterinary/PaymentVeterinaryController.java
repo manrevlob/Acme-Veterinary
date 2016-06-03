@@ -41,19 +41,23 @@ public class PaymentVeterinaryController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView details(@RequestParam int appointmentId) {
 		ModelAndView result;
+		try {
+			Appointment appointment;
+			appointment = appointmentService.findOne(appointmentId);
 
-		Appointment appointment;
-		appointment = appointmentService.findOne(appointmentId);
+			Payment payment = paymentService.create(appointment);
 
-		Payment payment = paymentService.create(appointment);
+			LinkedHashMap<String, Integer> months = Utiles.getMonth();
+			LinkedHashMap<String, Integer> years = Utiles.getYears();
 
-		LinkedHashMap<String, Integer> months = Utiles.getMonth();
-		LinkedHashMap<String, Integer> years = Utiles.getYears();
-
-		result = new ModelAndView("appointment/payment");
-		result.addObject("payment", payment);
-		result.addObject("months", months);
-		result.addObject("years", years);
+			result = new ModelAndView("appointment/payment");
+			result.addObject("payment", payment);
+			result.addObject("months", months);
+			result.addObject("years", years);
+			
+		} catch (Exception e) {
+			result = new ModelAndView("misc/403");
+		}
 
 		return result;
 	}
