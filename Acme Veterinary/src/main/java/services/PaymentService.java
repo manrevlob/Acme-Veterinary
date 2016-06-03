@@ -24,6 +24,8 @@ public class PaymentService {
 	private PaymentRepository paymentRepository;
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private AppointmentService appointmentService;
 
 	// Supporting services ----------------------------------------------------
 
@@ -37,6 +39,7 @@ public class PaymentService {
 
 	public Payment create(Appointment appointment) {
 		Assert.isTrue(appointment.getPayment() == null);
+		Assert.isTrue(!appointmentService.checkAppointment(appointment));
 		Payment result;
 		result = new Payment();
 		result.setMoment(new Date(System.currentTimeMillis() - 1000));

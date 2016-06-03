@@ -71,7 +71,7 @@
 
 </jstl:if>
 
-	<jstl:if test="${appointment.history == null && appointmentService.checkDateInViewDetails(appointment.day, appointment.startTime)}">
+	<jstl:if test="${appointment.payment == null && appointmentService.checkDateInViewDetails(appointment.day, appointment.startTime)}">
 		<a class="btn btn-warning" href="payment/veterinary/create.do?appointmentId=${appointment.id}">
 			<spring:message code="appointment.payment.create" />
 		</a>&nbsp;&nbsp;

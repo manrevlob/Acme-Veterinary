@@ -14,9 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import repositories.AppointmentRepository;
+
 import com.mchange.lang.IntegerUtils;
 
-import repositories.AppointmentRepository;
 import domain.Appointment;
 import domain.Customer;
 import domain.Message;
@@ -243,7 +244,7 @@ public class AppointmentService {
 		messageService.sendMessage(message);
 	}
 	//Comprobar que las citas sean validas para crearla
-	private boolean checkAppointment(Appointment appointment) {
+	public boolean checkAppointment(Appointment appointment) {
 		boolean result = true;
 		// que no sean pasadas
 		Calendar c = Calendar.getInstance();
