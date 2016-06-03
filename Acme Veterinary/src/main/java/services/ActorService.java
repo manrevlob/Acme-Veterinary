@@ -168,9 +168,9 @@ public class ActorService {
 			veterinaryService.save(veterinary);
 		}
 	}
-	
+
 	// Change password
-	
+
 	public void changePassword(PassForm passForm) {
 		Assert.isTrue(isAuthenticated());
 		Assert.isTrue(checkPassword(passForm));
@@ -180,25 +180,38 @@ public class ActorService {
 		String passNew = passForm.getPassNew();
 		String hashNew = encoder.encodePassword(passNew, null);
 		actor.getUserAccount().setPassword(hashNew);
-		
+
 		save(actor);
 	}
-	
-	public boolean checkPassword(PassForm passForm){
+
+	public boolean checkPassword(PassForm passForm) {
 		boolean result = false;
 		Actor actor;
 		actor = findByPrincipal();
 		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		String passOld = passForm.getPassLast();
 		String hashOld = encoder.encodePassword(passOld, null);
-		
-		if (hashOld.equals(actor.getUserAccount().getPassword())){
-			if (passForm.getPassNew().equals(passForm.getPassConf())){
+
+		if (hashOld.equals(actor.getUserAccount().getPassword())) {
+			if (passForm.getPassNew().equals(passForm.getPassConf())) {
 				result = true;
 			}
 		}
-		
+
 		return result;
 	}
 
+	public boolean checkOldPassword(PassForm passForm) {
+		boolean result = true;
+		Actor actor;
+		actor = findByPrincipal();
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		String passOld = passForm.getPassLast();
+		String hashOld = encoder.encodePassword(passOld, null);
+
+		if (hashOld.equals(actor.getUserAccount().getPassword())) {
+			result = false;
+		}
+		return result;
+	}
 }

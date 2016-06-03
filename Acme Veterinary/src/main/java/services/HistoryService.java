@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.HistoryRepository;
+import domain.Appointment;
 import domain.History;
 import domain.Treatment;
 import forms.HistoryForm;
@@ -31,6 +32,8 @@ public class HistoryService {
 	private PetService petService;
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private VeterinaryService veterinaryService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -137,6 +140,15 @@ public class HistoryService {
 			}
 		}
 		
+		return result;
+	}
+
+	public boolean checkOwn(Appointment appointment) {
+		Assert.notNull(appointment);
+		boolean result = true;
+		if (!appointment.getVeterinary().equals(veterinaryService.findByPrincipal())){
+			result = false;
+		}
 		return result;
 	}
 }
