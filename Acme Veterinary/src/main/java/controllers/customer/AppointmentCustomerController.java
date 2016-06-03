@@ -46,7 +46,7 @@ public class AppointmentCustomerController extends AbstractController {
 
 		result = new ModelAndView("appointment/list");
 		result.addObject("requestURI", "appointment/customer/list.do");
-		result.addObject("appointments", appointments);
+		result.addObject("appointmentsNoExpired", appointments);
 		result.addObject("message", message);
 
 		return result;
@@ -55,6 +55,7 @@ public class AppointmentCustomerController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "book")
 	public ModelAndView create(AppointmentForm appointmentForm) {
 		ModelAndView result;
+		
 
 		Collection<Pet> pets = petService.findAllByPrincipal();
 

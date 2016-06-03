@@ -272,7 +272,7 @@ public class AppointmentService {
 		dayCalendar.setTime(dateFormat.parse(day));
 		dayCalendar.set(Calendar.HOUR_OF_DAY, IntegerUtils.parseInt(startTime, 0));
 		Calendar today = Calendar.getInstance();
-		if (dayCalendar.before(today.getTime())){
+		if (dayCalendar.before(today)){
 			result = false;
 		}
 		
