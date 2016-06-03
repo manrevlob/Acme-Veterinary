@@ -69,13 +69,24 @@ public class MessageFolderActorController extends AbstractController {
 
 		if (binding.hasErrors()) {
 			result = new ModelAndView("messageFolder/create");
+
 		} else {
 			try {
-				messageFolder = messageFolderService.save(messageFolder);
-				messageFolderService.assignFolderToActor(messageFolder);
+				if (messageFolder.getSystem()) {
+					result = new ModelAndView("messageFolder/create");
+					result.addObject("messageFolder", messageFolder);
+					result.addObject("requestURI",
+							"messageFolder/actor/create.do");
+					result.addObject("message",
+							"messageFolder.create.system.error");
+				} else {
+					messageFolder = messageFolderService.save(messageFolder);
+					messageFolderService.assignFolderToActor(messageFolder);
 
-				result = new ModelAndView(
-						"redirect:/messageFolder/actor/list.do");
+					result = new ModelAndView(
+							"redirect:/messageFolder/actor/list.do");
+				}
+
 			} catch (Throwable oops) {
 				result = new ModelAndView("messageFolder/create");
 				result.addObject("messageFolder", messageFolder);
@@ -117,9 +128,19 @@ public class MessageFolderActorController extends AbstractController {
 			result.addObject("edit", true);
 		} else {
 			try {
-				messageFolderService.save(messageFolder);
-				result = new ModelAndView(
-						"redirect:/messageFolder/actor/list.do");
+				if (messageFolder.getSystem()) {
+					result = new ModelAndView("messageFolder/create");
+					result.addObject("messageFolder", messageFolder);
+					result.addObject("requestURI",
+							"messageFolder/actor/edit.do");
+					result.addObject("message",
+							"messageFolder.edit.system.error");
+				} else {
+					messageFolderService.save(messageFolder);
+					result = new ModelAndView(
+							"redirect:/messageFolder/actor/list.do");
+				}
+
 			} catch (Throwable oops) {
 				result = new ModelAndView("messageFolder/create");
 				result.addObject("messageFolder", messageFolder);
@@ -138,10 +159,16 @@ public class MessageFolderActorController extends AbstractController {
 		ModelAndView result;
 
 		try {
+			if (messageFolder.getSystem()) {
+				result = new ModelAndView("messageFolder/create");
+				result.addObject("message", "messageFolder.delete.system.error");
+			} else {
 
-			messageFolderService.deleteOfActor(messageFolder);
+				messageFolderService.deleteOfActor(messageFolder);
 
-			result = new ModelAndView("redirect:/messageFolder/actor/list.do");
+				result = new ModelAndView(
+						"redirect:/messageFolder/actor/list.do");
+			}
 		} catch (Throwable oops) {
 			result = new ModelAndView("redirect:/messageFolder/actor/list.do");
 			result.addObject("message", "messageFolder.commit.error");

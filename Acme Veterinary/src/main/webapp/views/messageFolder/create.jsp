@@ -32,9 +32,7 @@
 	<acme:submit name="save" code="messageFolder.save"/>
 		
 	<jstl:if test="${messageFolder.system == false && edit == true }">
-		<input type="submit" name="delete"
-			value="<spring:message code="messageFolder.delete" />"
-			onclick="return confirm('<spring:message code="messageFolder.deletePermanently" />')" />&nbsp;			
+		<acme:delete name="delete" code="messageFolder.delete"/>		
 	</jstl:if>
 	<acme:cancel url="messageFolder/actor/list.do" code="messageFolder.cancel"/>
 	
