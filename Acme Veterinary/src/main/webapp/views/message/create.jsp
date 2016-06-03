@@ -19,6 +19,8 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
 
 <form:form action="message/actor/create.do" modelAttribute="sendMessage">
 
@@ -51,13 +53,8 @@
 	</form:select>
 	<form:errors cssClass="error" path="recipient" />
 	<br />
-
-	<input type="submit" name="send"
-		value="<spring:message code="message.send" />" />&nbsp;
-			
-	<input type="button" name="cancel"
-		value="<spring:message code="message.cancel" />"
-		onclick="javascript: window.location.replace('messageFolder/actor/list.do')" />
-	<br />
+	<acme:submit name="send" code="message.send"/>
+	<acme:cancel url="messageFolder/actor/list.do" code="message.cancel"/>
+	
 
 </form:form>
