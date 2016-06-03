@@ -17,6 +17,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="message/actor/moveToFolder.do" modelAttribute="moveMessageForm">
 
@@ -31,12 +32,8 @@
 	</form:select>
 	<form:errors cssClass="error" path="messageFolder" />
 	<br />
-
-	<input type="submit" name="save"
-		value="<spring:message code="actor.save" />" />&nbsp; 
-	<input type="button" name="cancel"
-		value="<spring:message code="actor.cancel" />"
-		onclick="javascript: window.location.replace('messageFolder/actor/list.do')" />
-	<br />
+	<acme:submit name="save" code="actor.save"/>
+	<acme:cancel url="messageFolder/actor/list.do" code="actor.cancel"/>
+	
 
 </form:form>
