@@ -244,10 +244,15 @@ public class MessageActorController extends AbstractController {
 		ModelAndView result;
 
 		try {
-			messageService.moveToFolder(moveMessageForm.getMessage(),
-					moveMessageForm.getMessageFolder());
-			result = new ModelAndView(
-					"redirect:../../messageFolder/actor/list.do");
+			if(messageService.isOwnerFolder(moveMessageForm.getMessageFolder())){
+				moveMessageForm.getMessageFolder();
+				result = new ModelAndView(
+						"redirect:../../messageFolder/actor/list.do");
+			}else{
+				result = new ModelAndView("misc/403");
+				
+			}
+					
 		} catch (Throwable oops) {
 			Collection<MessageFolder> messageFolders = messageFolderService
 					.findByActor();

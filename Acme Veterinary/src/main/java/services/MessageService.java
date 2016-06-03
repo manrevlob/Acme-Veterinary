@@ -158,37 +158,7 @@ public class MessageService {
 
 	}
 
-	public void sendAutoReplyMessage(String messageText, Actor sender,
-			Actor recipient) {
-		Assert.notNull(sender);
-		Assert.notNull(recipient);
-
-		Collection<Message> messages;
-		MessageFolder senderOutbox;
-		Message message;
-		message = create();
-
-		message.setSender(sender);
-		message.setRecipient(recipient);
-		message.setSubject("AUTO-REPLY --");
-		message.setBody(messageText);
-
-		senderOutbox = messageFolderService
-				.findFolder(sender, "Auto-Reply box");
-
-		receiveMessage(message, recipient);
-
-		message.setMessageFolder(senderOutbox);
-
-		messages = findAllByFolder(senderOutbox);
-		messages.add(message);
-		senderOutbox.setMessages(messages);
-
-		save(message);
-		messageFolderService.save(senderOutbox);
-
-	}
-
+	
 	public void receiveMessage(Message message, Actor recipient) {
 		Message messageReceived;
 		MessageFolder recipientInbox;
@@ -223,21 +193,7 @@ public class MessageService {
 
 	}
 
-	public Message createReply(Message message) {
-		Message result;
-
-		Assert.notNull(message);
-		Assert.isTrue(actorService.findByPrincipal().equals(
-				message.getRecipient()));
-
-		result = create();
-
-		result.setSubject("RE: " + message.getSubject());
-		result.setRecipient(message.getSender());
-		result.setSender(actorService.findByPrincipal());
-
-		return result;
-	}
+	
 
 	public boolean isRecipient(Message message, Actor actor) {
 		return message.getRecipient().equals(actor);
@@ -273,6 +229,7 @@ public class MessageService {
 	public void moveToFolder(Message message, MessageFolder messageFolder) {
 		Assert.notNull(message);
 		Assert.notNull(messageFolder);
+		Assert.isTrue(isOwnerFolder(messageFolder));
 		Assert.isTrue(message.getSender() == actorService.findByPrincipal()
 				|| message.getRecipient() == actorService.findByPrincipal());
 		MessageFolder actualFolder;
@@ -334,5 +291,13 @@ public class MessageService {
 
 		sendMessage(message);
 
+	}
+	public boolean isOwnerFolder(MessageFolder messageFolder) {
+		boolean result = false;
+		Actor actor = actorService.findByPrincipal();
+		if (actor.getMessageFolders().contains(messageFolder)) {
+			result = true;
+		}
+		return result;
 	}
 }

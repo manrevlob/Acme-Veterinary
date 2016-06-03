@@ -51,7 +51,7 @@
 	<form:hidden path="system" />
 	<form:hidden path="messages" />
 
-		<input type="button" onclick="javascript: window.location.replace('messageFolder/actor/list.do')"
+		<input type="button" class = "btn" onclick="javascript: window.location.replace('messageFolder/actor/list.do')"
 			value="<spring:message code='messageFolder.cancel' />" />
 
 

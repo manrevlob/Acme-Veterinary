@@ -54,7 +54,8 @@
 </display:table>
 
 <div>
-	<input type="button" name="cancel"
+	
+	<input class = "btn" type="button" name="cancel"
 		value="<spring:message code="message.cancel" />"
 		onclick="history.back();" />
 	<br />
