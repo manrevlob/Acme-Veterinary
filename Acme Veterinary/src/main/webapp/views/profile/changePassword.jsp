@@ -19,10 +19,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
 <form:form action="profile/actor/changePassword.do"
 	modelAttribute="passForm">
-
 
 	<acme:password code="pass.last" path="passLast" />
 
@@ -30,10 +28,7 @@
 	<acme:password code="pass.newConf" path="passConf" />
 
 	<acme:submit name="save" code="profile.save" />
-	<input class="btn btn-secundary" type="button" name="cancel"
-		value="<spring:message code="profile.cancel" />"
-		onclick="javascript:history.back();" />
-
+	<acme:cancel url="profile/actor/list.do" code="profile.cancel"/>
 
 </form:form>
 

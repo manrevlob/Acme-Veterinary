@@ -45,7 +45,7 @@ public class AppointmentAdministratorController extends AbstractController {
 
 		result = new ModelAndView("appointment/list");
 		result.addObject("requestURI", "appointment/veterinary/list.do");
-		result.addObject("appointments", appointments);
+		result.addObject("appointmentsNoExpired", appointments);
 		result.addObject("message", message);
 
 		return result;

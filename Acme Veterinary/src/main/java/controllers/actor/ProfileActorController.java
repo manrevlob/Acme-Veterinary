@@ -108,8 +108,14 @@ public class ProfileActorController extends AbstractController {
 			result = new ModelAndView("profile/changePassword");
 		} else {
 			try {
-				actorService.changePassword(passForm);
-				result = new ModelAndView("redirect:/profile/actor/list.do");
+				if (!actorService.checkOldPassword(passForm)){
+					actorService.changePassword(passForm);
+					result = new ModelAndView("redirect:/profile/actor/list.do");
+				}else{
+					result = new ModelAndView("profile/changePassword");
+					result.addObject("passForm", passForm);
+					result.addObject("message", "actor.commit.errorOldPass");
+				}
 			} catch (Throwable oops) {
 				result = new ModelAndView("profile/changePassword");
 				result.addObject("passForm", passForm);

@@ -85,10 +85,16 @@ public class HistoryVeterinaryController extends AbstractController {
 		Appointment appointment;
 
 		appointment = appointmentService.findOne(appointmentId);
-		historyForm = new HistoryForm();
-		historyForm.setAppointment(appointment);
+		
+		if (historyService.checkOwn(appointment)){
+			historyForm = new HistoryForm();
+			historyForm.setAppointment(appointment);
 
-		result = createAndEditModelAndView(historyForm);
+			result = createAndEditModelAndView(historyForm);
+		}else{
+			result = new ModelAndView("misc/403");
+		}
+		
 		return result;
 	}
 
